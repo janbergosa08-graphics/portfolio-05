@@ -304,19 +304,20 @@
       <h2 class="section-title">From problem to product</h2>
       <p class="section-intro">A structured six-phase approach that turns ambiguity into polished, shippable design.</p>
     </div>
-    <div class="ps-indicator">
-      <div class="ps-indicator-inner">
-        <div class="ps-pagination" id="psPagination">
-          <div class="ps-step active" data-idx="0"><span class="ps-step-num">01</span><div class="ps-step-line"></div></div>
-          <div class="ps-step" data-idx="1"><span class="ps-step-num">02</span><div class="ps-step-line"></div></div>
-          <div class="ps-step" data-idx="2"><span class="ps-step-num">03</span><div class="ps-step-line"></div></div>
-          <div class="ps-step" data-idx="3"><span class="ps-step-num">04</span><div class="ps-step-line"></div></div>
-          <div class="ps-step" data-idx="4"><span class="ps-step-num">05</span><div class="ps-step-line"></div></div>
-          <div class="ps-step" data-idx="5"><span class="ps-step-num">06</span><div class="ps-step-line"></div></div>
+    <div class="ps-scroll-zone" id="psScrollZone">
+      <div class="ps-indicator">
+        <div class="ps-indicator-inner">
+          <div class="ps-pagination" id="psPagination" role="tablist" aria-label="Process steps">
+            <button type="button" class="ps-step active" data-idx="0" aria-selected="true"><span class="ps-step-num">01</span><div class="ps-step-line"></div></button>
+            <button type="button" class="ps-step" data-idx="1" aria-selected="false"><span class="ps-step-num">02</span><div class="ps-step-line"></div></button>
+            <button type="button" class="ps-step" data-idx="2" aria-selected="false"><span class="ps-step-num">03</span><div class="ps-step-line"></div></button>
+            <button type="button" class="ps-step" data-idx="3" aria-selected="false"><span class="ps-step-num">04</span><div class="ps-step-line"></div></button>
+            <button type="button" class="ps-step" data-idx="4" aria-selected="false"><span class="ps-step-num">05</span><div class="ps-step-line"></div></button>
+            <button type="button" class="ps-step" data-idx="5" aria-selected="false"><span class="ps-step-num">06</span><div class="ps-step-line"></div></button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="ps-stack">
+      <div class="ps-stack">
       <div class="ps-card" data-idx="0">
         <div class="ps-card-inner glass">
           <div class="ps-visual-col">
@@ -395,6 +396,7 @@
           <span class="ps-number">06</span>
         </div>
       </div>
+    </div>
     </div>
   </section>
 

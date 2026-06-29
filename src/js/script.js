@@ -160,35 +160,127 @@ function toggleFaq(el) {
   });
 })();
 
-// ── Process — Stack Animation + Phase Indicator ──
+// ── Process — Sticky Stack (animated deck, readable active card) ──
 (function() {
-  const cards = document.querySelectorAll('.ps-card');
+  const scrollZone = document.getElementById('psScrollZone');
   const psStack = document.querySelector('.ps-stack');
-  if (!cards.length || !psStack) return;
+  const cards = document.querySelectorAll('.ps-card');
+  const steps = document.querySelectorAll('.ps-step');
+  if (!scrollZone || !psStack || !cards.length) return;
+
+  const STACK_OFFSET = 18;
+  const SCALE_STEP = 0.045;
+  const SCROLL_PER_CARD = 0.72;
+
+  let ticking = false;
+  let stackEnabled = true;
+
+  function setStackHeight() {
+    stackEnabled = window.innerWidth > 1100;
+    if (stackEnabled) {
+      const totalVh = (cards.length - 1) * SCROLL_PER_CARD + 1;
+      scrollZone.style.height = `${totalVh * 100}vh`;
+      psStack.style.minHeight = '';
+      requestAnimationFrame(() => {
+        const indicator = scrollZone.querySelector('.ps-indicator');
+        const indicatorH = indicator ? indicator.offsetHeight : 0;
+        psStack.style.minHeight = `${scrollZone.offsetHeight - indicatorH}px`;
+        updateStack();
+      });
+    } else {
+      scrollZone.style.height = 'auto';
+      psStack.style.minHeight = '';
+      cards.forEach(card => {
+        card.classList.remove('active', 'passed', 'hidden');
+        card.style.removeProperty('--ps-scale');
+        card.style.removeProperty('--ps-y');
+        card.style.removeProperty('z-index');
+      });
+    }
+  }
+
+  function scrollToStep(idx) {
+    if (!stackEnabled) {
+      cards[idx]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    const zoneTop = scrollZone.offsetTop;
+    const zoneHeight = scrollZone.offsetHeight;
+    const scrollable = zoneHeight - window.innerHeight;
+    const target = zoneTop + (idx / (cards.length - 1)) * scrollable;
+    window.scrollTo({ top: target, behavior: 'smooth' });
+  }
 
   function updateStack() {
-    const rect = psStack.getBoundingClientRect();
-    const viewportH = window.innerHeight;
-    const scrollable = psStack.scrollHeight - viewportH;
-    if (scrollable <= 0) return;
-    const progress = Math.max(0, Math.min(1, (-rect.top) / scrollable));
-    const idx = Math.min(cards.length - 1, Math.floor(progress * cards.length));
+    if (!stackEnabled) return;
 
-    // Update pagination steps
-    const steps = document.querySelectorAll('.ps-step');
+    const zoneRect = scrollZone.getBoundingClientRect();
+    const scrollable = scrollZone.offsetHeight - window.innerHeight;
+    if (scrollable <= 0) return;
+
+    const progress = Math.max(0, Math.min(1, -zoneRect.top / scrollable));
+    const floatIdx = progress * (cards.length - 1);
+    const contentIdx = Math.min(cards.length - 1, Math.round(floatIdx));
+    const cardProgress = floatIdx - Math.floor(floatIdx);
+    const showUntil = Math.ceil(floatIdx);
+
     steps.forEach((step, i) => {
-      step.classList.toggle('active', i === idx);
-      step.classList.toggle('done', i < idx);
+      const isActive = i === contentIdx;
+      const isDone = i < contentIdx;
+      step.classList.toggle('active', isActive);
+      step.classList.toggle('done', isDone);
+      step.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      if (i === contentIdx) {
+        step.style.setProperty('--ps-line-fill', cardProgress);
+      } else if (i < contentIdx) {
+        step.style.setProperty('--ps-line-fill', 1);
+      } else {
+        step.style.setProperty('--ps-line-fill', 0);
+      }
     });
 
-    // Toggle animation classes
     cards.forEach((card, i) => {
-      card.classList.toggle('active', i === idx);
-      card.classList.toggle('passed', i < idx);
+      if (i > showUntil) {
+        card.classList.add('hidden');
+        card.classList.remove('active', 'passed');
+        card.style.removeProperty('--ps-scale');
+        card.style.removeProperty('--ps-y');
+        card.style.removeProperty('z-index');
+        return;
+      }
+
+      card.classList.remove('hidden');
+      const depth = Math.max(0, floatIdx - i);
+      card.style.setProperty('--ps-scale', String(Math.max(0.82, 1 - depth * SCALE_STEP)));
+      card.style.setProperty('--ps-y', `${-depth * STACK_OFFSET}px`);
+      card.style.zIndex = String(i + 1);
+      card.classList.toggle('active', i === contentIdx);
+      card.classList.toggle('passed', i < contentIdx);
     });
   }
 
-  window.addEventListener('scroll', updateStack, { passive: true });
-  window.addEventListener('resize', updateStack);
-  setTimeout(updateStack, 100);
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateStack();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  steps.forEach(step => {
+    step.addEventListener('click', () => {
+      scrollToStep(parseInt(step.dataset.idx, 10));
+    });
+  });
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => {
+    setStackHeight();
+    updateStack();
+  });
+
+  setStackHeight();
+  updateStack();
 })();
