@@ -2,6 +2,20 @@
 // Interactions — Portfolio-05
 // ══════════════════════════════════════════════
 
+// ── Glass Border Highlight (mouse follower) ──
+(function() {
+  const els = document.querySelectorAll('.glass');
+  els.forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      el.style.setProperty('--mx', x + '%');
+      el.style.setProperty('--my', y + '%');
+    });
+  });
+})();
+
 // ── Cursor Spotlight (lerp) ──
 (function() {
   const spotlight = document.getElementById('cursor-spotlight');
@@ -63,6 +77,26 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
   });
 })();
 
+// ── Scroll Up Button ──
+(function() {
+  const btn = document.getElementById('scrollUpBtn');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  let scrollTimer = null;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.remove('visible');
+    if (scrollTimer) clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 10;
+      if (atBottom) btn.classList.add('visible');
+    }, 300);
+  }, { passive: true });
+})();
+
 // ── Nav — Smooth Scroll on Click ──
 (function() {
   document.querySelectorAll('.nav-link, .nav-cta').forEach(anchor => {
@@ -95,7 +129,13 @@ function toggleFaq(el) {
       pill.classList.add('active');
       const filter = pill.dataset.filter;
       cards.forEach(card => {
-        if (filter === 'all' || card.dataset.categories.includes(filter)) {
+        let show = false;
+        if (filter === 'featured') {
+          show = card.dataset.featured === 'true';
+        } else if (filter === 'all' || card.dataset.categories.includes(filter)) {
+          show = true;
+        }
+        if (show) {
           card.classList.remove('hidden');
           card.classList.remove('visible');
           requestAnimationFrame(() => {
@@ -222,17 +262,18 @@ function toggleFaq(el) {
     const floatIdx = progress * (cards.length - 1);
     const contentIdx = Math.min(cards.length - 1, Math.round(floatIdx));
     const cardProgress = floatIdx - Math.floor(floatIdx);
-    const showUntil = Math.ceil(floatIdx);
+    const showUntil = Math.min(cards.length - 1, contentIdx + 1);
+    const hideFrom = Math.max(0, contentIdx - 1);
 
     steps.forEach((step, i) => {
-      const isActive = i === contentIdx;
-      const isDone = i < contentIdx;
+      const isActive = i === contentIdx && i < cards.length - 1;
+      const isDone = i < contentIdx || (i === cards.length - 1 && i === contentIdx);
       step.classList.toggle('active', isActive);
       step.classList.toggle('done', isDone);
       step.setAttribute('aria-selected', isActive ? 'true' : 'false');
-      if (i === contentIdx) {
+      if (i === contentIdx && i < cards.length - 1) {
         step.style.setProperty('--ps-line-fill', cardProgress);
-      } else if (i < contentIdx) {
+      } else if (i <= contentIdx) {
         step.style.setProperty('--ps-line-fill', 1);
       } else {
         step.style.setProperty('--ps-line-fill', 0);
@@ -240,7 +281,7 @@ function toggleFaq(el) {
     });
 
     cards.forEach((card, i) => {
-      if (i > showUntil) {
+      if (i > showUntil || i < hideFrom) {
         card.classList.add('hidden');
         card.classList.remove('active', 'passed');
         card.style.removeProperty('--ps-scale');
@@ -283,4 +324,80 @@ function toggleFaq(el) {
 
   setStackHeight();
   updateStack();
+
+  // Hide process indicator when approach section appears
+  const approach = document.getElementById('approach');
+  const psIndicator = document.querySelector('.ps-indicator');
+  if (approach && psIndicator) {
+    const io = new IntersectionObserver(([entry]) => {
+      psIndicator.classList.toggle('ps-indicator--hidden', entry.isIntersecting);
+    }, { threshold: 0 });
+    io.observe(approach);
+  }
+})();
+
+// ── Contact Modal ──
+(function() {
+  const openBtn = document.getElementById('openModalBtn');
+  const overlay = document.getElementById('modalOverlay');
+  const closeBtn = document.getElementById('modalClose');
+  const form = document.getElementById('contactForm');
+  if (!openBtn || !overlay) return;
+
+  openBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeModal() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('formName').value.trim();
+      const email = document.getElementById('formEmail').value.trim();
+      if (!name || !email) return;
+      const project = document.getElementById('formProject').value;
+      const message = document.getElementById('formMessage').value.trim();
+      const subject = encodeURIComponent(`New inquiry from ${name}`);
+      const body = encodeURIComponent(
+        `Name: ${name}%0D%0AEmail: ${email}%0D%0AProject: ${project || 'Not specified'}%0D%0A%0D%0AMessage:%0D%0A${message || 'No message'}`
+      );
+      window.location.href = `mailto:janbergosa.graphics@gmail.com?subject=${subject}&body=${body}`;
+      closeModal();
+    });
+  }
+})();
+
+// ── Availability Dot ──
+(function() {
+  const dots = document.querySelectorAll('.availability-dot');
+  if (!dots.length) return;
+
+  function updateDots() {
+    const now = new Date();
+    const phtDate = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Manila' }));
+    const day = phtDate.getDay();
+    const hour = phtDate.getHours();
+    const isAvailable = day >= 1 && day <= 5 && hour >= 9 && hour < 18;
+    dots.forEach(dot => {
+      dot.classList.toggle('active', isAvailable);
+      dot.classList.toggle('inactive', !isAvailable);
+    });
+  }
+  updateDots();
+  setInterval(updateDots, 60000);
 })();
