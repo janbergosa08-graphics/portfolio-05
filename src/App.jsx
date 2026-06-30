@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Expertise from './components/Expertise'
@@ -47,6 +48,7 @@ export default function App() {
 
   return (
     <>
+      <SpeedInsights />
       <div className="film-grain" />
       <div id="cursor-spotlight" />
 
