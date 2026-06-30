@@ -13,7 +13,7 @@ const tileVariants = {
 const tiles = [
   { className: 'bento-hero', content: (
     <>
-      <div className="bento-hero-number">6+</div>
+      <div className="bento-hero-number">1+</div>
       <span className="bento-hero-label">Years of experience</span>
       <p className="bento-hero-desc">Delivering end-to-end product design and front-end development for startups and agencies worldwide.</p>
       <div className="bento-hero-glow"></div>
@@ -21,7 +21,7 @@ const tiles = [
   )},
   { className: 'bento-exp', content: (
     <>
-      <span className="bento-stat">120+</span>
+      <span className="bento-stat">25</span>
       <span className="bento-stat-label">Projects delivered</span>
       <div className="bento-timeline">
         <div className="bento-timeline-item"><span className="tl-dot"></span> UI/UX Design</div>

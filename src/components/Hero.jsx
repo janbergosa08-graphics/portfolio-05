@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { heroWords } from '../data/constants'
 
@@ -7,6 +8,29 @@ const fadeUp = {
 }
 
 export default function Hero({ onScrollTo, onOpenModal }) {
+  const [text, setText] = useState('')
+  const fullLabel = 'Jr UI UX Designer'
+
+  useEffect(() => {
+    let timer, timeout
+    const type = () => {
+      let i = 0
+      setText('')
+      timeout = setTimeout(() => {
+        timer = setInterval(() => {
+          i++
+          setText(fullLabel.slice(0, i))
+          if (i >= fullLabel.length) {
+            clearInterval(timer)
+            timeout = setTimeout(type, 3000)
+          }
+        }, 50)
+      }, 400)
+    }
+    type()
+    return () => { clearTimeout(timeout); if (timer) clearInterval(timer) }
+  }, [])
+
   return (
     <div id="hero">
       <div className="hero-bg">
@@ -29,7 +53,8 @@ export default function Hero({ onScrollTo, onOpenModal }) {
             animate="animate"
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Jr UI UX Designer
+            <span className="typewriter-text">{text}</span>
+            <span className="typewriter-cursor">|</span>
           </motion.div>
           <h1>
             Designing{' '}
