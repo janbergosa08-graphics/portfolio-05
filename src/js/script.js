@@ -224,8 +224,9 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
     if (stackEnabled) {
       const totalVh = (cards.length - 1) * SCROLL_PER_CARD + 1;
       scrollZone.style.height = `${totalVh * 100}vh`;
-      psStack.style.minHeight = '';
       requestAnimationFrame(() => {
+        const prevMinHeight = psStack.style.minHeight;
+        psStack.style.minHeight = '';
         const indicator = scrollZone.querySelector('.ps-indicator');
         const indicatorH = indicator ? indicator.offsetHeight : 0;
         psStack.style.minHeight = `${scrollZone.offsetHeight - indicatorH}px`;
@@ -323,11 +324,9 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', () => {
     setStackHeight();
-    updateStack();
   });
 
   setStackHeight();
-  updateStack();
 
   // Hide process indicator when approach section appears
   const approach = document.getElementById('approach');
@@ -384,6 +383,29 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
       closeModal();
     });
   }
+})();
+
+// ── Hamburger Menu ──
+(function() {
+  const burger = document.getElementById('burgerBtn');
+  const menu = document.getElementById('mobileMenu');
+  if (!burger || !menu) return;
+
+  function toggleMenu(open) {
+    burger.classList.toggle('open', open);
+    menu.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  burger.addEventListener('click', () => {
+    toggleMenu(!menu.classList.contains('open'));
+  });
+
+  menu.querySelectorAll('.mobile-link, .mobile-cta').forEach(link => {
+    link.addEventListener('click', () => {
+      toggleMenu(false);
+    });
+  });
 })();
 
 // ── Availability Dot ──
