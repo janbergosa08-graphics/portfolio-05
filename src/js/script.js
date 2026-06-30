@@ -123,35 +123,281 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
   });
 })();
 
-// ── Project Filter ──
+// ── Project Data ──
+const projectsData = [
+  {
+    title: 'Dataflower \u2013 BaaS Platform',
+    desc: 'Backend-as-a-Service platform designed for developers \u2014 intuitive dashboard, API management, and seamless deployment workflows.',
+    categories: ['product-design', 'ui-ux'],
+    tags: ['Product Design', 'Dashboard', 'UI/UX'],
+    url: 'https://www.behance.net/gallery/232269585/Dataflower-Backend-as-a-Service-Platform',
+    featured: true,
+    gradient: 'linear-gradient(135deg,rgba(251,146,60,0.15),rgba(125,211,252,0.08))',
+    icon: '\u25C6',
+    badge: 'BaaS Platform'
+  },
+  {
+    title: 'Powerion \u2013 Energy Platform',
+    desc: 'Energy management platform with real-time monitoring, consumption analytics, and intelligent resource optimization tools.',
+    categories: ['product-design', 'ui-ux'],
+    tags: ['Product Design', 'Dashboard', 'Data Viz'],
+    url: 'https://www.behance.net/gallery/232269087/Powerion-Energy-Management-Platform',
+    featured: true,
+    gradient: 'linear-gradient(135deg,rgba(245,158,11,0.12),rgba(34,211,238,0.06)',
+    icon: '\u25C1',
+    badge: 'Energy'
+  },
+  {
+    title: '4rom \u2013 Social Hub',
+    desc: 'Social networking platform connecting communities through shared interests \u2014 designed for engagement and seamless interaction.',
+    categories: ['ui-ux', 'product-design'],
+    tags: ['Mobile', 'Social', 'UI/UX'],
+    url: 'https://www.behance.net/gallery/232271697/4rom-Social-Hub',
+    featured: true,
+    gradient: 'linear-gradient(135deg,rgba(251,146,60,0.1),rgba(125,211,252,0.05))',
+    icon: '\u25A2'
+  },
+  {
+    title: 'Odysse \u2013 IT Solutions Website',
+    desc: 'Professional IT solutions website showcasing services, case studies, and a clean, trust-building interface for B2B clients.',
+    categories: ['web', 'ui-ux'],
+    tags: ['Web Design', 'B2B', 'UI/UX'],
+    url: 'https://www.behance.net/gallery/232273329/Odysse-IT-Solutions-Website',
+    featured: false,
+    gradient: 'linear-gradient(135deg,rgba(251,146,60,0.12),rgba(34,211,238,0.06))',
+    icon: '\u25C6'
+  },
+  {
+    title: 'Grafon \u2013 Supply Chain App',
+    desc: 'Supply chain simulator web app for training and optimization \u2014 interactive dashboards and real-time scenario modeling.',
+    categories: ['web', 'ui-ux', 'product-design'],
+    tags: ['Web App', 'Simulation', 'Product Design'],
+    url: 'https://www.behance.net/gallery/239508565/Grafon-Supply-Chain-Simulator-Web-App',
+    featured: true,
+    gradient: 'linear-gradient(135deg,rgba(249,115,22,0.13),rgba(125,211,252,0.07))',
+    icon: '\u25A2',
+    badge: 'Supply Chain'
+  },
+  {
+    title: 'Seafood Innovation \u2013 Landing Page',
+    desc: 'Landing page redesign for a seafood innovation company \u2014 modern, brand-driven layout with clear product storytelling.',
+    categories: ['web', 'ui-ux'],
+    tags: ['Landing Page', 'Web Design', 'UI/UX'],
+    url: 'https://www.behance.net/gallery/240877067/Seafood-Innovation-Landing-Page-Redesign',
+    featured: false,
+    gradient: 'linear-gradient(135deg,rgba(245,158,11,0.12),rgba(34,211,238,0.06))',
+    icon: '\u25C1'
+  },
+  {
+    title: 'wpward \u2013 Website Design',
+    desc: 'Modern website design with clean typography, structured layouts, and a refined visual identity tailored for digital presence.',
+    categories: ['web', 'ui-ux'],
+    tags: ['Web Design', 'UI/UX'],
+    url: 'https://www.behance.net/gallery/232272229/wpward-Website-Design',
+    featured: false,
+    gradient: 'linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))',
+    icon: '\u25C6'
+  },
+  {
+    title: '3D Print Pricing \u2013 Plug-in',
+    desc: 'Pricing plug-in for 3D printing services \u2014 intuitive interface with cost calculation, material selection, and instant quotes.',
+    categories: ['ui-ux', 'product-design'],
+    tags: ['UI/UX', 'Product Design'],
+    url: 'https://www.behance.net/gallery/232272705/3D-Print-Pricing-Plug-in',
+    featured: true,
+    gradient: 'linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.01))',
+    icon: '\u25A2',
+    badge: 'Plug-in'
+  },
+  {
+    title: 'ADHD \u2013 Test Assessment',
+    desc: 'Assessment tool designed for clarity and accessibility \u2014 streamlined test flow with clear progress tracking and result visualization.',
+    categories: ['ui-ux'],
+    tags: ['UI/UX', 'Health'],
+    url: 'https://www.behance.net/gallery/232272891/ADHD-Test-Assestment',
+    featured: true,
+    gradient: 'linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))',
+    icon: '\u25C1',
+    badge: 'Health'
+  },
+  {
+    title: 'Florist \u2013 Feminine Vector Illustration',
+    desc: 'Elegant vector illustration with soft floral motifs and feminine aesthetics \u2014 crafted for brand identity and visual storytelling.',
+    categories: ['illustration', 'graphic-design', 'branding'],
+    tags: ['Illustration', 'Vector Art', 'Branding'],
+    url: 'https://www.behance.net/gallery/240878813/Florist-Feminine-Vector-Illustration',
+    featured: false,
+    gradient: 'linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.01))',
+    icon: '\u25C6'
+  },
+  {
+    title: '3D Printing Service \u2013 Isometric Vector',
+    desc: 'Isometric vector illustration showcasing a 3D printing service workflow \u2014 detailed, technical, and visually engaging.',
+    categories: ['illustration', 'graphic-design'],
+    tags: ['Illustration', 'Isometric'],
+    url: 'https://www.behance.net/gallery/240874197/3D-Printing-Service-Isometric-Vector-Illustration',
+    featured: false,
+    gradient: 'linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))',
+    icon: '\u25C1'
+  },
+  {
+    title: 'Calmity \u2013 Minimal Vector Illustration',
+    desc: 'Minimal vector illustration with a calm, understated aesthetic \u2014 clean lines, muted tones, and thoughtful composition.',
+    categories: ['illustration', 'graphic-design'],
+    tags: ['Illustration', 'Minimal'],
+    url: 'https://www.behance.net/gallery/240873963/Calmity-Minimal-Vector-Illustration',
+    featured: false,
+    gradient: 'linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.01))',
+    icon: '\u25A2'
+  }
+];
+
+// ── Project Filter & Render ──
 (function() {
+  const grid = document.getElementById('projectsGrid');
+  const footer = document.getElementById('projectsFooter');
+  const viewAllBtn = document.getElementById('viewAllBtn');
   const pills = document.querySelectorAll('.pill');
-  const cards = document.querySelectorAll('.project-card');
+  if (!grid) return;
+
+  let currentFilter = 'all';
+  let showingAll = false;
+
+  function getViews(title) { return parseInt(localStorage.getItem('pv_views_' + title)) || Math.floor(Math.random() * 400) + 120; }
+  function setViews(title, val) { localStorage.setItem('pv_views_' + title, val); }
+  function getLiked(title) { return localStorage.getItem('pv_liked_' + title) === 'true'; }
+  function setLiked(title, val) { localStorage.setItem('pv_liked_' + title, val); }
+  function getLikes(title) { return parseInt(localStorage.getItem('pv_likes_' + title)) || Math.floor(Math.random() * 20) + 5; }
+  function setLikes(title, val) { localStorage.setItem('pv_likes_' + title, val); }
+
+  function renderCards() {
+    const max = showingAll ? Infinity : 6;
+    const filtered = projectsData.filter(p => {
+      if (currentFilter === 'all') return true;
+      return p.categories.includes(currentFilter);
+    });
+    const visible = filtered.slice(0, max);
+    const hasMore = filtered.length > max;
+
+    grid.innerHTML = '';
+    visible.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.dataset.categories = p.categories.join(',');
+      card.dataset.featured = String(p.featured);
+
+      const views = getViews(p.title);
+      const liked = getLiked(p.title);
+      let likes = getLikes(p.title);
+
+      const heartSvg = '<svg viewBox="0 0 24 24" width="16" height="16"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+      const eyeSvg = '<svg viewBox="0 0 24 24" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+
+      card.innerHTML = `
+        <a href="${p.url}" target="_blank" class="project-thumb" style="display:block;text-decoration:none">
+          <div class="project-thumb-inner" style="background:${p.gradient}">
+            ${p.icon ? '<span class="project-thumb-icon">' + p.icon + '</span>' : ''}
+            ${p.badge ? '<span class="project-badge">' + p.badge + '</span>' : ''}
+          </div>
+          <div class="project-overlay">
+            <span class="project-overlay-cta">View on Behance &nearr;</span>
+          </div>
+        </a>
+        <div class="project-info">
+          <div class="project-info-left">
+            <div class="project-info-title">${p.title}</div>
+            <div class="project-info-category">${p.tags[0] || ''}</div>
+          </div>
+          <div class="project-info-right">
+            <span class="project-stat project-stat-heart${liked ? ' liked' : ''}" data-title="${p.title}">
+              ${heartSvg}
+              <span class="project-stat-count">${likes}</span>
+            </span>
+            <span class="project-stat">
+              ${eyeSvg}
+              <span>${views}</span>
+            </span>
+          </div>
+        </div>
+      `;
+
+      grid.appendChild(card);
+      requestAnimationFrame(() => {
+        revealObserver.observe(card);
+        setTimeout(() => card.classList.add('visible'), 50);
+      });
+    });
+
+    // Heart click handler
+    grid.querySelectorAll('.project-stat-heart').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        const title = this.dataset.title;
+        const countEl = this.querySelector('.project-stat-count');
+        const wasLiked = getLiked(title);
+        const newLiked = !wasLiked;
+        setLiked(title, newLiked);
+        let likes = getLikes(title);
+        likes = newLiked ? likes + 1 : likes - 1;
+        setLikes(title, likes);
+        this.classList.toggle('liked', newLiked);
+        this.classList.remove('pop');
+        void this.offsetWidth;
+        this.classList.add('pop');
+        countEl.textContent = likes;
+      });
+    });
+
+    // Thumbnail click opens Behance (the wrapping <a> does this)
+    // Prevent heart click from navigating
+    grid.querySelectorAll('.project-stat').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    });
+
+    if (footer) {
+      footer.style.display = hasMore || showingAll ? '' : 'none';
+    }
+  }
+
+  function setShowAll(state) {
+    showingAll = state;
+    if (viewAllBtn) {
+      const span = viewAllBtn.querySelector('span');
+      if (span) span.textContent = showingAll ? 'Show Less' : 'View All Projects';
+      viewAllBtn.classList.toggle('show-less', showingAll);
+    }
+    renderCards();
+  }
+
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
       pills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
-      const filter = pill.dataset.filter;
-      cards.forEach(card => {
-        let show = false;
-        if (filter === 'featured') {
-          show = card.dataset.featured === 'true';
-        } else if (filter === 'all' || card.dataset.categories.includes(filter)) {
-          show = true;
-        }
-        if (show) {
-          card.classList.remove('hidden');
-          card.classList.remove('visible');
-          requestAnimationFrame(() => {
-            revealObserver.observe(card);
-            setTimeout(() => card.classList.add('visible'), 50);
-          });
-        } else {
-          card.classList.add('hidden');
-        }
-      });
+      currentFilter = pill.dataset.filter;
+      showingAll = false;
+      if (viewAllBtn) {
+        const span = viewAllBtn.querySelector('span');
+        if (span) span.textContent = 'View All Projects';
+        viewAllBtn.classList.remove('show-less');
+      }
+      renderCards();
     });
   });
+
+  if (viewAllBtn) {
+    viewAllBtn.addEventListener('click', () => {
+      setShowAll(!showingAll);
+    });
+  }
+
+  window.addEventListener('resize', () => {
+    renderCards();
+  });
+
+  renderCards();
 })();
 
 // ── Parallax (Hero Orbs) ──
@@ -397,14 +643,20 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
     document.body.style.overflow = open ? 'hidden' : '';
   }
 
-  burger.addEventListener('click', () => {
-    toggleMenu(!menu.classList.contains('open'));
-  });
+  const closeBtn = document.getElementById('mobileClose');
+
+  function openMenu() { toggleMenu(true); }
+  function closeMenu() { toggleMenu(false); }
+
+  burger.addEventListener('click', openMenu);
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
 
   menu.querySelectorAll('.mobile-link, .mobile-cta').forEach(link => {
-    link.addEventListener('click', () => {
-      toggleMenu(false);
-    });
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
   });
 })();
 
