@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Expertise from './components/Expertise'
@@ -100,6 +101,8 @@ export default function App() {
 
       {/* Modal */}
       <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      
+      <Analytics />
     </>
   )
 }
