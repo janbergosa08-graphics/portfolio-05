@@ -4,6 +4,7 @@ import {
   projectsData,
   filterCategories,
   allShowcase,
+  sectionContent,
 } from '../data/constants'
 import { useProjectStats, useProjectViewTracker } from '../hooks/useProjectStats'
 import MeshGradient from './MeshGradient'
@@ -66,27 +67,29 @@ function ProjectCard({ project, stats, onView, onLike, index, displayLabel }) {
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.5, delay: (index % PREVIEW_COUNT) * 0.07, ease: [0.16, 1, 0.3, 1] }}
     >
-      <a
-        href={project.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="project-thumb"
-        aria-label={`${project.title} on Behance`}
-      >
-        <div className="project-thumb-media">
-          {project.image ? (
-            <img
-              src={project.image}
-              alt={project.title}
-              loading="lazy"
-              decoding="async"
-              width={1200}
-              height={675}
-            />
-          ) : (
-            <div className="project-thumb-fallback" style={{ background: project.gradient }} aria-hidden="true" />
-          )}
-        </div>
+      <div className="project-thumb">
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="project-thumb-link"
+          aria-label={`${project.title} on Behance`}
+        >
+          <div className="project-thumb-media">
+            {project.image ? (
+              <img
+                src={project.image}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width={1200}
+                height={675}
+              />
+            ) : (
+              <div className="project-thumb-fallback" style={{ background: project.gradient }} aria-hidden="true" />
+            )}
+          </div>
+        </a>
         {displayLabel && (
           <span className="project-thumb-label">{displayLabel}</span>
         )}
@@ -107,15 +110,16 @@ function ProjectCard({ project, stats, onView, onLike, index, displayLabel }) {
             </svg>
             <span>{likes}</span>
           </button>
-          <span className="project-stat project-stat-views" aria-label={`${views} views`}>
+          <span className="project-stat project-stat-views">
             <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
               <circle cx="12" cy="12" r="3" />
             </svg>
-            <span>{views}</span>
+            <span aria-hidden="true">{views}</span>
+            <span className="sr-only">{views} views</span>
           </span>
         </div>
-      </a>
+      </div>
     </motion.article>
   )
 }
@@ -159,10 +163,10 @@ export default function FeaturedProjects() {
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="section-kicker">Projects</div>
-          <h2 id="featured-heading" className="section-title">Featured work</h2>
+          <div className="section-kicker">{sectionContent.featured.kicker}</div>
+          <h2 id="featured-heading" className="section-title">{sectionContent.featured.title}</h2>
           <p className="section-intro">
-            UI/UX, dashboards, branding, and visual design — from web products to Adobe-crafted graphics and social creatives.
+            {sectionContent.featured.intro}
           </p>
         </motion.div>
 
@@ -180,8 +184,10 @@ export default function FeaturedProjects() {
               key={cat.value}
               type="button"
               role="tab"
+              id={`projects-tab-${cat.value}`}
               className={`pill${filter === cat.value ? ' active' : ''}`}
               aria-selected={filter === cat.value}
+              aria-controls="projects-panel"
               onClick={() => handleFilter(cat.value)}
             >
               {cat.label}
@@ -189,7 +195,12 @@ export default function FeaturedProjects() {
           ))}
         </motion.div>
 
-        <div className="projects-bento-wrap" role="tabpanel">
+        <div
+          id="projects-panel"
+          className="projects-bento-wrap"
+          role="tabpanel"
+          aria-labelledby={`projects-tab-${filter}`}
+        >
           <div className="projects-bento">
             {visibleItems.map(({ project, displayLabel }, i) => (
               <ProjectCard

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { sectionContent } from '../data/constants'
 import BackToTop from './BackToTop'
 
 export default function Contact({ onOpenModal }) {
@@ -27,15 +28,15 @@ export default function Contact({ onOpenModal }) {
         viewport={{ once: true, margin: '-40px' }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="section-kicker">Contact</div>
+        <div className="section-kicker">{sectionContent.contact.kicker}</div>
         <h2 id="contact-heading" className="section-title section-title--narrow">
-          Ready to bring your vision to life?
+          {sectionContent.contact.title}
         </h2>
         <p>
-          I am currently accepting new projects and collaborations. Let&rsquo;s talk about how I can help you build something great.
+          {sectionContent.contact.intro}
         </p>
         <button type="button" className="btn-primary btn-large" onClick={onOpenModal}>
-          Start a Project
+          {sectionContent.contact.cta}
         </button>
         <div className="availability-row">
           <span

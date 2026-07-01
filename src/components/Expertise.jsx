@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { sectionContent } from '../data/constants'
 import MeshGradient from './MeshGradient'
 
 const tileVariants = {
@@ -18,15 +19,15 @@ const tiles = [
         <MeshGradient intensity="bento" />
       </div>
       <div className="bento-hero-content">
-        <div className="bento-hero-number">1+</div>
-        <span className="bento-hero-label">Years of experience</span>
-        <p className="bento-hero-desc">Delivering end-to-end product design and front-end development for startups and agencies worldwide.</p>
+        <div className="bento-hero-number">5+</div>
+        <span className="bento-hero-label">Years in the design field</span>
+        <p className="bento-hero-desc">Delivering end-to-end UI/UX, product, graphic, and web design for startups and agencies worldwide.</p>
       </div>
     </>
   )},
   { className: 'bento-exp', content: (
     <>
-      <span className="bento-stat">25</span>
+      <span className="bento-stat">20+</span>
       <span className="bento-stat-label">Projects delivered</span>
       <div className="bento-timeline">
         <div className="bento-timeline-item"><span className="tl-dot"></span> UI/UX Design</div>
@@ -37,7 +38,6 @@ const tiles = [
   )},
   { className: 'bento-ai', content: (
     <>
-      <span className="bento-glyph">&#9889;</span>
       <div className="bento-title">AI-Augmented Workflow</div>
       <div className="bento-desc">Leveraging AI tools to accelerate research, prototyping, and design iteration without compromising quality.</div>
     </>
@@ -51,7 +51,6 @@ const tiles = [
   )},
   { className: 'bento-full', content: (
     <>
-      <span className="bento-glyph">&#9733;</span>
       <div className="bento-title">End-to-End Delivery</div>
       <div className="bento-desc">From concept to code &mdash; I handle research, design, prototyping, and front-end development for a seamless workflow.</div>
       <div className="skill-tags" aria-label="Skills">
@@ -70,8 +69,9 @@ export default function Expertise() {
         viewport={{ once: true, margin: '-40px' }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="section-kicker">Expertise</div>
-        <h2 id="expertise-heading" className="section-title">Blending design &amp; engineering</h2>
+        <div className="section-kicker">{sectionContent.expertise.kicker}</div>
+        <h2 id="expertise-heading" className="section-title">{sectionContent.expertise.title}</h2>
+        <p className="section-intro">{sectionContent.expertise.intro}</p>
       </motion.div>
 
       <div className="bento-grid">

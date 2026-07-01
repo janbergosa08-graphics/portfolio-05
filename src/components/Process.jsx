@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from 'react'
-import { processSteps } from '../data/constants'
+import { processSteps, sectionContent } from '../data/constants'
 import StepProgress from './StepProgress'
 import CardVisualPlaceholder, { CardMeshLayer } from './CardVisualPlaceholder'
 import DocBody from './DocBody'
@@ -134,11 +134,9 @@ export default function Process() {
   return (
     <>
       <div className="container">
-        <div className="section-kicker">Process</div>
-        <h2 id="process-heading" className="section-title">From idea to impact</h2>
-        <p className="section-intro">
-          A structured approach that turns ambiguity into clarity, and concepts into products that perform.
-        </p>
+        <div className="section-kicker">{sectionContent.process.kicker}</div>
+        <h2 id="process-heading" className="section-title">{sectionContent.process.title}</h2>
+        <p className="section-intro">{sectionContent.process.intro}</p>
       </div>
 
       <div

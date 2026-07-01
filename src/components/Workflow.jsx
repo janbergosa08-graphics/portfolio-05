@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { workflowSteps } from '../data/constants'
+import { workflowSteps, sectionContent } from '../data/constants'
 import { useWorkflowProgress } from '../hooks/useWorkflowProgress'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import CardVisualPlaceholder, { CardMeshLayer } from './CardVisualPlaceholder'
@@ -27,14 +27,7 @@ function WorkflowNav({ steps, activeIndex, stepFills, onStepClick }) {
               <span className="wf-nav-num">{String(i + 1).padStart(2, '0')}</span>
               <span className="wf-nav-title">{step.short}</span>
             </div>
-            <div
-              className="wf-nav-bar"
-              role="progressbar"
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-valuenow={Math.round(fill * 100)}
-              aria-label={`${step.short} progress`}
-            >
+            <div className="wf-nav-bar" aria-hidden="true">
               <span className="wf-nav-bar-track">
                 <span
                   className="wf-nav-bar-fill"
@@ -103,8 +96,9 @@ export default function Workflow() {
         viewport={{ once: true, margin: '-40px' }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="section-kicker">Workflow</div>
-        <h2 id="workflow-heading" className="section-title">How I work</h2>
+        <div className="section-kicker">{sectionContent.workflow.kicker}</div>
+        <h2 id="workflow-heading" className="section-title">{sectionContent.workflow.title}</h2>
+        <p className="section-intro">{sectionContent.workflow.intro}</p>
       </motion.div>
 
       <div className="workflow-split">
@@ -115,7 +109,7 @@ export default function Workflow() {
           onStepClick={scrollToFrame}
         />
 
-        <div className="wf-cards" role="list" aria-label="Workflow detail cards">
+        <div className="wf-cards" aria-label="Workflow detail cards">
           {workflowSteps.map((step, i) => (
             <WorkflowFrame
               key={step.title}

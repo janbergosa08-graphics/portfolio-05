@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { faqItems, pricingData } from '../data/constants'
+import { faqItems, pricingData, sectionContent } from '../data/constants'
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null)
@@ -17,8 +17,8 @@ export default function FAQ() {
         viewport={{ once: true, margin: '-40px' }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="section-kicker">FAQs</div>
-        <h2 id="faq-heading" className="section-title">Common questions</h2>
+        <div className="section-kicker">{sectionContent.faq.kicker}</div>
+        <h2 id="faq-heading" className="section-title">{sectionContent.faq.title}</h2>
       </motion.div>
 
       <motion.div
@@ -48,7 +48,13 @@ export default function FAQ() {
               <span>{item.question}</span>
               <span className="faq-icon">+</span>
             </button>
-            <div className="faq-answer" id={`faq-answer-${i}`} role="region" aria-labelledby={`faq-question-${i}`}>
+            <div
+              className="faq-answer"
+              id={`faq-answer-${i}`}
+              role="region"
+              aria-labelledby={`faq-question-${i}`}
+              hidden={openIndex !== i}
+            >
               <div className="faq-content">
                 {item.description && <p>{item.description}</p>}
 
@@ -80,12 +86,14 @@ export default function FAQ() {
                       {pricingData.map((row, j) => (
                         <div key={j} className="faq-table-row">
                           <span className="faq-table-cell">
-                            {j === 0 ? 'Landing Page' : j === 1 ? 'Website' : j === 2 ? 'Dashboard' : j === 3 ? 'Mobile App' : j === 4 ? 'UI/UX Design' : j === 5 ? 'Brand Identity' : j === 6 ? (
-                              <span className="faq-service-label">
-                                Hourly
-                                <span className="faq-tag faq-tag--micro">Negotiable</span>
-                              </span>
-                            ) : row.service}
+                            <span className="faq-service-label">
+                              {row.service}
+                              {row.badge && (
+                                <span className={`faq-price-badge faq-price-badge--${row.badge.variant}`}>
+                                  {row.badge.text}
+                                </span>
+                              )}
+                            </span>
                           </span>
                           <span className="faq-table-cell">{row.description}</span>
                           <span className="faq-table-cell">{row.timeline}</span>

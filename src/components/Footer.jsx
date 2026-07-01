@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion'
 import { footerNavLinks, socialLinks } from '../data/constants'
 import MeshGradient from './MeshGradient'
+import { SocialIcon } from './SocialIcons'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
-export default function Footer({ onScrollTo, onOpenModal }) {
+export default function Footer({ onScrollTo }) {
   const reducedMotion = useReducedMotion()
 
   return (
@@ -34,7 +35,7 @@ export default function Footer({ onScrollTo, onOpenModal }) {
               <img src="/logo.svg" alt="Jan Bergosa" className="footer-logo" />
             </a>
             <p className="footer-tagline">
-              Product designer &amp; front-end developer crafting strategic digital experiences that bridge user needs and business goals.
+              UI/UX designer, product designer, graphic designer, and web designer crafting strategic digital experiences that bridge user needs and business goals.
             </p>
           </div>
 
@@ -49,27 +50,28 @@ export default function Footer({ onScrollTo, onOpenModal }) {
                 {link.label}
               </a>
             ))}
-            <a
-              href="#contact"
-              className="link-accent"
-              onClick={(e) => { e.preventDefault(); onOpenModal() }}
-            >
-              Start a Project
-            </a>
           </div>
 
           <div className="footer-social">
             <strong className="text-label">Social</strong>
-            {socialLinks.map((link) => (
-              <a key={link.label} href={link.href} target="_blank" className="footer-social-link">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-                {link.label}
-              </a>
-            ))}
+            <ul className="footer-social-list">
+              {socialLinks.map((link) => (
+                <li key={link.id}>
+                  <a
+                    href={link.href}
+                    className="footer-social-link"
+                    target={link.href.startsWith('mailto:') ? undefined : '_blank'}
+                    rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                    aria-label={`${link.label}: ${link.username}`}
+                  >
+                    <span className="footer-social-icon" aria-hidden="true">
+                      <SocialIcon id={link.id} />
+                    </span>
+                    <span className="footer-social-username">{link.username}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

@@ -56,17 +56,9 @@ async function download(url, dest) {
 function updateConstants(imageMap) {
   let source = readFileSync(constantsPath, 'utf8')
   for (const [id, publicPath] of Object.entries(imageMap)) {
-    const idPattern = new RegExp(`(id:\\s*'${id}'[\\s\\S]*?)(\\n\\s*gradient:)`, 'm')
-    if (source.includes(`image: '/projects/${id}`)) {
-      source = source.replace(
-        new RegExp(`image:\\s*'/projects/[^']+'`, 'm'),
-        `image: '${publicPath}'`
-      )
-      continue
-    }
-    if (idPattern.test(source)) {
-      source = source.replace(idPattern, `$1\n    image: '${publicPath}',$2`)
-    }
+    const re = new RegExp(`(id:\\s*'${id}'[\\s\\S]*?image:\\s*')[^']+(')`)
+    if (!re.test(source)) continue
+    source = source.replace(re, `$1${publicPath}$2`)
   }
   writeFileSync(constantsPath, source)
 }

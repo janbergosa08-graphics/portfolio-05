@@ -1,6 +1,18 @@
-import { navLinks } from '../data/constants'
+import { useEffect } from 'react'
+import { navLinks, sectionContent } from '../data/constants'
 
 export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobile, onCloseMobile, onScrollTo, onOpenModal }) {
+  useEffect(() => {
+    if (!mobileOpen) return undefined
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') onCloseMobile()
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [mobileOpen, onCloseMobile])
+
   return (
     <>
       <nav className={`nav-wrapper${scrolled ? ' scrolled' : ''}`} aria-label="Primary">
@@ -8,12 +20,12 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
           <div className="nav-system">
             <div className="nav-panel nav-left">
               <a href="#hero" onClick={(e) => { e.preventDefault(); onScrollTo('hero') }}>
-                <img src="/logo.svg" alt="Jan Bergosa" className="logo" />
+                <img src="/logo.svg" alt="Jan Bergosa" className="logo" width="120" height="38" fetchPriority="high" decoding="async" />
               </a>
             </div>
 
             <div className="nav-panel nav-center">
-              <nav className="nav-links" aria-label="Section links">
+              <div className="nav-links" role="group" aria-label="Section links">
                 <ul className="nav-links-list">
                   {navLinks.map((link) => (
                     <li key={link.href}>
@@ -28,7 +40,7 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
                     </li>
                   ))}
                 </ul>
-              </nav>
+              </div>
             </div>
 
             <div className="nav-panel nav-right">
@@ -53,32 +65,42 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
         </div>
       </nav>
 
-      <div id="mobile-menu" className={`mobile-menu${mobileOpen ? ' open' : ''}`} aria-hidden={!mobileOpen}>
+      <div
+        id="mobile-menu"
+        className={`mobile-menu${mobileOpen ? ' open' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+        hidden={!mobileOpen}
+      >
         <button type="button" className="mobile-close" onClick={onCloseMobile} aria-label="Close menu">
-          &times; Close
+          <span aria-hidden="true">&times;</span>
+          <span>Close</span>
         </button>
-        <div className="mobile-nav">
-          {navLinks.map((link) => (
+        <div className="mobile-menu-panel">
+          <nav className="mobile-nav" aria-label="Mobile section links">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className={`mobile-link${activeSection === link.href.slice(1) ? ' active' : ''}`}
+                aria-current={activeSection === link.href.slice(1) ? 'page' : undefined}
+                onClick={(e) => { e.preventDefault(); onScrollTo(link.href.slice(1)) }}
+              >
+                {link.label}
+              </a>
+            ))}
             <a
-              key={link.href}
-              href={link.href}
-              className={`mobile-link${activeSection === link.href.slice(1) ? ' active' : ''}`}
-              aria-current={activeSection === link.href.slice(1) ? 'page' : undefined}
-              onClick={(e) => { e.preventDefault(); onScrollTo(link.href.slice(1)) }}
+              href="#contact"
+              className="mobile-cta"
+              onClick={(e) => { e.preventDefault(); onCloseMobile(); onOpenModal() }}
             >
-              {link.label}
+              {sectionContent.hero.ctaPrimary}
             </a>
-          ))}
-          <a
-            href="#contact"
-            className="mobile-cta"
-            onClick={(e) => { e.preventDefault(); onCloseMobile(); onOpenModal() }}
-          >
-            Start a Project
-          </a>
-        </div>
-        <div className="mobile-footer">
-          <span>Jan Bergosa &copy; {new Date().getFullYear()}</span>
+          </nav>
+          <div className="mobile-footer">
+            <span>Jan Bergosa &copy; {new Date().getFullYear()}</span>
+          </div>
         </div>
       </div>
     </>

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Mail, Phone, Clock } from 'lucide-react'
+import { outlineIconSm } from '../utils/iconStyle'
 
 export default function ContactModal({ isOpen, onClose }) {
   const modalRef = useRef(null)
@@ -56,7 +57,8 @@ export default function ContactModal({ isOpen, onClose }) {
           onClick={onClose}
           aria-label="Close dialog"
         >
-          &times;
+          <span className="modal-close-icon" aria-hidden="true">&times;</span>
+          <span className="modal-close-label">Close</span>
         </button>
         <div className="modal-layout">
           <div className="modal-left">
@@ -68,7 +70,7 @@ export default function ContactModal({ isOpen, onClose }) {
             <div className="modal-details">
               <div className="modal-detail-item">
                 <span className="modal-detail-icon" aria-hidden="true">
-                  <Mail size={16} strokeWidth={1.5} />
+                  <Mail {...outlineIconSm} />
                 </span>
                 <div>
                   <span className="modal-detail-label">Email</span>
@@ -79,7 +81,7 @@ export default function ContactModal({ isOpen, onClose }) {
               </div>
               <div className="modal-detail-item">
                 <span className="modal-detail-icon" aria-hidden="true">
-                  <Phone size={16} strokeWidth={1.5} />
+                  <Phone {...outlineIconSm} />
                 </span>
                 <div>
                   <span className="modal-detail-label">Phone</span>
@@ -90,7 +92,7 @@ export default function ContactModal({ isOpen, onClose }) {
               </div>
               <div className="modal-detail-item">
                 <span className="modal-detail-icon" aria-hidden="true">
-                  <Clock size={16} strokeWidth={1.5} />
+                  <Clock {...outlineIconSm} />
                 </span>
                 <div>
                   <span className="modal-detail-label">Response Time</span>

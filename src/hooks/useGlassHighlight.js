@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 
-export function useGlassHighlight() {
+export function useGlassHighlight(disabled = false) {
   useEffect(() => {
+    if (disabled) return
     const onMouseMove = (e) => {
       const el = e.target.closest('.glass')
       if (!el) return
@@ -14,5 +15,5 @@ export function useGlassHighlight() {
 
     document.addEventListener('mousemove', onMouseMove)
     return () => document.removeEventListener('mousemove', onMouseMove)
-  }, [])
+  }, [disabled])
 }
