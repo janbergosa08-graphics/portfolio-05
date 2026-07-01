@@ -3327,6 +3327,7 @@ select.form-input option { background: #1a1a1a; color: var(--text); }
     padding: var(--section-pad-top) 0;
   }
   #cursor-spotlight { display: none; }
+  .film-grain { display: none; }
   .glass::before { display: none; }
   .glass:hover { transform: none !important; }
   .project-card:hover { transform: none !important; }
@@ -3385,6 +3386,8 @@ select.form-input option { background: #1a1a1a; color: var(--text); }
     text-align: center;
     margin-inline: auto;
     font-size: var(--text-xs);
+    min-height: 2.75rem;
+    box-sizing: border-box;
   }
   #hero .hero-desc {
     text-align: center;

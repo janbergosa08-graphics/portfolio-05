@@ -368,6 +368,15 @@
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
+@media (max-width: 768px) {
+  .mesh-blob {
+    animation: none !important;
+  }
+  .mesh-gradient__canvas {
+    filter: blur(48px) saturate(1.05);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mesh-blob {
     animation: none !important;

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { sectionContent } from '../data/constants'
 import { useReducedMotion } from '../hooks/useReducedMotion'
+import { useMobileLite } from '../hooks/useMobileLite'
 import MeshGradient from './MeshGradient'
 
 function HeroHeadlineRow({ line, reducedMotion }) {
@@ -25,6 +26,8 @@ export default function Hero({ onScrollTo, onOpenModal }) {
   const [text, setText] = useState('')
   const fullLabel = sectionContent.hero.roleLabel
   const reducedMotion = useReducedMotion()
+  const mobileLite = useMobileLite()
+  const lightHero = reducedMotion || mobileLite
   const { scrollY } = useScroll()
   const orb1Y = useTransform(scrollY, [0, 800], [0, 120])
   const orb2Y = useTransform(scrollY, [0, 800], [0, -80])
@@ -33,7 +36,7 @@ export default function Hero({ onScrollTo, onOpenModal }) {
   const gridOpacity = useTransform(scrollY, [0, 800], [0.08, 0.02])
 
   useEffect(() => {
-    if (reducedMotion) {
+    if (lightHero) {
       setText(fullLabel)
       return undefined
     }
@@ -54,13 +57,13 @@ export default function Hero({ onScrollTo, onOpenModal }) {
     }
     type()
     return () => { clearTimeout(timeout); if (timer) clearInterval(timer) }
-  }, [reducedMotion, fullLabel])
+  }, [lightHero, fullLabel])
 
   return (
     <section id="hero" className="hero-section" aria-label="Introduction">
       <div className="hero-bg">
         <MeshGradient />
-        {!reducedMotion && (
+        {!lightHero && (
           <>
             <motion.div
               className="hero-orb hero-orb-1"
@@ -82,14 +85,14 @@ export default function Hero({ onScrollTo, onOpenModal }) {
         <div className="hero-text">
           <div className="hero-kicker">
             <span className="typewriter-text">{text}</span>
-            {!reducedMotion && <span className="typewriter-cursor" aria-hidden="true">|</span>}
+            {!lightHero && <span className="typewriter-cursor" aria-hidden="true">|</span>}
           </div>
           <h1 className="hero-headline">
             {sectionContent.hero.headlineLines.map((line) => (
               <HeroHeadlineRow
                 key={typeof line === 'string' ? line : line.highlight}
                 line={line}
-                reducedMotion={reducedMotion}
+                reducedMotion={lightHero}
               />
             ))}
           </h1>
@@ -102,15 +105,15 @@ export default function Hero({ onScrollTo, onOpenModal }) {
 
         <motion.div
           className="hero-visual"
-          initial={reducedMotion ? false : { opacity: 0, scale: 0.96 }}
+          initial={lightHero ? false : { opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <motion.div
             className="hero-grid"
             style={{
-              scale: reducedMotion ? 1 : gridScale,
-              opacity: reducedMotion ? 0.08 : gridOpacity,
+              scale: lightHero ? 1 : gridScale,
+              opacity: lightHero ? 0.08 : gridOpacity,
             }}
           >
             {Array.from({ length: 16 }).map((_, i) => (
@@ -119,7 +122,7 @@ export default function Hero({ onScrollTo, onOpenModal }) {
           </motion.div>
           <motion.div
             className="hero-floating-card glass"
-            initial={reducedMotion ? false : { opacity: 0, y: 16 }}
+            initial={lightHero ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
@@ -133,7 +136,7 @@ export default function Hero({ onScrollTo, onOpenModal }) {
 
       <motion.div
         className="scroll-indicator"
-        initial={reducedMotion ? false : { opacity: 0 }}
+        initial={lightHero ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
       >

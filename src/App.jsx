@@ -123,7 +123,7 @@ export default function App() {
       <main id="main-content">
         <Hero onScrollTo={scrollTo} onOpenModal={() => setModalOpen(true)} />
 
-        <DeferredSection id="expertise" ariaLabelledby="expertise-heading" eager>
+        <DeferredSection id="expertise" ariaLabelledby="expertise-heading">
           <Expertise />
         </DeferredSection>
 
