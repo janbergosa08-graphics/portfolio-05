@@ -39,3 +39,9 @@ UI/UX designer portfolio website. Single-page, dark theme, scroll-driven storyte
 
 ## Design Principles
 See `CLAUDE.md` for the design constitution (clarity, business value, purposeful motion).
+
+## Cursor Cloud specific instructions
+- Frontend-only static site; no backend, database, or API to run. `npm run dev` (Vite on port 3000) is the only service.
+- No lint or test tooling is configured (no ESLint/Prettier/vitest). Verify changes via `npm run build` and manual browser testing.
+- `vite.config.mjs` sets `server.open: true`; the auto-open browser attempt is harmless/ignored in headless cloud VMs — the server still serves on port 3000.
+- Two contact CTAs behave differently by design: the nav "Let's talk" is a `mailto:` link, while the hero "Start a Project" opens the on-page `ContactModal`.
