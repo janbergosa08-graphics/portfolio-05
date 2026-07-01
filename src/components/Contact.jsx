@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import BackToTop from './BackToTop'
 
 export default function Contact({ onOpenModal }) {
   const [available, setAvailable] = useState(false)
-  const [showBtn, setShowBtn] = useState(false)
 
   useEffect(() => {
     function update() {
@@ -17,29 +17,6 @@ export default function Contact({ onOpenModal }) {
     const interval = setInterval(update, 60000)
     return () => clearInterval(interval)
   }, [])
-
-  useEffect(() => {
-    const footer = document.querySelector('footer')
-    if (!footer) return undefined
-
-    const update = () => {
-      const rect = footer.getBoundingClientRect()
-      const footerVisible = rect.top < window.innerHeight && rect.bottom > 0
-      setShowBtn(footerVisible)
-    }
-
-    update()
-    window.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
-    }
-  }, [])
-
-  const scrollToTop = () => {
-    document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })
-  }
 
   return (
     <div className="contact-full">
@@ -73,17 +50,7 @@ export default function Contact({ onOpenModal }) {
         </div>
       </motion.div>
 
-      <div className={`back-to-top-wrap${showBtn ? ' visible' : ''}`}>
-        <button
-          type="button"
-          className="back-to-top-btn"
-          onClick={scrollToTop}
-          aria-label="Back to top"
-        >
-          Back to top
-          <span className="back-to-top-icon" aria-hidden="true">&uarr;</span>
-        </button>
-      </div>
+      <BackToTop />
     </div>
   )
 }

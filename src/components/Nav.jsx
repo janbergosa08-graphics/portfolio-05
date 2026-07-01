@@ -8,7 +8,7 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
           <div className="nav-system">
             <div className="nav-panel nav-left">
               <a href="#hero" onClick={(e) => { e.preventDefault(); onScrollTo('hero') }}>
-                <img src="/logo.png" alt="Jan Bergosa" className="logo" />
+                <img src="/logo.svg" alt="Jan Bergosa" className="logo" />
               </a>
             </div>
 

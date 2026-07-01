@@ -31,7 +31,7 @@ export default function Footer({ onScrollTo, onOpenModal }) {
         <div className="footer-inner">
           <div className="footer-brand">
             <a href="#hero" onClick={(e) => { e.preventDefault(); onScrollTo('hero') }}>
-              <img src="/logo.png" alt="Jan Bergosa" className="footer-logo" />
+              <img src="/logo.svg" alt="Jan Bergosa" className="footer-logo" />
             </a>
             <p className="footer-tagline">
               Product designer &amp; front-end developer crafting strategic digital experiences that bridge user needs and business goals.
