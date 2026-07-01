@@ -18,7 +18,7 @@ export default function FAQ() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="section-kicker">FAQs</div>
-        <h2 className="section-title">Common questions</h2>
+        <h2 id="faq-heading" className="section-title">Common questions</h2>
       </motion.div>
 
       <motion.div
@@ -37,11 +37,18 @@ export default function FAQ() {
               visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
             }}
           >
-            <button className="faq-question" onClick={() => toggle(i)}>
+            <button
+              type="button"
+              className="faq-question"
+              onClick={() => toggle(i)}
+              aria-expanded={openIndex === i}
+              aria-controls={`faq-answer-${i}`}
+              id={`faq-question-${i}`}
+            >
               <span>{item.question}</span>
               <span className="faq-icon">+</span>
             </button>
-            <div className="faq-answer">
+            <div className="faq-answer" id={`faq-answer-${i}`} role="region" aria-labelledby={`faq-question-${i}`}>
               <div className="faq-content">
                 {item.description && <p>{item.description}</p>}
 
@@ -74,9 +81,9 @@ export default function FAQ() {
                         <div key={j} className="faq-table-row">
                           <span className="faq-table-cell">
                             {j === 0 ? 'Landing Page' : j === 1 ? 'Website' : j === 2 ? 'Dashboard' : j === 3 ? 'Mobile App' : j === 4 ? 'UI/UX Design' : j === 5 ? 'Brand Identity' : j === 6 ? (
-                              <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <span className="faq-service-label">
                                 Hourly
-                                <span className="faq-tag" style={{ fontSize: '10px', padding: '2px 8px' }}>Negotiable</span>
+                                <span className="faq-tag faq-tag--micro">Negotiable</span>
                               </span>
                             ) : row.service}
                           </span>
@@ -99,7 +106,7 @@ export default function FAQ() {
                 )}
 
                 {item.note && (
-                  <p className="faq-note" style={{ fontStyle: 'italic' }}>{item.note}</p>
+                  <p className="faq-note faq-note--italic">{item.note}</p>
                 )}
               </div>
             </div>

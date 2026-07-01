@@ -1,40 +1,59 @@
 import { useRef, useEffect, useState, useCallback } from 'react'
 import { processSteps } from '../data/constants'
+import StepProgress from './StepProgress'
+import CardVisualPlaceholder, { CardMeshLayer } from './CardVisualPlaceholder'
+import DocBody from './DocBody'
+import {
+  resolveProcessScrollState,
+  PROCESS_STICKY_TOP,
+} from '../utils/scrollProgress'
 
 export default function Process() {
   const [activeIdx, setActiveIdx] = useState(0)
-  const [progress, setProgress] = useState(0)
+  const [lineFills, setLineFills] = useState(() => Array(processSteps.length).fill(0))
   const scrollZoneRef = useRef(null)
-  const stackRef = useRef(null)
+  const cardRefs = useRef([])
   const [indicatorHidden, setIndicatorHidden] = useState(false)
 
   const STACK_OFFSET = 18
   const SCALE_STEP = 0.045
   const SCROLL_PER_CARD = 0.72
+  const MAX_VISIBLE_DEPTH = 2
+
+  const setCardRef = useCallback(
+    (index) => (el) => {
+      cardRefs.current[index] = el
+    },
+    []
+  )
 
   const updateStack = useCallback(() => {
     const scrollZone = scrollZoneRef.current
-    if (!scrollZone) return
-    const zoneRect = scrollZone.getBoundingClientRect()
-    const scrollable = scrollZone.offsetHeight - window.innerHeight
-    if (scrollable <= 0) return
+    if (!scrollZone || window.innerWidth <= 1100) return
 
-    const p = Math.max(0, Math.min(1, -zoneRect.top / scrollable))
-    setProgress(p)
-    const floatIdx = p * (processSteps.length - 1)
-    const idx = Math.min(processSteps.length - 1, Math.round(floatIdx))
-    setActiveIdx(idx)
+    const cards = cardRefs.current
+    const { activeIndex, floatIndex, lineFills } = resolveProcessScrollState(
+      cards,
+      scrollZone
+    )
 
-    const cards = scrollZone.querySelectorAll('.ps-card')
+    setActiveIdx(activeIndex)
+    setLineFills(lineFills)
 
     cards.forEach((card, i) => {
+      if (!card) return
       card.classList.remove('hidden')
-      const depth = Math.max(0, floatIdx - i)
-      card.style.setProperty('--ps-scale', String(Math.max(0.82, 1 - depth * SCALE_STEP)))
-      card.style.setProperty('--ps-y', `${-depth * STACK_OFFSET}px`)
+      const depth = Math.max(0, floatIndex - i)
+      const clampedDepth = Math.min(depth, MAX_VISIBLE_DEPTH)
+      card.style.setProperty(
+        '--ps-scale',
+        String(Math.max(0.82, 1 - clampedDepth * SCALE_STEP))
+      )
+      card.style.setProperty('--ps-y', `${-clampedDepth * STACK_OFFSET}px`)
       card.style.zIndex = String(i + 1)
-      card.classList.toggle('active', i === Math.round(floatIdx))
-      card.classList.toggle('passed', i < Math.round(floatIdx))
+      card.classList.toggle('active', i === Math.round(floatIndex))
+      card.classList.toggle('passed', i < Math.round(floatIndex))
+      card.classList.toggle('deep', depth > MAX_VISIBLE_DEPTH)
     })
   }, [])
 
@@ -53,12 +72,11 @@ export default function Process() {
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
     updateStack()
 
-    // Observe approach section for indicator hide
     const approachEl = document.getElementById('approach')
-    const indicator = document.querySelector('.ps-indicator')
-    if (approachEl && indicator) {
+    if (approachEl) {
       const io = new IntersectionObserver(
         ([entry]) => {
           setIndicatorHidden(entry.isIntersecting)
@@ -66,10 +84,16 @@ export default function Process() {
         { threshold: 0 }
       )
       io.observe(approachEl)
+      return () => {
+        window.removeEventListener('scroll', onScroll)
+        window.removeEventListener('resize', onScroll)
+        io.disconnect()
+      }
     }
 
     return () => {
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
     }
   }, [updateStack])
 
@@ -95,22 +119,23 @@ export default function Process() {
     if (!scrollZone) return
     const isDesktop = window.innerWidth > 1100
     if (!isDesktop) {
-      const cards = scrollZone.querySelectorAll('.ps-card')
-      cards[idx]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      cardRefs.current[idx]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       return
     }
-    const zoneTop = scrollZone.offsetTop
-    const zoneHeight = scrollZone.offsetHeight
-    const scrollable = zoneHeight - window.innerHeight
-    const target = zoneTop + (idx / (processSteps.length - 1)) * scrollable
-    window.scrollTo({ top: target, behavior: 'smooth' })
+
+    const card = cardRefs.current[idx]
+    if (!card) return
+
+    const top = card.getBoundingClientRect().top
+    const targetScroll = window.scrollY + top - PROCESS_STICKY_TOP
+    window.scrollTo({ top: targetScroll, behavior: 'smooth' })
   }
 
   return (
     <>
       <div className="container">
         <div className="section-kicker">Process</div>
-        <h2 className="section-title">From idea to impact</h2>
+        <h2 id="process-heading" className="section-title">From idea to impact</h2>
         <p className="section-intro">
           A structured approach that turns ambiguity into clarity, and concepts into products that perform.
         </p>
@@ -120,41 +145,31 @@ export default function Process() {
         className={`ps-indicator${indicatorHidden ? ' ps-indicator--hidden' : ''}`}
       >
         <div className="ps-indicator-inner">
-          <div className="ps-pagination">
-            {processSteps.map((step, i) => {
-              const isActive = i === activeIdx && i < processSteps.length - 1
-              const isDone = i < activeIdx || (i === processSteps.length - 1 && i === activeIdx)
-              const lineFill = i === activeIdx && i < processSteps.length - 1 ? progress * (processSteps.length - 1) - Math.floor(progress * (processSteps.length - 1)) : isDone ? 1 : 0
-              return (
-                <button
-                  key={i}
-                  className={`ps-step${isActive ? ' active' : ''}${isDone ? ' done' : ''}`}
-                  data-idx={i}
-                  onClick={() => scrollToStep(i)}
-                >
-                  <span className="ps-step-num">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="ps-step-line" style={{ '--ps-line-fill': lineFill }} />
-                </button>
-              )
-            })}
-          </div>
+          <StepProgress
+            count={processSteps.length}
+            activeIndex={activeIdx}
+            lineFills={lineFills}
+            onStepClick={scrollToStep}
+            orientation="horizontal"
+            ariaLabel="Process steps"
+            getStepLabel={(i) => `${processSteps[i].phase}: ${processSteps[i].title}`}
+          />
         </div>
       </div>
 
       <div className="ps-scroll-zone" ref={scrollZoneRef}>
-        <div className="ps-stack" ref={stackRef}>
+        <div className="ps-stack">
           {processSteps.map((step, i) => (
-            <div key={i} className="ps-card">
+            <div key={i} className="ps-card" data-step={i} ref={setCardRef(i)}>
               <div className="ps-card-inner">
-                <div className="ps-visual-col">
-                  <div className="ps-visual">
-                    <span className="ps-icon">{step.icon}</span>
-                  </div>
+                <CardMeshLayer stepIndex={i} fadeSide="right" />
+                <div className="ps-visual-col" aria-hidden="true">
+                  <CardVisualPlaceholder variant={step.placeholder} />
                 </div>
                 <div className="ps-body-col">
                   <div className="ps-phase">{step.phase}</div>
                   <h3>{step.title}</h3>
-                  <p>{step.desc}</p>
+                  <DocBody paragraphs={step.body} />
                 </div>
                 <span className="ps-number">{String(i + 1).padStart(2, '0')}</span>
               </div>

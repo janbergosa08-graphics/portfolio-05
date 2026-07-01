@@ -3,7 +3,7 @@ import { navLinks } from '../data/constants'
 export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobile, onCloseMobile, onScrollTo, onOpenModal }) {
   return (
     <>
-      <nav className={`nav-wrapper${scrolled ? ' scrolled' : ''}`}>
+      <nav className={`nav-wrapper${scrolled ? ' scrolled' : ''}`} aria-label="Primary">
         <div className="nav-inner">
           <div className="nav-system">
             <div className="nav-panel nav-left">
@@ -13,19 +13,22 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
             </div>
 
             <div className="nav-panel nav-center">
-              <ul className="nav-links">
-                {navLinks.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      className={`nav-link${activeSection === link.href.slice(1) ? ' active' : ''}`}
-                      onClick={(e) => { e.preventDefault(); onScrollTo(link.href.slice(1)) }}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <nav className="nav-links" aria-label="Section links">
+                <ul className="nav-links-list">
+                  {navLinks.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        className={`nav-link${activeSection === link.href.slice(1) ? ' active' : ''}`}
+                        aria-current={activeSection === link.href.slice(1) ? 'page' : undefined}
+                        onClick={(e) => { e.preventDefault(); onScrollTo(link.href.slice(1)) }}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
             </div>
 
             <div className="nav-panel nav-right">
@@ -35,9 +38,12 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
             </div>
 
             <button
+              type="button"
               className={`burger${mobileOpen ? ' open' : ''}`}
               onClick={onToggleMobile}
-              aria-label="Toggle menu"
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
             >
               <span></span>
               <span></span>
@@ -47,14 +53,17 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
         </div>
       </nav>
 
-      <div className={`mobile-menu${mobileOpen ? ' open' : ''}`}>
-        <button className="mobile-close" onClick={onCloseMobile}>&times; Close</button>
+      <div id="mobile-menu" className={`mobile-menu${mobileOpen ? ' open' : ''}`} aria-hidden={!mobileOpen}>
+        <button type="button" className="mobile-close" onClick={onCloseMobile} aria-label="Close menu">
+          &times; Close
+        </button>
         <div className="mobile-nav">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="mobile-link"
+              className={`mobile-link${activeSection === link.href.slice(1) ? ' active' : ''}`}
+              aria-current={activeSection === link.href.slice(1) ? 'page' : undefined}
               onClick={(e) => { e.preventDefault(); onScrollTo(link.href.slice(1)) }}
             >
               {link.label}

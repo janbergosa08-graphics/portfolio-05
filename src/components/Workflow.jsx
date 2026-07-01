@@ -1,37 +1,99 @@
-import { useRef, useEffect, useState } from 'react'
+import { useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { Search, PenTool, Rocket } from 'lucide-react'
 import { workflowSteps } from '../data/constants'
+import { useWorkflowProgress } from '../hooks/useWorkflowProgress'
+import { useReducedMotion } from '../hooks/useReducedMotion'
+import CardVisualPlaceholder, { CardMeshLayer } from './CardVisualPlaceholder'
+import DocBody from './DocBody'
 
-const wfIcons = [Search, PenTool, Rocket]
+function WorkflowNav({ steps, activeIndex, stepFills, onStepClick }) {
+  return (
+    <nav className="wf-nav" aria-label="Workflow steps">
+      {steps.map((step, i) => {
+        const isActive = i === activeIndex
+        const isDone = (stepFills[i] ?? 0) >= 0.97 && !isActive
+        const fill = stepFills[i] ?? 0
+
+        return (
+          <button
+            key={step.title}
+            type="button"
+            className={`wf-nav-item${isActive ? ' is-active' : ''}${isDone ? ' is-done' : ''}`}
+            onClick={() => onStepClick(i)}
+            aria-current={isActive ? 'step' : undefined}
+            aria-label={`${step.short}: ${step.title}`}
+          >
+            <div className="wf-nav-heading">
+              <span className="wf-nav-num">{String(i + 1).padStart(2, '0')}</span>
+              <span className="wf-nav-title">{step.short}</span>
+            </div>
+            <div
+              className="wf-nav-bar"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={Math.round(fill * 100)}
+              aria-label={`${step.short} progress`}
+            >
+              <span className="wf-nav-bar-track">
+                <span
+                  className="wf-nav-bar-fill"
+                  style={{ '--bar-fill': fill }}
+                />
+              </span>
+            </div>
+          </button>
+        )
+      })}
+    </nav>
+  )
+}
+
+function WorkflowFrame({ step, index, isActive, frameRef, reducedMotion }) {
+  const isReversed = index % 2 === 1
+  const fadeSide = isReversed ? 'right' : 'left'
+
+  return (
+    <motion.article
+      className={`wf-frame${isActive ? ' is-active' : ''}${isReversed ? ' wf-frame--reversed' : ''}`}
+      data-step={index}
+      ref={frameRef}
+      aria-labelledby={`wf-card-title-${index}`}
+      initial={reducedMotion ? false : { opacity: 0, y: 64, x: isReversed ? -72 : 72 }}
+      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0, x: 0 }}
+      viewport={{ once: true, margin: '-8% 0px -10% 0px' }}
+      transition={{
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1],
+        delay: index * 0.05,
+      }}
+    >
+      <CardMeshLayer stepIndex={index} fadeSide={fadeSide} />
+
+      <div className="wf-frame-content">
+        <h3 id={`wf-card-title-${index}`}>{step.title}</h3>
+        <DocBody paragraphs={step.body} />
+      </div>
+
+      <div className="wf-frame-visual" aria-hidden="true">
+        <CardVisualPlaceholder variant={step.placeholder} />
+      </div>
+    </motion.article>
+  )
+}
 
 export default function Workflow() {
-  const [activeStep, setActiveStep] = useState(0)
-  const frameRefs = useRef([])
+  const reducedMotion = useReducedMotion()
+  const { activeIndex: activeStep, setRef, stepFills } = useWorkflowProgress(
+    workflowSteps.length
+  )
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const idx = parseInt(entry.target.dataset.step)
-          if (entry.isIntersecting) {
-            setActiveStep(idx)
-          }
-        })
-      },
-      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
-    )
-
-    frameRefs.current.forEach((el) => {
-      if (el) observer.observe(el)
+  const scrollToFrame = useCallback((idx) => {
+    document.querySelector(`.wf-frame[data-step="${idx}"]`)?.scrollIntoView({
+      behavior: reducedMotion ? 'auto' : 'smooth',
+      block: 'center',
     })
-
-    return () => observer.disconnect()
-  }, [])
-
-  const scrollToFrame = (idx) => {
-    frameRefs.current[idx]?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-  }
+  }, [reducedMotion])
 
   return (
     <div className="container">
@@ -42,63 +104,28 @@ export default function Workflow() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="section-kicker">Workflow</div>
-        <h2 className="section-title">How I work</h2>
+        <h2 id="workflow-heading" className="section-title">How I work</h2>
       </motion.div>
 
       <div className="workflow-split">
-        <motion.div
-          className="wf-nav"
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {workflowSteps.map((step, i) => {
-            const Icon = wfIcons[i]
-            return (
-              <button
-                key={i}
-                className={`wf-pill${activeStep === i ? ' active' : ''}`}
-                data-step={i}
-                onClick={() => scrollToFrame(i)}
-              >
-                <Icon size={16} strokeWidth={1.5} style={{ flexShrink: 0 }} />
-                {step.title}
-              </button>
-            )
-          })}
-        </motion.div>
+        <WorkflowNav
+          steps={workflowSteps}
+          activeIndex={activeStep}
+          stepFills={stepFills}
+          onStepClick={scrollToFrame}
+        />
 
-        <div className="wf-frames">
-          {workflowSteps.map((step, i) => {
-            const Icon = wfIcons[i]
-            return (
-              <motion.div
-                key={i}
-                className={`wf-frame grain${activeStep === i ? ' visible' : ''}`}
-                data-step={i}
-                ref={(el) => (frameRefs.current[i] = el)}
-                initial={{ opacity: 0, x: 120 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div className="wf-frame-content">
-                  <h3>{step.title}</h3>
-                  <p>{step.desc}</p>
-                  <ul className="wf-detail">
-                    {step.details.map((d, j) => (
-                      <li key={j}>{d}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="wf-frame-visual">
-                  <div className="wf-visual-bg"></div>
-                  <Icon size={64} strokeWidth={1} className="wf-visual-icon" style={{ color: 'rgba(255,255,255,0.04)' }} />
-                </div>
-              </motion.div>
-            )
-          })}
+        <div className="wf-cards" role="list" aria-label="Workflow detail cards">
+          {workflowSteps.map((step, i) => (
+            <WorkflowFrame
+              key={step.title}
+              step={step}
+              index={i}
+              isActive={activeStep === i}
+              frameRef={setRef(i)}
+              reducedMotion={reducedMotion}
+            />
+          ))}
         </div>
       </div>
     </div>

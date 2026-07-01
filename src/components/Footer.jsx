@@ -1,7 +1,11 @@
 import { motion } from 'framer-motion'
 import { footerNavLinks, socialLinks } from '../data/constants'
+import MeshGradient from './MeshGradient'
+import { useReducedMotion } from '../hooks/useReducedMotion'
 
 export default function Footer({ onScrollTo, onOpenModal }) {
+  const reducedMotion = useReducedMotion()
+
   return (
     <motion.footer
       initial={{ opacity: 0, y: 40 }}
@@ -9,8 +13,19 @@ export default function Footer({ onScrollTo, onOpenModal }) {
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="footer-banner grain">
-        <span className="footer-banner-text">UI/UX DESIGNER</span>
+      <div className="footer-banner-wrap">
+        <motion.div
+          className="footer-banner"
+          initial={reducedMotion ? false : { opacity: 0, y: 36, scale: 0.96 }}
+          whileInView={reducedMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="footer-banner-mesh" aria-hidden="true">
+            <MeshGradient intensity="footer" />
+          </div>
+          <p className="footer-banner-text" aria-hidden="true">UI UX DESIGNER</p>
+        </motion.div>
       </div>
       <div className="glass-footer">
         <div className="footer-inner">
@@ -24,7 +39,7 @@ export default function Footer({ onScrollTo, onOpenModal }) {
           </div>
 
           <div className="footer-nav">
-            <strong style={{ fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--text-tertiary)' }}>Navigation</strong>
+            <strong className="text-label">Navigation</strong>
             {footerNavLinks.map((link) => (
               <a
                 key={link.href}
@@ -36,15 +51,15 @@ export default function Footer({ onScrollTo, onOpenModal }) {
             ))}
             <a
               href="#contact"
+              className="link-accent"
               onClick={(e) => { e.preventDefault(); onOpenModal() }}
-              style={{ fontWeight: 600, background: 'var(--warm-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
             >
               Start a Project
             </a>
           </div>
 
           <div className="footer-social">
-            <strong style={{ fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--text-tertiary)' }}>Social</strong>
+            <strong className="text-label">Social</strong>
             {socialLinks.map((link) => (
               <a key={link.label} href={link.href} target="_blank" className="footer-social-link">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

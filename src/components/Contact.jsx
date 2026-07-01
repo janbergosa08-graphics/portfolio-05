@@ -19,21 +19,22 @@ export default function Contact({ onOpenModal }) {
   }, [])
 
   useEffect(() => {
-    const onScroll = () => {
-      const el = document.getElementById('contact')
-      if (!el) return
-      const rect = el.getBoundingClientRect()
-      const inView = rect.top < window.innerHeight && rect.bottom > 0
-      if (inView) {
-        const scrollable = el.scrollHeight - window.innerHeight
-        const scrolled = window.scrollY - el.offsetTop
-        setShowBtn(scrolled > scrollable - 200)
-      } else {
-        setShowBtn(false)
-      }
+    const footer = document.querySelector('footer')
+    if (!footer) return undefined
+
+    const update = () => {
+      const rect = footer.getBoundingClientRect()
+      const footerVisible = rect.top < window.innerHeight && rect.bottom > 0
+      setShowBtn(footerVisible)
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
   }, [])
 
   const scrollToTop = () => {
@@ -50,57 +51,37 @@ export default function Contact({ onOpenModal }) {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="section-kicker">Contact</div>
-        <h2 className="section-title" style={{ maxWidth: 520 }}>
+        <h2 id="contact-heading" className="section-title section-title--narrow">
           Ready to bring your vision to life?
         </h2>
         <p>
           I am currently accepting new projects and collaborations. Let&rsquo;s talk about how I can help you build something great.
         </p>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '24px' }}>
-          <span className={`availability-dot${available ? ' active' : ''}`}></span>
-          <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
+        <button type="button" className="btn-primary btn-large" onClick={onOpenModal}>
+          Start a Project
+        </button>
+        <div className="availability-row">
+          <span
+            className={`availability-dot${available ? ' active' : ' inactive'}`}
+            aria-hidden="true"
+          />
+          <span className={`availability-text${available ? '' : ' is-unavailable'}`}>
             {available
               ? 'Available for work \u2014 Mon\u2013Fri 9AM\u20136PM PHT'
               : 'Not available at this hour \u2014 back Mon\u2013Fri 9AM\u20136PM PHT'}
           </span>
         </div>
-        <button className="btn-primary btn-large" onClick={onOpenModal}>
-          Start a Project
-        </button>
-        <div className="contact-links">
-          <a href="mailto:janbergosa.graphics@gmail.com">Email</a>
-          <a href="https://www.behance.net/janbergosa" target="_blank">Behance</a>
-          <a href="https://dribbble.com/janbergosa" target="_blank">Dribbble</a>
-        </div>
       </motion.div>
 
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: '64px',
-        opacity: showBtn ? 1 : 0,
-        visibility: showBtn ? 'visible' : 'hidden',
-        transition: 'opacity 0.4s, visibility 0.4s',
-      }}>
+      <div className={`back-to-top-wrap${showBtn ? ' visible' : ''}`}>
         <button
+          type="button"
+          className="back-to-top-btn"
           onClick={scrollToTop}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '12px 28px',
-            border: '1px solid var(--glass-border)',
-            borderRadius: '100px',
-            background: 'rgba(255,255,255,0.04)',
-            backdropFilter: 'blur(20px)',
-            color: '#fff',
-            fontFamily: 'var(--font)',
-            fontSize: '13px',
-            cursor: 'pointer',
-            whiteSpace: 'nowrap',
-          }}
+          aria-label="Back to top"
         >
-          &uarr; Back to top
+          Back to top
+          <span className="back-to-top-icon" aria-hidden="true">&uarr;</span>
         </button>
       </div>
     </div>

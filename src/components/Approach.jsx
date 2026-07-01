@@ -11,7 +11,7 @@ export default function Approach() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="section-kicker">Approach</div>
-        <h2 className="section-title">Design philosophy</h2>
+        <h2 id="approach-heading" className="section-title">Design philosophy</h2>
       </motion.div>
 
       <motion.div

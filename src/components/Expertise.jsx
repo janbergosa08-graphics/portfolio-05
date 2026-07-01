@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import MeshGradient from './MeshGradient'
 
 const tileVariants = {
   hidden: { opacity: 0, scale: 1.06, y: 30 },
@@ -13,10 +14,14 @@ const tileVariants = {
 const tiles = [
   { className: 'bento-hero', content: (
     <>
-      <div className="bento-hero-number">1+</div>
-      <span className="bento-hero-label">Years of experience</span>
-      <p className="bento-hero-desc">Delivering end-to-end product design and front-end development for startups and agencies worldwide.</p>
-      <div className="bento-hero-glow"></div>
+      <div className="bento-hero-mesh" aria-hidden="true">
+        <MeshGradient intensity="bento" />
+      </div>
+      <div className="bento-hero-content">
+        <div className="bento-hero-number">1+</div>
+        <span className="bento-hero-label">Years of experience</span>
+        <p className="bento-hero-desc">Delivering end-to-end product design and front-end development for startups and agencies worldwide.</p>
+      </div>
     </>
   )},
   { className: 'bento-exp', content: (
@@ -49,7 +54,7 @@ const tiles = [
       <span className="bento-glyph">&#9733;</span>
       <div className="bento-title">End-to-End Delivery</div>
       <div className="bento-desc">From concept to code &mdash; I handle research, design, prototyping, and front-end development for a seamless workflow.</div>
-      <div className="pill-strip">
+      <div className="skill-tags" aria-label="Skills">
         <span>Design Systems</span><span>Prototyping</span><span>Front-End</span><span>Figma</span><span>React</span>
       </div>
     </>
@@ -66,7 +71,7 @@ export default function Expertise() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="section-kicker">Expertise</div>
-        <h2 className="section-title">Blending design &amp; engineering</h2>
+        <h2 id="expertise-heading" className="section-title">Blending design &amp; engineering</h2>
       </motion.div>
 
       <div className="bento-grid">
