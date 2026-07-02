@@ -73,7 +73,7 @@ export default function Expertise() {
     >
       <div className="bento-linkedin-media">
         <img
-          src="/me/marjan-profile.png"
+          src="/me/marjan-profile.webp"
           alt=""
           width={480}
           height={560}

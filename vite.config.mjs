@@ -19,6 +19,7 @@ export default defineConfig({
         },
       },
     },
+    cssCodeSplit: true,
   },
   server: {
     port: 3000,

@@ -1,15 +1,16 @@
-import { useState, useEffect, useRef, Suspense, useCallback } from 'react'
+import { useState, useEffect, useRef, Suspense, useCallback, lazy } from 'react'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
-import Expertise from './components/Expertise'
-import Workflow from './components/Workflow'
-import FeaturedProjects from './components/FeaturedProjects'
-import Process from './components/Process'
-import Approach from './components/Approach'
-import FAQ from './components/FAQ'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
 import ContactModal from './components/ContactModal'
+
+const Expertise = lazy(() => import('./components/Expertise'))
+const Workflow = lazy(() => import('./components/Workflow'))
+const FeaturedProjects = lazy(() => import('./components/FeaturedProjects'))
+const Process = lazy(() => import('./components/Process'))
+const Approach = lazy(() => import('./components/Approach'))
+const FAQ = lazy(() => import('./components/FAQ'))
+const Contact = lazy(() => import('./components/Contact'))
+const Footer = lazy(() => import('./components/Footer'))
 import { useReducedMotion } from './hooks/useReducedMotion'
 import { useScrollSpy } from './hooks/useScrollSpy'
 import { useGlassHighlight } from './hooks/useGlassHighlight'
@@ -211,33 +212,35 @@ export default function App() {
       <main id="main-content">
         <Hero onScrollTo={scrollTo} onOpenModal={() => setModalOpen(true)} />
 
-        <section id="expertise" aria-labelledby="expertise-heading">
-          <Expertise />
-        </section>
+        <Suspense fallback={null}>
+          <section id="expertise" aria-labelledby="expertise-heading">
+            <Expertise />
+          </section>
 
-        <section id="workflow" aria-labelledby="workflow-heading">
-          <Workflow />
-        </section>
+          <section id="workflow" aria-labelledby="workflow-heading">
+            <Workflow />
+          </section>
 
-        <section id="featured" className="section-featured" aria-labelledby="featured-heading">
-          <FeaturedProjects />
-        </section>
+          <section id="featured" className="section-featured" aria-labelledby="featured-heading">
+            <FeaturedProjects />
+          </section>
 
-        <section id="process" aria-labelledby="process-heading">
-          <Process />
-        </section>
+          <section id="process" aria-labelledby="process-heading">
+            <Process />
+          </section>
 
-        <section id="approach" aria-labelledby="approach-heading">
-          <Approach />
-        </section>
+          <section id="approach" aria-labelledby="approach-heading">
+            <Approach />
+          </section>
 
-        <section id="faq" aria-labelledby="faq-heading">
-          <FAQ />
-        </section>
+          <section id="faq" aria-labelledby="faq-heading">
+            <FAQ />
+          </section>
 
-        <section id="contact" aria-labelledby="contact-heading">
-          <Contact onOpenModal={() => setModalOpen(true)} />
-        </section>
+          <section id="contact" aria-labelledby="contact-heading">
+            <Contact onOpenModal={() => setModalOpen(true)} />
+          </section>
+        </Suspense>
 
         <div ref={footerSentinelRef} aria-hidden="true" />
       </main>
