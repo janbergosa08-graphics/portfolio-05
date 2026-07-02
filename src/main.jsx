@@ -4,6 +4,7 @@ import Root from './Root'
 import './index.css'
 import './styles/mesh-gradient.css'
 import './styles/doc-page.css'
+import './styles/nav-bar.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
