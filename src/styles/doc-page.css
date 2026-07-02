@@ -93,7 +93,7 @@
 
 .doc-intro {
   max-width: var(--content-max);
-  margin: 0 0 var(--space-2xl);
+  margin: 0 auto var(--space-2xl);
   padding: 0 var(--content-pad);
   text-align: left;
 }
@@ -132,14 +132,14 @@
   font-size: var(--text-lg);
   color: var(--text-secondary);
   line-height: var(--leading-body);
-  margin: 0 0 var(--space-lg);
+  margin: 0 0 var(--space-md);
   max-width: 40rem;
 }
 
 .doc-meta-row {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
 }
 
 .doc-meta-chip {
@@ -184,8 +184,12 @@
   top: calc(4.5rem + var(--space-md));
   max-height: calc(100dvh - 6rem);
   overflow-y: auto;
-  padding-right: var(--space-sm);
+  padding: var(--space-sm) var(--space-sm) var(--space-sm) 0;
   border-right: 1px solid var(--glass-border);
+  background: rgba(6, 7, 10, 0.62);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-sm);
 }
 
 .doc-nav-group + .doc-nav-group {
@@ -255,12 +259,12 @@
 .doc-sections {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3xl);
+  gap: var(--space-2xl);
 }
 
 .doc-section {
   scroll-margin-top: calc(5.5rem + var(--space-md));
-  padding-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -271,13 +275,12 @@
 
 .doc-section-head {
   display: flex;
-  gap: var(--space-md);
   align-items: flex-start;
-  margin-bottom: var(--space-lg);
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
 }
 
 .doc-step-num {
-  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -292,6 +295,7 @@
   font-variant-numeric: tabular-nums;
   color: var(--text-tertiary);
   letter-spacing: 0.04em;
+  margin: 0;
 }
 
 .doc-section-meta {
@@ -299,8 +303,9 @@
 }
 
 .doc-badge {
-  display: inline-block;
-  margin-bottom: var(--space-sm);
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: var(--space-xs);
   padding: 0.2rem 0.5rem;
   border-radius: var(--radius-2xs);
   background: rgba(255, 255, 255, 0.04);
@@ -309,25 +314,26 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--text-secondary);
+  white-space: nowrap;
 }
 
 .doc-section-title {
   font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   font-weight: 700;
-  margin: 0 0 var(--space-sm);
+  margin: 0 0 0.35rem;
   letter-spacing: var(--tracking-tight);
-  line-height: 1.25;
+  line-height: 1.22;
 }
 
 .doc-section-summary {
   margin: 0;
   font-size: var(--text-md);
   color: var(--text-secondary);
-  line-height: var(--leading-body);
+  line-height: 1.45;
 }
 
 .doc-field-grid {
-  margin: 0 0 var(--space-lg);
+  margin: 0 0 var(--space-md);
   padding: var(--space-md);
   border-radius: var(--radius-sm);
   border: 1px solid var(--glass-border);
@@ -339,8 +345,8 @@
 
 .doc-field-row {
   display: grid;
-  grid-template-columns: minmax(5.5rem, 7rem) minmax(0, 1fr);
-  gap: var(--space-md);
+  grid-template-columns: minmax(4.25rem, 5.25rem) minmax(0, 1fr);
+  gap: var(--space-sm);
   align-items: baseline;
   font-size: var(--text-sm);
   line-height: 1.5;
@@ -364,7 +370,7 @@
   font-size: var(--text-md);
   color: var(--text-secondary);
   line-height: var(--leading-relaxed);
-  margin: 0 0 var(--space-md);
+  margin: 0 0 var(--space-sm);
 }
 
 .doc-body:last-child {
@@ -373,17 +379,17 @@
 
 .doc-list {
   list-style: none;
-  margin: 0 0 var(--space-md);
+  margin: 0 0 var(--space-sm);
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
 }
 
 .doc-list-item {
   display: grid;
-  grid-template-columns: minmax(5rem, 6.5rem) minmax(0, 1fr);
-  gap: var(--space-md);
+  grid-template-columns: minmax(4.25rem, 5.25rem) minmax(0, 1fr);
+  gap: var(--space-sm);
   font-size: var(--text-sm);
   line-height: 1.55;
   padding: var(--space-sm) 0;
@@ -403,7 +409,7 @@
 }
 
 .doc-code-panel {
-  margin: var(--space-md) 0;
+  margin: var(--space-sm) 0;
   padding: var(--space-md);
   border-radius: var(--radius-sm);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -448,7 +454,7 @@
 }
 
 .doc-contact {
-  margin-top: var(--space-3xl);
+  margin-top: var(--space-2xl);
   padding-top: var(--space-lg);
   border-top: 1px solid var(--glass-border);
   font-size: var(--text-sm);
