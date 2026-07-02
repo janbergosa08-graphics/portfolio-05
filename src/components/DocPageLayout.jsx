@@ -65,9 +65,7 @@ function DocList({ items }) {
   )
 }
 
-function DocSectionBlock({ section, index }) {
-  const step = section.step ?? String(index + 1).padStart(2, '0')
-
+function DocSectionBlock({ section }) {
   return (
     <section
       id={section.id}
@@ -75,7 +73,6 @@ function DocSectionBlock({ section, index }) {
       aria-labelledby={`${section.id}-title`}
     >
       <div className="doc-section-head">
-        <span className="doc-step-num" aria-hidden="true">{step}</span>
         <div className="doc-section-meta">
           {section.badge && (
             <span className="doc-badge">{section.badge}</span>
@@ -223,7 +220,7 @@ export default function DocPageLayout({
           <div className="doc-content">
             <div className="doc-sections">
               {sections.map((section, index) => (
-                <DocSectionBlock key={section.id} section={section} index={index} />
+                <DocSectionBlock key={section.id} section={section} />
               ))}
             </div>
 

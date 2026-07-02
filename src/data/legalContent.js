@@ -16,18 +16,19 @@ export const legalContent = {
     {
       id: 'purpose',
       step: '01',
-      shortLabel: 'Purpose',
+      shortLabel: 'Overview',
       heading: 'Site purpose',
       icon: 'Target',
       badge: 'Overview',
-      summary: 'A personal portfolio for professional review — not a storefront or service contract.',
+      summary:
+        'A reusable design playbook that explains how this portfolio is structured and why each section exists.',
       fields: [
         { label: 'Format', value: 'Personal portfolio and design reference' },
         { label: 'Audience', value: 'Recruiters, hiring managers, product teams, collaborators' },
         { label: 'Intent', value: 'Show process, thinking, and selected work' },
       ],
       body: [
-        'This site demonstrates how I approach UI/UX, product design, and delivery. It is not an agency site, pricing page, or binding offer unless agreed separately in writing.',
+        'This page outlines the legal purpose, usage boundaries, and ownership context for this portfolio. It is provided for transparency and professional review.',
       ],
     },
     {

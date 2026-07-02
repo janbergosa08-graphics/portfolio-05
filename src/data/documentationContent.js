@@ -17,17 +17,34 @@ export const documentationContent = {
   ],
   sections: [
     {
-      id: 'principles',
+      id: 'overview',
       step: '01',
+      shortLabel: 'Overview',
+      heading: 'Site purpose',
+      icon: 'Target',
+      badge: 'Overview',
+      summary: 'A reusable design playbook that explains how this portfolio is structured and why each section exists.',
+      fields: [
+        { label: 'Goal', value: 'Document strategic design decisions, not just visual polish' },
+        { label: 'Audience', value: 'Founders, PMs, agencies, recruiters' },
+        { label: 'Intent', value: 'Provide a practical reference for planning and execution' },
+      ],
+      body: [
+        'This page is a reference document for UI/UX strategy, structure, and workflow decisions used across projects. It supports consistency, faster delivery, and clearer product communication.',
+      ],
+    },
+    {
+      id: 'principles',
+      step: '02',
       shortLabel: 'Principles',
       heading: 'Design principles',
       icon: 'Target',
       badge: 'Foundation',
       summary: 'Rules I apply before adding UI — clarity and business value over decoration.',
       fields: [
-        { label: 'Goal', value: 'Show strategic thinking, not just visual polish' },
-        { label: 'Audience', value: 'Founders, PMs, agencies, recruiters' },
-        { label: 'Test', value: 'Can a visitor understand value in 30 seconds?' },
+        { label: 'Rule 01', value: 'Clarity before creativity' },
+        { label: 'Rule 02', value: 'Business value before decoration' },
+        { label: 'Rule 03', value: 'One purpose per section' },
       ],
       items: [
         { label: 'Clarity', text: 'If it reduces clarity, simplify or remove it.' },
@@ -40,7 +57,7 @@ export const documentationContent = {
     },
     {
       id: 'structure',
-      step: '02',
+      step: '03',
       shortLabel: 'Structure',
       heading: 'Page structure',
       icon: 'Layout',
@@ -110,7 +127,7 @@ export const documentationContent = {
     },
     {
       id: 'copy',
-      step: '03',
+      step: '04',
       shortLabel: 'Copy',
       heading: 'Copy rules',
       icon: 'Zap',
@@ -137,7 +154,7 @@ export const documentationContent = {
     },
     {
       id: 'ai-workflow',
-      step: '04',
+      step: '05',
       shortLabel: 'AI',
       heading: 'AI workflow notes',
       icon: 'Brain',
@@ -165,7 +182,7 @@ export const documentationContent = {
     },
     {
       id: 'stack',
-      step: '05',
+      step: '06',
       shortLabel: 'Stack',
       heading: 'Stack reference',
       icon: 'Workflow',
@@ -187,7 +204,7 @@ documentationContent.groups = [
   {
     label: 'Foundation',
     items: documentationContent.sections.filter((s) =>
-      ['principles', 'structure'].includes(s.id),
+      ['overview', 'principles', 'structure'].includes(s.id),
     ),
   },
   {
