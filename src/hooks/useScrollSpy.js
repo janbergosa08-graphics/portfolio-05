@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const SECTION_IDS = [
   'hero',
@@ -11,73 +11,67 @@ const SECTION_IDS = [
   'contact',
 ]
 
+/** Nav height + breathing room — section top past this line becomes active */
+const SECTION_OFFSET = 112
+
 /**
  * Tracks which page section is active for nav highlighting.
- * Uses a visibility map across all sections (not just the current IO batch).
+ * Geometry-based (not IntersectionObserver ratios) for accurate, low-latency updates.
  */
-export function useScrollSpy({ heroScrollMax = 120 } = {}) {
+export function useScrollSpy({ heroScrollMax = 120, pinnedSection = null } = {}) {
   const [activeSection, setActiveSection] = useState('hero')
+  const activeRef = useRef('hero')
+  const rafRef = useRef(0)
 
   useEffect(() => {
-    const visibility = new Map(SECTION_IDS.map((id) => [id, 0]))
-
-    const pickActive = () => {
+    const measureActive = () => {
       if (window.scrollY < heroScrollMax) {
-        setActiveSection('hero')
-        return
+        return 'hero'
       }
 
-      let bestId = 'hero'
-      let bestScore = 0
+      let current = 'hero'
 
-      visibility.forEach((ratio, id) => {
+      for (const id of SECTION_IDS) {
+        if (id === 'hero') continue
         const el = document.getElementById(id)
-        if (!el || ratio <= 0) return
+        if (!el) continue
 
-        const rect = el.getBoundingClientRect()
-        const visibleHeight = Math.max(
-          0,
-          Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0)
-        )
-        const score = visibleHeight + ratio * 100
+        const { top, height } = el.getBoundingClientRect()
+        if (height < 4) continue
 
-        if (score > bestScore) {
-          bestScore = score
-          bestId = id
+        if (top <= SECTION_OFFSET) {
+          current = id
         }
-      })
+      }
 
-      if (bestScore > 0) setActiveSection(bestId)
+      return current
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          visibility.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0)
-        })
-        pickActive()
-      },
-      {
-        // Align active link when section crosses the upper-middle viewport band
-        rootMargin: '-20% 0px -45% 0px',
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
-      }
-    )
+    const commit = () => {
+      rafRef.current = 0
+      const next = measureActive()
+      if (next === activeRef.current) return
+      activeRef.current = next
+      setActiveSection(next)
+    }
 
-    SECTION_IDS.forEach((id) => {
-      const el = document.getElementById(id)
-      if (el) observer.observe(el)
-    })
+    const schedule = () => {
+      if (rafRef.current) return
+      rafRef.current = requestAnimationFrame(commit)
+    }
 
-    const onScroll = () => pickActive()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    pickActive()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule, { passive: true })
+    commit()
 
     return () => {
-      observer.disconnect()
-      window.removeEventListener('scroll', onScroll)
+      cancelAnimationFrame(rafRef.current)
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
     }
   }, [heroScrollMax])
 
-  return activeSection
+  return pinnedSection ?? activeSection
 }
+
+export { SECTION_IDS }

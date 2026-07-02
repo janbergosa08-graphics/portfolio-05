@@ -43,16 +43,13 @@ function WorkflowNav({ steps, activeIndex, stepFills, onStepClick }) {
 }
 
 function WorkflowFrame({ step, index, isActive, frameRef, reducedMotion }) {
-  const isReversed = index % 2 === 1
-  const fadeSide = isReversed ? 'right' : 'left'
-
   return (
     <motion.article
-      className={`wf-frame${isActive ? ' is-active' : ''}${isReversed ? ' wf-frame--reversed' : ''}`}
+      className={`wf-frame${isActive ? ' is-active' : ''}`}
       data-step={index}
       ref={frameRef}
       aria-labelledby={`wf-card-title-${index}`}
-      initial={reducedMotion ? false : { opacity: 0, y: 64, x: isReversed ? -72 : 72 }}
+      initial={reducedMotion ? false : { opacity: 0, y: 48, x: 64 }}
       whileInView={reducedMotion ? undefined : { opacity: 1, y: 0, x: 0 }}
       viewport={{ once: true, margin: '-8% 0px -10% 0px' }}
       transition={{
@@ -61,7 +58,7 @@ function WorkflowFrame({ step, index, isActive, frameRef, reducedMotion }) {
         delay: index * 0.05,
       }}
     >
-      <CardMeshLayer stepIndex={index} fadeSide={fadeSide} />
+      <CardMeshLayer stepIndex={index} fadeSide="left" />
 
       <div className="wf-frame-content">
         <h3 id={`wf-card-title-${index}`}>{step.title}</h3>

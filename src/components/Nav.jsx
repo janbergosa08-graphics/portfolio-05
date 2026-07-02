@@ -1,7 +1,13 @@
 import { useEffect } from 'react'
+import { Download, X } from 'lucide-react'
 import { navLinks, sectionContent } from '../data/constants'
 
 export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobile, onCloseMobile, onScrollTo, onOpenModal }) {
+  const mobileFooterLinks = [
+    { label: 'Legal', href: '/legal' },
+    { label: 'Documents', href: '/docs' },
+  ]
+
   useEffect(() => {
     if (!mobileOpen) return undefined
 
@@ -44,9 +50,21 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
             </div>
 
             <div className="nav-panel nav-right">
-              <a href="mailto:janbergosa.graphics@gmail.com" className="nav-cta">
-                Let&rsquo;s talk
-              </a>
+              <div className="nav-actions">
+                <a href="mailto:janbergosa.graphics@gmail.com" className="nav-cta">
+                  {sectionContent.nav.cta}
+                </a>
+                <a
+                  href={sectionContent.nav.resumeFile}
+                  className="nav-download"
+                  download={sectionContent.nav.resumeDownloadName}
+                  aria-label={sectionContent.nav.resumeLabel}
+                  title={sectionContent.nav.resumeLabel}
+                >
+                  <Download className="nav-download-icon" size={18} strokeWidth={1.75} aria-hidden="true" />
+                  <span className="nav-download-label">{sectionContent.nav.resumeLabel}</span>
+                </a>
+              </div>
             </div>
 
             <button
@@ -74,31 +92,55 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
         hidden={!mobileOpen}
       >
         <button type="button" className="mobile-close" onClick={onCloseMobile} aria-label="Close menu">
-          <span aria-hidden="true">&times;</span>
-          <span>Close</span>
+          <X size={22} strokeWidth={1.75} aria-hidden="true" />
         </button>
         <div className="mobile-menu-panel">
           <nav className="mobile-nav" aria-label="Mobile section links">
-            {navLinks.map((link) => (
+            <ul className="mobile-nav-grid">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className={`mobile-link${activeSection === link.href.slice(1) ? ' active' : ''}`}
+                    aria-current={activeSection === link.href.slice(1) ? 'page' : undefined}
+                    onClick={(e) => { e.preventDefault(); onScrollTo(link.href.slice(1)) }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="mobile-nav-actions">
               <a
-                key={link.href}
-                href={link.href}
-                className={`mobile-link${activeSection === link.href.slice(1) ? ' active' : ''}`}
-                aria-current={activeSection === link.href.slice(1) ? 'page' : undefined}
-                onClick={(e) => { e.preventDefault(); onScrollTo(link.href.slice(1)) }}
+                href={sectionContent.nav.resumeFile}
+                className="mobile-download"
+                download={sectionContent.nav.resumeDownloadName}
+                onClick={onCloseMobile}
               >
-                {link.label}
+                <Download size={18} strokeWidth={1.75} aria-hidden="true" />
+                {sectionContent.nav.resumeLabel}
               </a>
-            ))}
-            <a
-              href="#contact"
-              className="mobile-cta"
-              onClick={(e) => { e.preventDefault(); onCloseMobile(); onOpenModal() }}
-            >
-              {sectionContent.hero.ctaPrimary}
-            </a>
+              <a
+                href="#contact"
+                className="mobile-cta"
+                onClick={(e) => { e.preventDefault(); onCloseMobile(); onOpenModal() }}
+              >
+                {sectionContent.hero.ctaPrimary}
+              </a>
+            </div>
           </nav>
           <div className="mobile-footer">
+            <nav className="mobile-footer-nav" aria-label="Footer links">
+              <ul className="mobile-footer-nav-list">
+                {mobileFooterLinks.map((link) => (
+                  <li key={link.href}>
+                    <a href={link.href} className="mobile-footer-link" onClick={onCloseMobile}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
             <span>Jan Bergosa &copy; {new Date().getFullYear()}</span>
           </div>
         </div>

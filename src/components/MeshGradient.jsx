@@ -11,7 +11,9 @@ export default function MeshGradient({ className = '', intensity = 'default' }) 
           ? ' mesh-gradient--bento'
           : intensity === 'footer'
             ? ' mesh-gradient--footer'
-            : ''
+            : intensity === 'hero'
+              ? ' mesh-gradient--hero'
+              : ''
 
   return (
     <div
@@ -25,6 +27,7 @@ export default function MeshGradient({ className = '', intensity = 'default' }) 
         <span className="mesh-blob mesh-blob--blue" />
         <span className="mesh-blob mesh-blob--blend" />
       </div>
+      <div className="mesh-gradient__grain" />
       <div className="mesh-gradient__vignette" />
     </div>
   )

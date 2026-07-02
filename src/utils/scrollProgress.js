@@ -1,4 +1,4 @@
-export const PROCESS_STICKY_TOP = 180
+export const PROCESS_STICKY_TOP = 168
 
 /** Scroll progress for a card within a viewport focus band (0 = entering, 1 = leaving). */
 export function getCardScrollProgress(el, options = {}) {
@@ -91,7 +91,7 @@ export function resolveProcessScrollState(cardEls, scrollZoneEl, stickyTop = PRO
   return {
     activeIndex,
     floatIndex,
-    lineFills: getProcessLineFills(cardEls, activeIndex),
+    lineFills: getProcessLineFills(cardEls, floatIndex),
   }
 }
 
@@ -121,18 +121,16 @@ export function getStickyHandoffProgress(nextEl, stickyTop = PROCESS_STICKY_TOP)
   return 1 - distance / height
 }
 
-/** Process indicator lines — fill tracks the next card approaching sticky top. */
-export function getProcessLineFills(cardEls, activeIndex) {
+/** Line fill between step i and i+1 — synced to stack float index. */
+export function getProcessLineFills(cardEls, floatIndex) {
   const last = cardEls.length - 1
-  if (activeIndex >= last) {
-    return cardEls.map((_, i) => (i < last ? 1 : 0))
-  }
+  const rounded = Math.round(floatIndex)
 
   return cardEls.map((_, i) => {
-    if (i >= cardEls.length - 1) return 0
-    if (i < activeIndex) return 1
-    if (i > activeIndex) return 0
-    return getStickyHandoffProgress(cardEls[i + 1], PROCESS_STICKY_TOP)
+    if (i >= last) return 0
+    if (rounded > i || floatIndex >= i + 1) return 1
+    if (floatIndex <= i) return 0
+    return floatIndex - i
   })
 }
 

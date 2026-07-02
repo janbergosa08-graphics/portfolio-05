@@ -1,4 +1,8 @@
 /* ── Animated mesh gradient (pure CSS) ── */
+:root {
+  --mesh-grain-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='mg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23mg)'/%3E%3C/svg%3E");
+}
+
 .mesh-gradient {
   position: absolute;
   inset: 0;
@@ -150,8 +154,8 @@
 
 .mesh-gradient--bento .mesh-gradient__vignette {
   background:
-    linear-gradient(180deg, rgba(6, 7, 10, 0.22) 0%, transparent 28%, transparent 72%, rgba(6, 7, 10, 0.28) 100%),
-    linear-gradient(90deg, rgba(6, 7, 10, 0.18) 0%, transparent 22%, transparent 78%, rgba(6, 7, 10, 0.18) 100%);
+    linear-gradient(180deg, rgba(6, 7, 10, 0.12) 0%, transparent 24%, transparent 88%, rgba(6, 7, 10, 0.08) 100%),
+    linear-gradient(90deg, rgba(6, 7, 10, 0.1) 0%, transparent 18%, transparent 82%, rgba(6, 7, 10, 0.1) 100%);
 }
 
 /* Footer banner — full-bleed vibrant mesh */
@@ -219,6 +223,104 @@
 .mesh-gradient--footer .mesh-gradient__vignette {
   background:
     radial-gradient(ellipse 88% 78% at 50% 50%, transparent 35%, rgba(6, 7, 10, 0.32) 100%);
+}
+
+/* Hero banner — bottom light-shadow mesh (COSMOQ-style) */
+.mesh-gradient--hero .mesh-gradient__canvas {
+  left: -28%;
+  right: -28%;
+  top: 8%;
+  bottom: -52%;
+  filter: blur(76px) saturate(1.55);
+}
+
+.mesh-gradient--hero .mesh-blob {
+  mix-blend-mode: screen;
+  opacity: 1;
+}
+
+.mesh-gradient--hero .mesh-blob--coral {
+  width: 58%;
+  height: 52%;
+  bottom: 2%;
+  left: 0;
+  top: auto;
+  background: radial-gradient(circle, rgba(237, 93, 69, 0.62) 0%, rgba(237, 93, 69, 0) 70%);
+  animation-duration: 20s;
+}
+
+.mesh-gradient--hero .mesh-blob--gold {
+  width: 72%;
+  height: 58%;
+  bottom: -8%;
+  left: 22%;
+  top: auto;
+  background: radial-gradient(circle, rgba(242, 182, 85, 0.78) 0%, rgba(242, 182, 85, 0) 72%);
+  animation-duration: 24s;
+}
+
+.mesh-gradient--hero .mesh-blob--cyan {
+  width: 54%;
+  height: 50%;
+  bottom: 0;
+  right: -2%;
+  left: auto;
+  top: auto;
+  background: radial-gradient(circle, rgba(63, 190, 216, 0.68) 0%, rgba(63, 190, 216, 0) 68%);
+  animation-duration: 22s;
+}
+
+.mesh-gradient--hero .mesh-blob--blue {
+  width: 48%;
+  height: 46%;
+  bottom: -6%;
+  right: 18%;
+  left: auto;
+  top: auto;
+  background: radial-gradient(circle, rgba(63, 126, 222, 0.58) 0%, rgba(63, 126, 222, 0) 70%);
+  animation-duration: 26s;
+}
+
+.mesh-gradient--hero .mesh-blob--blend {
+  width: 95%;
+  height: 62%;
+  bottom: -18%;
+  left: 50%;
+  top: auto;
+  transform: translateX(-50%);
+  opacity: 0.42;
+  animation-duration: 34s;
+}
+
+.mesh-gradient--hero .mesh-gradient__vignette {
+  background: linear-gradient(
+    180deg,
+    var(--bg) 0%,
+    rgba(6, 7, 10, 0.92) 8%,
+    rgba(6, 7, 10, 0.55) 28%,
+    rgba(6, 7, 10, 0.06) 54%,
+    transparent 82%
+  );
+}
+
+.mesh-gradient--hero .mesh-gradient__grain {
+  opacity: 0.17;
+  mix-blend-mode: soft-light;
+  background-size: 160px 160px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 118% 68% at 50% 86%,
+    rgba(0, 0, 0, 0.98) 4%,
+    rgba(0, 0, 0, 0.55) 48%,
+    rgba(0, 0, 0, 0.15) 72%,
+    transparent 88%
+  );
+  mask-image: radial-gradient(
+    ellipse 118% 68% at 50% 86%,
+    rgba(0, 0, 0, 0.98) 4%,
+    rgba(0, 0, 0, 0.55) 48%,
+    rgba(0, 0, 0, 0.15) 72%,
+    transparent 88%
+  );
 }
 
 /* Mesh blooms from left (process cards) */
@@ -331,9 +433,76 @@
   animation: meshSpin 40s linear infinite;
 }
 
+/* Fine grain — scoped to mesh only; soft-light keeps it tactile without banding */
+.mesh-gradient__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.13;
+  mix-blend-mode: soft-light;
+  background-image: var(--mesh-grain-texture);
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 88% 82% at 50% 48%,
+    rgba(0, 0, 0, 0.95) 18%,
+    rgba(0, 0, 0, 0.45) 52%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    ellipse 88% 82% at 50% 48%,
+    rgba(0, 0, 0, 0.95) 18%,
+    rgba(0, 0, 0, 0.45) 52%,
+    transparent 78%
+  );
+}
+
+.mesh-gradient--subtle .mesh-gradient__grain {
+  opacity: 0.09;
+  background-size: 200px 200px;
+}
+
+.mesh-gradient--card .mesh-gradient__grain {
+  opacity: 0.11;
+  -webkit-mask-image: radial-gradient(
+    ellipse 78% 72% at 74% 46%,
+    rgba(0, 0, 0, 0.9) 8%,
+    rgba(0, 0, 0, 0.4) 45%,
+    transparent 72%
+  );
+  mask-image: radial-gradient(
+    ellipse 78% 72% at 74% 46%,
+    rgba(0, 0, 0, 0.9) 8%,
+    rgba(0, 0, 0, 0.4) 45%,
+    transparent 72%
+  );
+}
+
+.mesh-gradient--bento .mesh-gradient__grain {
+  opacity: 0.15;
+}
+
+.mesh-gradient--footer .mesh-gradient__grain {
+  opacity: 0.14;
+  -webkit-mask-image: radial-gradient(
+    ellipse 92% 78% at 50% 50%,
+    rgba(0, 0, 0, 0.92) 12%,
+    rgba(0, 0, 0, 0.35) 58%,
+    transparent 82%
+  );
+  mask-image: radial-gradient(
+    ellipse 92% 78% at 50% 50%,
+    rgba(0, 0, 0, 0.92) 12%,
+    rgba(0, 0, 0, 0.35) 58%,
+    transparent 82%
+  );
+}
+
 .mesh-gradient__vignette {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background:
     radial-gradient(ellipse 80% 70% at 50% 45%, transparent 35%, var(--bg) 100%),
     linear-gradient(180deg, transparent 0%, rgba(6, 7, 10, 0.35) 100%);
@@ -374,6 +543,36 @@
   }
   .mesh-gradient__canvas {
     filter: blur(48px) saturate(1.05);
+  }
+  .mesh-gradient--hero .mesh-gradient__canvas {
+    filter: blur(56px) saturate(1.35);
+    top: 18%;
+    bottom: -48%;
+  }
+  .mesh-gradient--hero .mesh-blob--gold {
+    width: 85%;
+    height: 52%;
+  }
+  .mesh-gradient--hero .mesh-gradient__grain {
+    opacity: 0.14;
+    background-size: 180px 180px;
+  }
+  .hero-bg {
+    bottom: -16vh;
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      #000 0%,
+      #000 52%,
+      rgba(0, 0, 0, 0.65) 72%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      #000 0%,
+      #000 52%,
+      rgba(0, 0, 0, 0.65) 72%,
+      transparent 100%
+    );
   }
 }
 

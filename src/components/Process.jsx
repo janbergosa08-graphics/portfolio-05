@@ -17,8 +17,27 @@ export default function Process() {
 
   const STACK_OFFSET = 18
   const SCALE_STEP = 0.045
-  const SCROLL_PER_CARD = 0.72
+  const CARD_GAP_PX = 40
+  const HANDOFF_RATIO = 0.48
   const MAX_VISIBLE_DEPTH = 2
+
+  const getProcessCardHeight = useCallback(() => {
+    const vh = window.innerHeight
+    return Math.min(560, Math.max(440, vh - 280))
+  }, [])
+
+  const syncScrollZoneHeight = useCallback(() => {
+    const scrollZone = scrollZoneRef.current
+    if (!scrollZone || window.innerWidth <= 1100) return
+
+    const cardHeight = cardRefs.current[0]?.offsetHeight || getProcessCardHeight()
+    const indicatorHeight = scrollZone.querySelector('.ps-indicator')?.offsetHeight || 0
+    const steps = processSteps.length
+    const stackHeight = indicatorHeight + steps * cardHeight + (steps - 1) * CARD_GAP_PX
+    const handoff = (steps - 1) * cardHeight * HANDOFF_RATIO
+
+    scrollZone.style.height = `${Math.ceil(stackHeight + handoff)}px`
+  }, [getProcessCardHeight])
 
   const setCardRef = useCallback(
     (index) => (el) => {
@@ -32,12 +51,12 @@ export default function Process() {
     if (!scrollZone || window.innerWidth <= 1100) return
 
     const cards = cardRefs.current
-    const { activeIndex, floatIndex, lineFills } = resolveProcessScrollState(
+    const { floatIndex, lineFills } = resolveProcessScrollState(
       cards,
       scrollZone
     )
 
-    setActiveIdx(activeIndex)
+    setActiveIdx(Math.round(floatIndex))
     setLineFills(lineFills)
 
     cards.forEach((card, i) => {
@@ -64,16 +83,27 @@ export default function Process() {
     const isDesktop = window.innerWidth > 1100
     if (!isDesktop) return
 
-    const totalVh = (processSteps.length - 1) * SCROLL_PER_CARD + 1
-    scrollZone.style.height = `${totalVh * 100}vh`
+    syncScrollZoneHeight()
 
     const onScroll = () => {
       requestAnimationFrame(updateStack)
     }
 
+    const onResize = () => {
+      if (window.innerWidth > 1100) {
+        syncScrollZoneHeight()
+        requestAnimationFrame(updateStack)
+      } else {
+        scrollZone.style.height = 'auto'
+      }
+    }
+
     window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll, { passive: true })
-    updateStack()
+    window.addEventListener('resize', onResize, { passive: true })
+    requestAnimationFrame(() => {
+      syncScrollZoneHeight()
+      updateStack()
+    })
 
     const approachEl = document.getElementById('approach')
     if (approachEl) {
@@ -86,33 +116,16 @@ export default function Process() {
       io.observe(approachEl)
       return () => {
         window.removeEventListener('scroll', onScroll)
-        window.removeEventListener('resize', onScroll)
+        window.removeEventListener('resize', onResize)
         io.disconnect()
       }
     }
 
     return () => {
       window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
+      window.removeEventListener('resize', onResize)
     }
-  }, [updateStack])
-
-  useEffect(() => {
-    const onResize = () => {
-      const scrollZone = scrollZoneRef.current
-      if (!scrollZone) return
-      const isDesktop = window.innerWidth > 1100
-      if (isDesktop) {
-        const totalVh = (processSteps.length - 1) * SCROLL_PER_CARD + 1
-        scrollZone.style.height = `${totalVh * 100}vh`
-        updateStack()
-      } else {
-        scrollZone.style.height = 'auto'
-      }
-    }
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-  }, [updateStack])
+  }, [syncScrollZoneHeight, updateStack])
 
   const scrollToStep = (idx) => {
     const scrollZone = scrollZoneRef.current
@@ -139,23 +152,22 @@ export default function Process() {
         <p className="section-intro">{sectionContent.process.intro}</p>
       </div>
 
-      <div
-        className={`ps-indicator${indicatorHidden ? ' ps-indicator--hidden' : ''}`}
-      >
-        <div className="ps-indicator-inner">
-          <StepProgress
-            count={processSteps.length}
-            activeIndex={activeIdx}
-            lineFills={lineFills}
-            onStepClick={scrollToStep}
-            orientation="horizontal"
-            ariaLabel="Process steps"
-            getStepLabel={(i) => `${processSteps[i].phase}: ${processSteps[i].title}`}
-          />
-        </div>
-      </div>
-
       <div className="ps-scroll-zone" ref={scrollZoneRef}>
+        <div
+          className={`ps-indicator${indicatorHidden ? ' ps-indicator--hidden' : ''}`}
+        >
+          <div className="ps-indicator-inner">
+            <StepProgress
+              count={processSteps.length}
+              activeIndex={activeIdx}
+              lineFills={lineFills}
+              onStepClick={scrollToStep}
+              orientation="horizontal"
+              ariaLabel="Process steps"
+              getStepLabel={(i) => `${processSteps[i].phase}: ${processSteps[i].title}`}
+            />
+          </div>
+        </div>
         <div className="ps-stack">
           {processSteps.map((step, i) => (
             <div key={i} className="ps-card" data-step={i} ref={setCardRef(i)}>

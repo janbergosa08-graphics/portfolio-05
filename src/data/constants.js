@@ -12,7 +12,7 @@ export const sectionContent = {
     ],
     description:
       'That\u2019s how precisely design ships when AI handles the craft \u2014 human-led strategy sets direction, agentic execution delivers speed, and every decision ties to friction removed and outcomes that convert.',
-    ctaPrimary: 'Start Scaling',
+    ctaPrimary: 'Get in Touch',
     ctaSecondary: 'View Projects',
   },
   expertise: {
@@ -21,6 +21,11 @@ export const sectionContent = {
     intro:
       'End-to-end product design across UI/UX, web, graphic, and brand — from research and systems to launch-ready interfaces built for measurable growth.',
   },
+  designToolRows: [
+    ['Relume', 'Adobe Photoshop', 'Illustrator', 'Figma'],
+    ['Cursor', 'Claude', 'Canva', 'Framer'],
+    ['LottieFiles', 'Figma', 'Relume', 'Cursor'],
+  ],
   workflow: {
     kicker: 'Velocity',
     title: 'Pilot AI. Execute design.',
@@ -46,15 +51,23 @@ export const sectionContent = {
       'Every decision passes the conversion story test: name the friction, map the process, prove the result.',
   },
   faq: {
-    kicker: 'Queries',
-    title: 'Clarify strategies. Resolve doubts.',
+    kicker: 'Profile',
+    title: 'Know the fit. See the value.',
+    intro:
+      'Direct answers on what I bring to a team, how I work with product and engineering, and where I add the most impact.',
   },
   contact: {
-    kicker: 'Partnership',
+    kicker: 'Contact',
     title: 'Build solutions. Forge impact.',
     intro:
       'I\u2019m accepting new projects and collaborations. Tell me where users stall \u2014 we\u2019ll align on goals and ship something that converts.',
-    cta: 'Start Launching',
+    cta: 'Send a Message',
+  },
+  nav: {
+    cta: 'Let\u2019s talk',
+    resumeLabel: 'Download Resume',
+    resumeFile: '/resume/marjan-bergosa-ui-ux-design-resume.pdf',
+    resumeDownloadName: 'Marjan-Bergosa-UI-UX-Design-Resume.pdf',
   },
 };
 
@@ -755,67 +768,75 @@ export const approachCards = [
 
 export const faqItems = [
   {
-    question: 'What services do you offer?',
-    description: 'I offer end-to-end product design services tailored to startups, agencies, and growing businesses. From research to launch, every project is crafted with strategic intent and pixel-perfect execution.',
+    question: 'What can you contribute to a product team?',
+    description:
+      'I bridge user needs and business goals \u2014 turning ambiguity into shipped interfaces that reduce friction and move metrics. My work spans research through launch-ready UI, with a bias for clarity, systems thinking, and outcomes teams can measure.',
     items: [
-      { label: 'UI/UX Design', sub: 'User research to visual design' },
-      { label: 'Web Design', sub: 'Landing pages to web apps' },
-      { label: 'Product Design', sub: 'SaaS dashboards to mobile apps' },
-      { label: 'Branding', sub: 'Visual identity to design systems' },
-      { label: 'Graphic Design', sub: 'Collateral to social assets' },
-      { label: 'Illustration', sub: 'Vector art to isometric icons' },
+      { label: 'Product UX', sub: 'Flows, IA, and interface decisions tied to goals' },
+      { label: 'Design systems', sub: 'Tokens, components, and patterns that scale' },
+      { label: 'Rapid prototyping', sub: 'Clickable validation before engineering investment' },
+      { label: 'Dev-ready handoff', sub: 'Specs, assets, and front-end implementation support' },
+      { label: 'Visual craft', sub: 'Brand, graphic, and illustration when the product needs it' },
+      { label: 'AI-accelerated delivery', sub: 'Faster iteration without sacrificing judgment' },
     ],
-    note: 'Each service is scoped individually based on your specific needs and project requirements.',
+    note: 'Every engagement starts with the problem your team is solving \u2014 not a fixed service menu.',
   },
   {
-    question: 'What is your design process?',
-    description: 'My process follows a structured six-phase approach that balances strategic thinking with creative execution. Every phase includes clear deliverables and checkpoints to keep projects on track.',
+    question: 'What are your core strengths?',
+    description:
+      'I combine strategic product thinking with hands-on visual execution. That means fewer handoffs, faster alignment, and interfaces that hold up from first prototype through production.',
     items: [
-      { label: 'Research', sub: 'Market analysis and user insights' },
-      { label: 'Strategy', sub: 'Goals, KPIs, and roadmap' },
-      { label: 'Design', sub: 'Wireframes to high-fidelity UI' },
-      { label: 'Prototype', sub: 'Interactive validation loops' },
-      { label: 'Build', sub: 'Clean code and QA testing' },
-      { label: 'Scale', sub: 'Launch support and growth' },
+      { label: 'Problem framing', sub: 'Name the friction before designing the screen' },
+      { label: 'Research synthesis', sub: 'Turn interviews and data into actionable direction' },
+      { label: 'High-fidelity UI', sub: 'Polished interfaces built for real constraints' },
+      { label: 'Cross-platform thinking', sub: 'Web, dashboard, and responsive patterns' },
+      { label: 'Brand alignment', sub: 'Consistent identity across product touchpoints' },
+      { label: 'Execution speed', sub: 'AI tools multiply output; strategy stays human-led' },
     ],
-    note: 'Phases are adaptable \u2014 I tailor the process to fit your timeline, budget, and project complexity.',
+    note: 'See the Growth and Solutions sections for how this shows up in shipped work.',
   },
   {
-    question: 'How much does a project cost?',
-    description: 'Every project is unique, so pricing depends on scope, complexity, and timeline. Below is a general guide to help you estimate \u2014 final quotes are provided after a brief discovery call.',
-    pricing: true,
-    pricingNote: '* Final pricing depends on scope, deliverables, and timeline. Each project is quoted individually.',
-  },
-  {
-    question: 'What is your availability?',
-    description: 'I balance client work with ongoing collaborations, so availability changes weekly. Reach out and I\u2019ll let you know if I have capacity for your project timeline.',
-    chips: ['Available for freelance', 'Open to collaborations', 'Full-time projects considered'],
-    note: 'I typically respond within 24 hours. If I\u2019m at capacity, I\u2019ll help you find the right timeline.',
-  },
-  {
-    question: 'How do I get started?',
-    description: 'Getting started is simple. Click \u201cStart Scaling\u201d or \u201cStart Launching,\u201d share your project brief, and I\u2019ll respond within 24 hours with a tailored proposal and timeline.',
-    note: 'No commitment needed for the initial conversation \u2014 just a friendly chat about your vision.',
-  },
-  {
-    question: 'Do you offer revisions?',
-    description: 'Yes. Every project includes two rounds of revisions to refine the deliverables. This ensures we nail the details and you\u2019re completely satisfied with the final output.',
+    question: 'How do you work day to day?',
+    description:
+      'I follow a structured loop that keeps product, design, and engineering aligned \u2014 with clear checkpoints so nothing ships on assumption alone.',
     items: [
-      { label: 'Round 1', sub: 'Structural and layout feedback' },
-      { label: 'Round 2', sub: 'Fine-tuning and polish' },
+      { label: 'Align', sub: 'Goals, users, constraints, and success metrics' },
+      { label: 'Research', sub: 'Evidence before pixels; validate early' },
+      { label: 'Design', sub: 'Wireframes to hi-fi UI with system consistency' },
+      { label: 'Prototype', sub: 'Test flows with stakeholders and users' },
+      { label: 'Build', sub: 'Partner on implementation and QA' },
+      { label: 'Measure', sub: 'Iterate from analytics, feedback, and conversion data' },
     ],
-    note: 'Additional revisions can be arranged and will be quoted based on scope. I aim for zero surprises.',
+    note: 'The rhythm adapts to your team\u2019s sprint cadence \u2014 async-friendly docs and prototypes included.',
   },
-];
-
-export const pricingData = [
-  { service: 'Landing Page', description: 'High-conversion, speed-optimized design', timeline: '2\u20133 weeks', price: '$650+', badge: { text: 'Recommended', variant: 'recommended' } },
-  { service: 'Website', description: 'Scalable, SEO-ready business site', timeline: '3\u20136 weeks', price: '$1,200+', badge: { text: 'Best', variant: 'best' } },
-  { service: 'Dashboard', description: 'Data-driven, custom enterprise app', timeline: '4\u20138 weeks', price: '$1,850+' },
-  { service: 'Mobile App', description: 'Bespoke mobile development', timeline: '6\u201312 weeks', price: '$2,650+' },
-  { service: 'UI/UX Design', description: 'Premium, user-centered experience', timeline: '3\u20136 weeks', price: '$950+' },
-  { service: 'Brand Identity', description: 'Complete visual branding suite', timeline: '2\u20134 weeks', price: '$750+' },
-  { service: 'Custom Support', description: 'Flexible, expert-level retainer', timeline: 'Flexible', price: '--', badge: { text: 'Negotiable', variant: 'negotiable' } },
+  {
+    question: 'What tools and AI workflow do you use?',
+    description:
+      'I work in the same stack modern product teams expect \u2014 with AI woven into research, exploration, and build phases to compress cycle time while keeping creative and strategic decisions human-led.',
+    chips: ['Figma', 'Cursor', 'Claude', 'Framer', 'Adobe Creative Suite', 'Design tokens', 'Relume', 'LottieFiles'],
+    note: 'Tooling flexes to your team\u2019s stack; the workflow is what stays consistent.',
+  },
+  {
+    question: 'What roles are you open to?',
+    description:
+      'I\u2019m exploring opportunities where design directly impacts product outcomes \u2014 embedded with teams that value rigor, velocity, and clear communication.',
+    chips: ['Full-time UI/UX', 'Product design', 'In-house design teams', 'Remote / hybrid', 'Contract-to-hire'],
+    note: 'Open to discussing fit and timing \u2014 reach out via LinkedIn or the contact form below.',
+  },
+  {
+    question: 'How do you collaborate with PMs and engineers?',
+    description:
+      'Strong products come from shared context, not thrown-over-the-wall deliverables. I keep communication tight, documentation clear, and feedback loops short.',
+    items: [
+      { label: 'Shared goals', sub: 'Same language on users, metrics, and scope' },
+      { label: 'Async clarity', sub: 'Written specs, annotated files, and decision logs' },
+      { label: 'Live prototypes', sub: 'Clickable flows for alignment before build' },
+      { label: 'Implementation partnership', sub: 'Front-end support and design QA in code' },
+      { label: 'Constructive critique', sub: 'Direct feedback focused on outcomes' },
+      { label: 'Iteration discipline', sub: 'Ship, measure, refine \u2014 not endless polish' },
+    ],
+    note: 'I respond within 24 hours. A short intro about your team and the problem space is enough to start.',
+  },
 ];
 
 export const socialLinks = [

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { faqItems, pricingData, sectionContent } from '../data/constants'
+import { faqItems, sectionContent } from '../data/constants'
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null)
@@ -19,6 +19,7 @@ export default function FAQ() {
       >
         <div className="section-kicker">{sectionContent.faq.kicker}</div>
         <h2 id="faq-heading" className="section-title">{sectionContent.faq.title}</h2>
+        <p className="section-intro">{sectionContent.faq.intro}</p>
       </motion.div>
 
       <motion.div
@@ -72,37 +73,6 @@ export default function FAQ() {
                       ))}
                     </ul>
                   </div>
-                )}
-
-                {item.pricing && (
-                  <>
-                    <div className="faq-table">
-                      <div className="faq-table-row faq-table-header">
-                        <span className="faq-table-cell">Service</span>
-                        <span className="faq-table-cell">Description</span>
-                        <span className="faq-table-cell">Timeline</span>
-                        <span className="faq-table-cell">Price</span>
-                      </div>
-                      {pricingData.map((row, j) => (
-                        <div key={j} className="faq-table-row">
-                          <span className="faq-table-cell">
-                            <span className="faq-service-label">
-                              {row.service}
-                              {row.badge && (
-                                <span className={`faq-price-badge faq-price-badge--${row.badge.variant}`}>
-                                  {row.badge.text}
-                                </span>
-                              )}
-                            </span>
-                          </span>
-                          <span className="faq-table-cell">{row.description}</span>
-                          <span className="faq-table-cell">{row.timeline}</span>
-                          <span className="faq-table-cell">{row.price}</span>
-                        </div>
-                      ))}
-                    </div>
-                    {item.pricingNote && <p className="faq-note">{item.pricingNote}</p>}
-                  </>
                 )}
 
                 {item.chips && (

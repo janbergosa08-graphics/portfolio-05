@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { sectionContent } from '../data/constants'
+import { useReducedMotion } from '../hooks/useReducedMotion'
 import BackToTop from './BackToTop'
 
 export default function Contact({ onOpenModal }) {
   const [available, setAvailable] = useState(false)
+  const reducedMotion = useReducedMotion()
+  const metallicGlow = `text-metallic-glow${reducedMotion ? ' text-metallic-glow--static' : ''}`
 
   useEffect(() => {
     function update() {
@@ -30,7 +33,7 @@ export default function Contact({ onOpenModal }) {
       >
         <div className="section-kicker">{sectionContent.contact.kicker}</div>
         <h2 id="contact-heading" className="section-title section-title--narrow">
-          {sectionContent.contact.title}
+          Build <span className={metallicGlow}>solutions</span>. Forge impact.
         </h2>
         <p>
           {sectionContent.contact.intro}

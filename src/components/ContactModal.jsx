@@ -156,7 +156,7 @@ export default function ContactModal({ isOpen, onClose }) {
                   <span>I agree to the privacy policy and terms of service.</span>
                 </label>
               </div>
-              <button type="submit" className="btn-primary modal-submit">Send Inquiry</button>
+              <button type="submit" className="btn-primary modal-submit">Send Message</button>
             </form>
           </div>
         </div>

@@ -25,7 +25,11 @@ export default function Footer({ onScrollTo }) {
           <div className="footer-banner-mesh" aria-hidden="true">
             <MeshGradient intensity="footer" />
           </div>
-          <p className="footer-banner-text" aria-hidden="true">UI UX DESIGNER</p>
+          <p className="footer-banner-text" aria-hidden="true">
+            <span className={`text-metallic-glow${reducedMotion ? ' text-metallic-glow--static' : ''}`}>
+              AND UI UX DESIGN
+            </span>
+          </p>
         </motion.div>
       </div>
       <div className="glass-footer">
@@ -52,6 +56,14 @@ export default function Footer({ onScrollTo }) {
             ))}
           </div>
 
+          <div className="footer-meta">
+            <strong className="text-label">Resources</strong>
+            <div className="footer-meta-links">
+              <a href="/legal" className="footer-meta-link">Legal Notice</a>
+              <a href="/docs" className="footer-meta-link">Documentation</a>
+            </div>
+          </div>
+
           <div className="footer-social">
             <strong className="text-label">Social</strong>
             <ul className="footer-social-list">
@@ -76,7 +88,13 @@ export default function Footer({ onScrollTo }) {
         </div>
 
         <div className="footer-bottom">
-          <span>&copy; {new Date().getFullYear()} Jan Bergosa. All rights reserved.</span>
+          <span className="footer-bottom-left">
+            &copy; {new Date().getFullYear()} Jan Bergosa. All rights reserved.
+            <span className="footer-bottom-meta">
+              <a href="/legal" className="footer-legal-link">Legal Notice</a>
+              <a href="/docs" className="footer-legal-link">Documentation</a>
+            </span>
+          </span>
           <span>Built with intention</span>
         </div>
       </div>

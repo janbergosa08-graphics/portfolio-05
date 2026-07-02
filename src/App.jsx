@@ -1,59 +1,44 @@
-import { useState, useEffect, useRef, lazy, Suspense } from 'react'
+import { useState, useEffect, useRef, Suspense, useCallback } from 'react'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
+import Expertise from './components/Expertise'
+import Workflow from './components/Workflow'
+import FeaturedProjects from './components/FeaturedProjects'
+import Process from './components/Process'
+import Approach from './components/Approach'
+import FAQ from './components/FAQ'
+import Contact from './components/Contact'
+import Footer from './components/Footer'
+import ContactModal from './components/ContactModal'
 import { useReducedMotion } from './hooks/useReducedMotion'
 import { useScrollSpy } from './hooks/useScrollSpy'
 import { useGlassHighlight } from './hooks/useGlassHighlight'
 import { useCursorSpotlight } from './hooks/useCursorSpotlight'
 import { useIdleReady } from './hooks/useIdleReady'
 
-const Expertise = lazy(() => import('./components/Expertise'))
-const Workflow = lazy(() => import('./components/Workflow'))
-const FeaturedProjects = lazy(() => import('./components/FeaturedProjects'))
-const Process = lazy(() => import('./components/Process'))
-const Approach = lazy(() => import('./components/Approach'))
-const FAQ = lazy(() => import('./components/FAQ'))
-const Contact = lazy(() => import('./components/Contact'))
-const Footer = lazy(() => import('./components/Footer'))
-const ContactModal = lazy(() => import('./components/ContactModal'))
+const SECTION_ORDER = [
+  'hero',
+  'expertise',
+  'workflow',
+  'featured',
+  'process',
+  'approach',
+  'faq',
+  'contact',
+]
 
-function DeferredSection({ id, className, ariaLabelledby, eager = false, children }) {
-  const ref = useRef(null)
-  const [near, setNear] = useState(eager)
-
-  useEffect(() => {
-    if (near) return undefined
-    const node = ref.current
-    if (!node) return undefined
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return
-        setNear(true)
-        observer.disconnect()
-      },
-      { rootMargin: '500px 0px' },
-    )
-
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [near])
-
-  return (
-    <section ref={ref} id={id} className={className} aria-labelledby={ariaLabelledby}>
-      {near ? <Suspense fallback={null}>{children}</Suspense> : null}
-    </section>
-  )
-}
+const NAV_SCROLL_OFFSET = -88
 
 export default function App() {
   const [scrolled, setScrolled] = useState(false)
-  const activeSection = useScrollSpy()
+  const [pinnedSection, setPinnedSection] = useState(null)
+  const activeSection = useScrollSpy({ pinnedSection })
   const [mobileOpen, setMobileOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [footerNear, setFooterNear] = useState(false)
   const footerSentinelRef = useRef(null)
   const spotlightRef = useRef(null)
+  const contactAutoScrollRafRef = useRef(0)
   const reducedMotion = useReducedMotion()
   const effectsReady = useIdleReady()
 
@@ -95,11 +80,114 @@ export default function App() {
     document.body.style.overflow = modalOpen || mobileOpen ? 'hidden' : ''
   }, [modalOpen, mobileOpen])
 
-  const scrollTo = (id) => {
-    const behavior = reducedMotion ? 'auto' : 'smooth'
-    document.getElementById(id)?.scrollIntoView({ behavior })
+  useEffect(() => () => {
+    if (!contactAutoScrollRafRef.current) return
+    cancelAnimationFrame(contactAutoScrollRafRef.current)
+  }, [])
+
+  useEffect(() => {
+    if (!pinnedSection) return undefined
+
+    let raf = 0
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        raf = 0
+        const el = document.getElementById(pinnedSection)
+        if (!el) return
+        const rect = el.getBoundingClientRect()
+        if (rect.height < 4) return
+        if (rect.top <= 112 && rect.bottom > 112) {
+          setPinnedSection(null)
+        }
+      })
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [pinnedSection])
+
+  const runScrollTo = useCallback((id) => {
+    if (id === 'hero') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+      return true
+    }
+
+    const targetEl = document.getElementById(id)
+    if (!targetEl) return false
+
+    const y = Math.max(0, window.scrollY + targetEl.getBoundingClientRect().top + NAV_SCROLL_OFFSET)
+    window.scrollTo({ top: y, left: 0, behavior: 'auto' })
+    return true
+  }, [])
+
+  const runContactAutoScroll = useCallback(() => {
+    const targetEl = document.getElementById('contact')
+    if (!targetEl) return
+
+    if (contactAutoScrollRafRef.current) {
+      cancelAnimationFrame(contactAutoScrollRafRef.current)
+      contactAutoScrollRafRef.current = 0
+    }
+
+    const startedAt = performance.now()
+    const maxDurationMs = 1800
+    const tolerancePx = 6
+
+    const tick = () => {
+      const target = document.getElementById('contact')
+      if (!target) return
+
+      const desiredTop = target.getBoundingClientRect().top + NAV_SCROLL_OFFSET
+      if (Math.abs(desiredTop) <= tolerancePx) {
+        contactAutoScrollRafRef.current = 0
+        return
+      }
+
+      const absoluteY = Math.max(0, window.scrollY + desiredTop)
+      window.scrollTo({ top: absoluteY, left: 0, behavior: 'auto' })
+
+      if (performance.now() - startedAt >= maxDurationMs) {
+        contactAutoScrollRafRef.current = 0
+        return
+      }
+
+      contactAutoScrollRafRef.current = requestAnimationFrame(tick)
+    }
+
+    contactAutoScrollRafRef.current = requestAnimationFrame(tick)
+  }, [])
+
+  const scrollTo = useCallback((id) => {
+    if (!SECTION_ORDER.includes(id)) return
+
+    if (contactAutoScrollRafRef.current) {
+      cancelAnimationFrame(contactAutoScrollRafRef.current)
+      contactAutoScrollRafRef.current = 0
+    }
+
+    setPinnedSection(id)
     setMobileOpen(false)
-  }
+    runScrollTo(id)
+
+    // Contact has to reliably pass long sticky/stack sections.
+    // Re-apply scroll briefly so one click reaches the target.
+    if (id === 'contact') {
+      runContactAutoScroll()
+    }
+  }, [runContactAutoScroll, runScrollTo])
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (!hash || !SECTION_ORDER.includes(hash) || hash === 'hero') return
+    scrollTo(hash)
+    // Run once on initial load for hash deep links.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>
@@ -123,33 +211,33 @@ export default function App() {
       <main id="main-content">
         <Hero onScrollTo={scrollTo} onOpenModal={() => setModalOpen(true)} />
 
-        <DeferredSection id="expertise" ariaLabelledby="expertise-heading">
+        <section id="expertise" aria-labelledby="expertise-heading">
           <Expertise />
-        </DeferredSection>
+        </section>
 
-        <DeferredSection id="workflow" ariaLabelledby="workflow-heading">
+        <section id="workflow" aria-labelledby="workflow-heading">
           <Workflow />
-        </DeferredSection>
+        </section>
 
-        <DeferredSection id="featured" className="section-featured" ariaLabelledby="featured-heading">
+        <section id="featured" className="section-featured" aria-labelledby="featured-heading">
           <FeaturedProjects />
-        </DeferredSection>
+        </section>
 
-        <DeferredSection id="process" ariaLabelledby="process-heading">
+        <section id="process" aria-labelledby="process-heading">
           <Process />
-        </DeferredSection>
+        </section>
 
-        <DeferredSection id="approach" ariaLabelledby="approach-heading">
+        <section id="approach" aria-labelledby="approach-heading">
           <Approach />
-        </DeferredSection>
+        </section>
 
-        <DeferredSection id="faq" ariaLabelledby="faq-heading">
+        <section id="faq" aria-labelledby="faq-heading">
           <FAQ />
-        </DeferredSection>
+        </section>
 
-        <DeferredSection id="contact" ariaLabelledby="contact-heading">
+        <section id="contact" aria-labelledby="contact-heading">
           <Contact onOpenModal={() => setModalOpen(true)} />
-        </DeferredSection>
+        </section>
 
         <div ref={footerSentinelRef} aria-hidden="true" />
       </main>

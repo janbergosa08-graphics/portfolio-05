@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useRef } from 'react'
 import { motion } from 'framer-motion'
 import {
   projectsData,
@@ -7,6 +7,8 @@ import {
   sectionContent,
 } from '../data/constants'
 import { useProjectStats, useProjectViewTracker } from '../hooks/useProjectStats'
+import { useMobileLite } from '../hooks/useMobileLite'
+import { useLerpScroll } from '../hooks/useLerpScroll'
 import MeshGradient from './MeshGradient'
 
 const PREVIEW_COUNT = 6
@@ -48,7 +50,7 @@ function getVisibleProjects(filter, expanded) {
     .map((project) => ({ project, displayLabel: tab?.label ?? '' }))
 }
 
-function ProjectCard({ project, stats, onView, onLike, index, displayLabel }) {
+function ProjectCard({ project, stats, onView, onLike, index, displayLabel, instantReveal }) {
   const cardRef = useProjectViewTracker(project.id, onView)
   const { views, likes, liked } = stats
 
@@ -62,10 +64,13 @@ function ProjectCard({ project, stats, onView, onLike, index, displayLabel }) {
     <motion.article
       ref={cardRef}
       className="project-card project-card--cosmo"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.5, delay: (index % PREVIEW_COUNT) * 0.07, ease: [0.16, 1, 0.3, 1] }}
+      initial={instantReveal ? false : { opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: instantReveal ? 0 : 0.4,
+        delay: instantReveal ? 0 : (index % PREVIEW_COUNT) * 0.05,
+        ease: [0.16, 1, 0.3, 1],
+      }}
     >
       <div className="project-thumb">
         <a
@@ -127,6 +132,13 @@ function ProjectCard({ project, stats, onView, onLike, index, displayLabel }) {
 export default function FeaturedProjects() {
   const [filter, setFilter] = useState('all')
   const [showAll, setShowAll] = useState(false)
+  const panelRef = useRef(null)
+  const mobileLite = useMobileLite()
+  const { scrollToElement } = useLerpScroll({
+    enabled: mobileLite,
+    lerpFactor: 0.1,
+    deltaMultiplier: 0.75,
+  })
   const { statsMap, trackView, toggleLike } = useProjectStats(projectsData)
 
   const visibleItems = useMemo(
@@ -139,6 +151,12 @@ export default function FeaturedProjects() {
   const handleFilter = (value) => {
     setFilter(value)
     setShowAll(false)
+    if (mobileLite) {
+      requestAnimationFrame(() => {
+        if (!panelRef.current) return
+        scrollToElement(panelRef.current)
+      })
+    }
   }
 
   const toggleShowAll = () => setShowAll((v) => !v)
@@ -196,6 +214,7 @@ export default function FeaturedProjects() {
         </motion.div>
 
         <div
+          ref={panelRef}
           id="projects-panel"
           className="projects-bento-wrap"
           role="tabpanel"
@@ -204,7 +223,8 @@ export default function FeaturedProjects() {
           <div className="projects-bento">
             {visibleItems.map(({ project, displayLabel }, i) => (
               <ProjectCard
-                key={project.id}
+                key={`${filter}-${project.id}`}
+                instantReveal={mobileLite}
                 project={project}
                 index={i}
                 displayLabel={displayLabel}

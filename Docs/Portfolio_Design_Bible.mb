@@ -1,0 +1,73 @@
+# Portfolio Design Bible
+
+Expanded placeholder.
+
+# Portfolio Strategy & Content Roadmap
+
+## 1. Mission & Philosophy
+### Purpose
+This portfolio is not a traditional résumé or project gallery. Its purpose is to demonstrate how I think, solve problems, and create business value through strategic UI/UX design supported by modern AI workflows. The experience guides visitors through a structured narrative that builds trust.
+
+### Guiding Principles
+* **Clarity Before Creativity:** If an idea reduces clarity, simplify or remove it.
+* **Business Before Decoration:** Every interface supports a business objective.
+* **Purposeful Motion:** Animations communicate; they are never just decorative.
+* **AI Supports Human Judgment:** AI is an execution partner; I define the direction.
+* **One Purpose Per Section:** Each section answers one key client question.
+* **Velocity & Precision:** Leverage AI to eliminate friction and deliver high-quality results rapidly.
+
+---
+
+## 2. Portfolio Structure (User Journey)
+The portfolio is a product experience that follows a logical progression, optimized for professional conversion.
+
+### Section 1: The Journey (Hero)
+* **Label:** Overview
+* **Narrative Hook:** Frictionless journeys that convert users.
+* **Supporting Idea:** Revenue-Driven Design
+
+### Section 2: Experience (Expertise)
+* **Label:** Expertise
+* **Narrative Hook:** Scaling products through strategic design.
+* **Supporting Idea:** Scalable UX Strategy
+
+### Section 3: Workflow (Modern Toolkit)
+* **Label:** Workflow
+* **Narrative Hook:** AI-powered design for rapid delivery.
+* **Supporting Idea:** Agile Workflow Optimization
+
+### Section 4: Methodology (Process)
+* **Label:** Methodology
+* **Narrative Hook:** Translating research into actionable insights.
+* **Supporting Idea:** Evidence-Based Strategy
+
+### Section 5: Impact (Performance)
+* **Label:** Performance
+* **Narrative Hook:** Delivering measurable growth for clients.
+* **Supporting Idea:** Proven Performance
+
+### Section 6: Client Prep (Strategic FAQ)
+* **Label:** Insights
+* **Narrative Hook:** Answering your critical project questions.
+* **Supporting Idea:** Collaborative Transparency
+
+### Section 7: Conversion (Call to Action)
+* **Label:** Connect
+* **Narrative Hook:** Let’s launch your next project.
+* **Supporting Idea:** Start Scaling Now
+
+---
+
+## 3. "Verb-First" Content Strategy
+To maintain a high-energy, authoritative presence, all content is structured around action.
+* **Active Verbs:** Every label and CTA uses action-oriented language (e.g., "Begin Quest", "Level Up", "Start Scaling").
+* **Concise Hooks:** Narrative hooks are strictly limited to 4-5 words for maximum scannability.
+* **Professional Tone:** Content avoids bland corporate language, focusing on business outcomes like revenue, conversion, and performance.
+
+---
+
+## 4. AI Collaboration Protocol
+* **Surgical Updates:** Use Cursor Composer (Ctrl+I) for atomic, single-feature updates.
+* **Avoid Bloat:** Explicitly instruct the AI: "Update only [file/logic]; do not rewrite the entire file."
+* **Context Management:** Use @mentions for specific files to minimize context token usage.
+* **Persona:** Senior Frontend Developer & UX Consultant. Tone: Empathic, professional, outcome-focused.

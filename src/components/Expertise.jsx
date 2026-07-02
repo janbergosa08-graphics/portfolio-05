@@ -1,6 +1,12 @@
 import { motion } from 'framer-motion'
-import { sectionContent } from '../data/constants'
+import { sectionContent, socialLinks } from '../data/constants'
+import { useReducedMotion } from '../hooks/useReducedMotion'
+import { BentoStackCards, BentoToolMarquee } from './BentoDesignTools'
 import MeshGradient from './MeshGradient'
+
+const linkedinProfile = socialLinks.find((link) => link.id === 'linkedin')
+const glowClass = (staticGlow) =>
+  `text-metallic-glow text-metallic-glow--stat${staticGlow ? ' text-metallic-glow--static' : ''}`
 
 const tileVariants = {
   hidden: { opacity: 0, scale: 1.06, y: 30 },
@@ -12,17 +18,22 @@ const tileVariants = {
   }),
 }
 
-const tiles = [
+export default function Expertise() {
+  const reducedMotion = useReducedMotion()
+  const metallicGlow = glowClass(reducedMotion)
+
+  const tiles = [
   { className: 'bento-hero', content: (
     <>
       <div className="bento-hero-mesh" aria-hidden="true">
         <MeshGradient intensity="bento" />
       </div>
       <div className="bento-hero-content">
-        <div className="bento-hero-number">5+</div>
+        <div className={`bento-hero-number ${metallicGlow}`}>5+</div>
         <span className="bento-hero-label">Years in the design field</span>
         <p className="bento-hero-desc">Delivering end-to-end UI/UX, product, graphic, and web design for startups and agencies worldwide.</p>
       </div>
+      <BentoToolMarquee reducedMotion={reducedMotion} />
     </>
   )},
   { className: 'bento-exp', content: (
@@ -34,6 +45,7 @@ const tiles = [
         <div className="bento-timeline-item"><span className="tl-dot"></span> Web &amp; Product Design</div>
         <div className="bento-timeline-item"><span className="tl-dot"></span> Branding &amp; Illustration</div>
       </div>
+      <BentoStackCards />
     </>
   )},
   { className: 'bento-ai', content: (
@@ -41,13 +53,6 @@ const tiles = [
       <div className="bento-title">AI-Augmented Workflow</div>
       <div className="bento-desc">Leveraging AI tools to accelerate research, prototyping, and design iteration without compromising quality.</div>
     </>
-  )},
-  { className: 'bento-visual', content: (
-    <div className="bento-visual-scene">
-      <div className="float-card float-card-1"><span className="hfc-bar"></span><span className="hfc-bar-short"></span><span className="hfc-bar"></span></div>
-      <div className="float-card float-card-2"><span className="hfc-bar"></span><span className="hfc-bar"></span><span className="hfc-bar-short"></span></div>
-      <div className="float-card float-card-3"><span className="hfc-bar"></span><span className="hfc-bar-short"></span></div>
-    </div>
   )},
   { className: 'bento-full', content: (
     <>
@@ -58,9 +63,39 @@ const tiles = [
       </div>
     </>
   )},
+  { className: 'bento-linkedin', content: (
+    <a
+      className="bento-linkedin-card"
+      href={linkedinProfile?.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Want to know more? Visit ${linkedinProfile?.label ?? 'LinkedIn'} profile`}
+    >
+      <div className="bento-linkedin-media">
+        <img
+          src="/me/marjan-profile.png"
+          alt=""
+          width={480}
+          height={560}
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="bento-linkedin-scrim" aria-hidden="true" />
+      </div>
+      <div className="bento-linkedin-body">
+        <p className="bento-linkedin-kicker">Want to know more?</p>
+        <p className="bento-linkedin-copy">
+          See how I work, what I&apos;ve shipped, and the teams I&apos;ve partnered with.
+        </p>
+        <span className="bento-linkedin-cta">
+          Visit my {linkedinProfile?.label ?? 'LinkedIn'}
+          <span className="bento-linkedin-arrow" aria-hidden="true">→</span>
+        </span>
+      </div>
+    </a>
+  )},
 ]
 
-export default function Expertise() {
   return (
     <div className="container">
       <motion.div

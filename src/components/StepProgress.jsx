@@ -68,11 +68,13 @@ export default function StepProgress({
             aria-label={label}
           >
             <span className="step-progress-num">{String(i + 1).padStart(2, '0')}</span>
-            <span
-              className="step-progress-line"
-              style={{ '--line-fill': fill }}
-              aria-hidden="true"
-            />
+            {i < count - 1 && (
+              <span
+                className="step-progress-line"
+                style={{ '--line-fill': fill }}
+                aria-hidden="true"
+              />
+            )}
           </button>
         )
       })}
