@@ -1,4 +1,6 @@
 /** Legal Notice — site use, privacy, and terms */
+import { aiCopy } from './constants'
+
 export const legalContent = {
   page: {
     kicker: 'Legal',
@@ -122,13 +124,11 @@ export const legalContent = {
       icon: 'Sparkles',
       badge: 'Workflow',
       fields: [
-        { label: 'Role', value: 'AI speeds research, exploration, and iteration' },
-        { label: 'Control', value: 'Strategy, curation, and final decisions stay human-led' },
-        { label: 'Standard', value: 'Attribution and professional ethics still apply' },
+        { label: 'Role', value: 'Accelerates research, ideation, documentation, and implementation' },
+        { label: 'Focus', value: 'More time on user and business problems' },
+        { label: 'Standard', value: 'Judgment, authorship, and accountability stay mine' },
       ],
-      body: [
-        'Some work reflects an AI-assisted workflow. AI reduces repetitive craft; judgment, authorship, and accountability remain mine.',
-      ],
+      body: [aiCopy.legal],
     },
     {
       id: 'disclaimer',

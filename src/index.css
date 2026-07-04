@@ -382,12 +382,6 @@ h1, h2, h3, h4 {
   opacity: 0.88;
 }
 
-#expertise .section-title,
-#approach .section-title,
-#faq .section-title {
-  margin-bottom: var(--section-block-gap);
-}
-
 /* â•â•â• Buttons â•â•â• */
 .btn-primary {
   display: inline-flex;
@@ -3024,6 +3018,9 @@ h1, h2, h3, h4 {
 .availability-text.is-unavailable {
   color: var(--text-tertiary);
 }
+.availability-schedule {
+  color: #fff;
+}
 .back-to-top-wrap {
   display: flex;
   justify-content: center;
@@ -3683,11 +3680,6 @@ select.form-input option { background: #1a1a1a; color: var(--text); }
   }
   #workflow .wf-nav {
     display: none;
-  }
-  #expertise .section-title,
-  #approach .section-title,
-  #faq .section-title {
-    margin-bottom: var(--section-block-gap);
   }
   /* Nav â€” drawer for 8 links (overflow-safe on tablet) */
   .nav-center { display: none; }

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { sectionContent, socialLinks } from '../data/constants'
+import { sectionContent, socialLinks, aiCopy } from '../data/constants'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import { BentoStackCards, BentoToolMarquee } from './BentoDesignTools'
 import MeshGradient from './MeshGradient'
@@ -50,14 +50,14 @@ export default function Expertise() {
   )},
   { className: 'bento-ai', content: (
     <>
-      <div className="bento-title">AI-Augmented Workflow</div>
-      <div className="bento-desc">Leveraging AI tools to accelerate research, prototyping, and design iteration without compromising quality.</div>
+      <div className="bento-title">AI-Assisted Workflow</div>
+      <div className="bento-desc">{aiCopy.bento}</div>
     </>
   )},
   { className: 'bento-full', content: (
     <>
       <div className="bento-title">End-to-End Delivery</div>
-      <div className="bento-desc">From concept to code &mdash; I handle research, design, prototyping, and front-end development for a seamless workflow.</div>
+      <div className="bento-desc">From product direction to dev-ready UI &mdash; I shape flows, prototypes, visual systems, and implementation details for smoother handoff.</div>
       <div className="skill-tags" aria-label="Skills">
         <span>Design Systems</span><span>Prototyping</span><span>Front-End</span><span>Figma</span><span>React</span>
       </div>

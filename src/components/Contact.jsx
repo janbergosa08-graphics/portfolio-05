@@ -47,9 +47,8 @@ export default function Contact({ onOpenModal }) {
             aria-hidden="true"
           />
           <span className={`availability-text${available ? '' : ' is-unavailable'}`}>
-            {available
-              ? 'Available for work \u2014 Mon\u2013Fri 9AM\u20136PM PHT'
-              : 'Not available at this hour \u2014 back Mon\u2013Fri 9AM\u20136PM PHT'}
+            {available ? 'Available now — ' : 'Offline now — '}
+            <span className="availability-schedule">Mon–Fri 9AM–6PM PHT (GMT+8)</span>
           </span>
         </div>
       </motion.div>

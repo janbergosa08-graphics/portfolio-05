@@ -1,4 +1,22 @@
 /** Section copy — Label → Narrative Hook → Supporting Idea → CTA (see Docs/Agentic_Logic_Library_Updated) */
+
+/** Core AI stance — full line reserved for FAQ; elsewhere use supporting variants. */
+export const aiPositioning =
+  'I use AI to accelerate research, ideation, documentation, and implementation, allowing me to spend more time solving user and business problems.';
+
+export const aiCopy = {
+  workflow:
+    'Product research, interface exploration, documentation, and iteration move faster with AI support — while UX judgment stays focused on users, flows, and business outcomes.',
+  bento:
+    'AI supports the workflow where it saves time: research synthesis, idea exploration, documentation, and iteration — leaving more focus for product decisions and design craft.',
+  legal:
+    'Some process and deliverables use AI-assisted workflows for speed on research, ideation, documentation, and implementation. Authorship, curation, and accountability remain mine.',
+  docsPrinciple:
+    'Speed the craft; protect time for user and business problems.',
+  docsSummary:
+    'AI handles repetitive lift across research, ideation, documentation, and implementation — strategy and problem-solving stay human-led.',
+};
+
 export const sectionContent = {
   hero: {
     roleLabel: 'UI UX Designer',
@@ -11,7 +29,7 @@ export const sectionContent = {
       },
     ],
     description:
-      'That\u2019s how precisely design ships when AI handles the craft \u2014 human-led strategy sets direction, agentic execution delivers speed, and every decision ties to friction removed and outcomes that convert.',
+      'I combine UX strategy, visual design, AI-assisted workflows, and live implementation to turn ideas into production-ready digital products faster.',
     ctaPrimary: 'Get in Touch',
     ctaSecondary: 'View Projects',
   },
@@ -19,7 +37,7 @@ export const sectionContent = {
     kicker: 'Expertise',
     title: 'Product UI/UX from research to launch.',
     intro:
-      'End-to-end product design across UI/UX, web, graphic, and brand — from research and systems to launch-ready interfaces built for measurable growth.',
+      'End-to-end UI/UX and product design for web apps, dashboards, and digital experiences — from research and flows to polished interfaces, design systems, and dev-ready handoff.',
   },
   designToolRows: [
     ['Relume', 'Adobe Photoshop', 'Illustrator', 'Figma'],
@@ -28,27 +46,26 @@ export const sectionContent = {
   ],
   workflow: {
     kicker: 'Workflow',
-    title: 'AI-augmented design, human-led decisions.',
-    intro:
-      'Human-led strategy, agentic speed — a workflow built to research, prototype, and iterate without sacrificing rigor or clarity.',
+    title: 'Product thinking. Faster execution.',
+    intro: aiCopy.workflow,
   },
   process: {
     kicker: 'Method',
-    title: 'Six phases from research to scale.',
+    title: 'Six phases from research to product-ready UI.',
     intro:
-      'Six structured phases that turn ambiguity into shipped product — each checkpoint tied to user friction removed and business outcomes.',
+      'A structured UX process for turning unclear requirements into usable product interfaces — each checkpoint tied to user friction, team alignment, and launch readiness.',
   },
   featured: {
     kicker: 'Projects',
-    title: 'Case studies and shipped work.',
+    title: 'Case studies and product work.',
     intro:
-      'Three deep case studies plus selected projects — each tied to friction removed and measurable outcomes.',
+      'Three product-focused case studies plus selected visual work — showing how interface decisions, systems, and handoff support clearer user experiences.',
   },
   approach: {
     kicker: 'Philosophy',
-    title: 'Pinpoint pain. Deliver impact.',
+    title: 'Design the flow. Prove the value.',
     intro:
-      'Every decision passes the conversion story test: name the friction, map the process, prove the result.',
+      'Every product decision starts with the user flow: identify the friction, shape the interface, validate the outcome, and make the next step easier.',
   },
   faq: {
     kicker: 'FAQ',
@@ -785,7 +802,7 @@ export const approachCards = [
   {
     icon: 'handshake',
     title: 'Partner Deeply',
-    desc: 'You own strategy and intent; I bring precision and velocity. Transparent collaboration from kickoff through launch.',
+    desc: 'I work closely with product, engineering, and stakeholders so decisions stay clear from discovery through handoff and launch.',
   },
 ];
 
@@ -800,7 +817,7 @@ export const faqItems = [
       { label: 'Rapid prototyping', sub: 'Clickable validation before engineering investment' },
       { label: 'Dev-ready handoff', sub: 'Specs, assets, and front-end implementation support' },
       { label: 'Visual craft', sub: 'Brand, graphic, and illustration when the product needs it' },
-      { label: 'AI-accelerated delivery', sub: 'Faster iteration without sacrificing judgment' },
+      { label: 'Accelerated delivery', sub: 'Research, ideation, docs, and build move faster' },
     ],
     note: 'Every engagement starts with the problem your team is solving \u2014 not a fixed service menu.',
   },
@@ -814,7 +831,7 @@ export const faqItems = [
       { label: 'High-fidelity UI', sub: 'Polished interfaces built for real constraints' },
       { label: 'Cross-platform thinking', sub: 'Web, dashboard, and responsive patterns' },
       { label: 'Brand alignment', sub: 'Consistent identity across product touchpoints' },
-      { label: 'Execution speed', sub: 'AI tools multiply output; strategy stays human-led' },
+      { label: 'Execution speed', sub: 'More time on user and business problems' },
     ],
     note: 'See the Projects and Method sections for how this shows up in shipped work.',
   },
@@ -833,9 +850,8 @@ export const faqItems = [
     note: 'The rhythm adapts to your team\u2019s sprint cadence \u2014 async-friendly docs and prototypes included.',
   },
   {
-    question: 'What tools and AI workflow do you use?',
-    description:
-      'I work in the same stack modern product teams expect \u2014 with AI woven into research, exploration, and build phases to compress cycle time while keeping creative and strategic decisions human-led.',
+    question: 'How do you use AI in your work?',
+    description: aiPositioning,
     chips: ['Figma', 'Cursor', 'Claude', 'Framer', 'Adobe Creative Suite', 'Design tokens', 'Relume', 'LottieFiles'],
     note: 'Tooling flexes to your team\u2019s stack; the workflow is what stays consistent.',
   },

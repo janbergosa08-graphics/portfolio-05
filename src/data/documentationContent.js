@@ -1,4 +1,6 @@
 /** UI/UX study notes and strategy reference — reusable across projects */
+import { aiCopy } from './constants'
+
 export const documentationContent = {
   page: {
     kicker: 'Study notes',
@@ -50,7 +52,7 @@ export const documentationContent = {
         { label: 'Clarity', text: 'If it reduces clarity, simplify or remove it.' },
         { label: 'Business', text: 'Every screen should support a measurable outcome.' },
         { label: 'Motion', text: 'Animation guides attention — never decorates only.' },
-        { label: 'AI', text: 'AI accelerates execution; strategy stays human-led.' },
+        { label: 'AI', text: aiCopy.docsPrinciple },
         { label: 'Sections', text: 'One purpose per section. One question answered.' },
         { label: 'Velocity', text: 'Ship fast without sacrificing rigor.' },
       ],
@@ -88,7 +90,7 @@ export const documentationContent = {
           title: '03 — Velocity (Workflow)',
           fields: [
             { label: 'Job', value: 'Explain how I work with speed and rigor' },
-            { label: 'Hook', value: 'AI-powered design for rapid delivery' },
+            { label: 'Hook', value: 'Speed on craft. Focus on problems.' },
           ],
         },
         {
@@ -156,14 +158,14 @@ export const documentationContent = {
       id: 'ai-workflow',
       step: '05',
       shortLabel: 'AI',
-      heading: 'AI workflow notes',
+      heading: 'How I use AI',
       icon: 'Brain',
       badge: 'Process',
-      summary: 'How I use AI in design work without losing authorship or quality.',
+      summary: aiCopy.docsSummary,
       fields: [
-        { label: 'Use AI for', value: 'Research drafts, exploration, iteration speed' },
-        { label: 'Keep human', value: 'Strategy, curation, final UI decisions' },
-        { label: 'Tools', value: 'Cursor, scoped edits, file-level context' },
+        { label: 'Use AI for', value: 'Research, ideation, documentation, implementation' },
+        { label: 'Protect time for', value: 'User and business problem-solving' },
+        { label: 'Tools', value: 'Cursor, Claude, Figma, scoped file-level edits' },
       ],
       items: [
         {
