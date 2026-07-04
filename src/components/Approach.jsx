@@ -1,19 +1,6 @@
 import { motion } from 'framer-motion'
-import {
-  User,
-  GridFour,
-  TrendingUp,
-  CooperativeHandshake,
-} from '@icon-park/react'
+import { APPROACH_ICONS } from './HeroIcons'
 import { approachCards, sectionContent } from '../data/constants'
-import { iconParkTwoToneMd } from '../utils/iconStyle'
-
-const approachIcons = {
-  'user-focus': User,
-  'grid-four': GridFour,
-  'chart-line-up': TrendingUp,
-  handshake: CooperativeHandshake,
-}
 
 export default function Approach() {
   return (
@@ -37,8 +24,7 @@ export default function Approach() {
         variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
       >
         {approachCards.map((card) => {
-          const Icon = approachIcons[card.icon]
-
+          const Icon = APPROACH_ICONS[card.icon]
           return (
             <motion.div
               key={card.title}
@@ -49,7 +35,7 @@ export default function Approach() {
               }}
             >
               <span className="approach-icon" aria-hidden="true">
-                {Icon ? <Icon {...iconParkTwoToneMd} /> : null}
+                {Icon ? <Icon /> : null}
               </span>
               <h3>{card.title}</h3>
               <p>{card.desc}</p>

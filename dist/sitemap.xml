@@ -6,6 +6,21 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://janbergosa.vercel.app/case-study/grafon-supply-chain</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://janbergosa.vercel.app/case-study/tradedungeon-uiux</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://janbergosa.vercel.app/case-study/dataflower-baas</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://janbergosa.vercel.app/legal</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

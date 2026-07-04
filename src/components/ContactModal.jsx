@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { Mail, Phone, Clock } from 'lucide-react'
-import { outlineIconSm } from '../utils/iconStyle'
+import { ClockIcon, EnvelopeIcon, PhoneIcon, XMarkIcon } from './HeroIcons'
+import { heroIconSm } from '../utils/iconStyle'
 
 export default function ContactModal({ isOpen, onClose }) {
   const modalRef = useRef(null)
@@ -57,7 +57,7 @@ export default function ContactModal({ isOpen, onClose }) {
           onClick={onClose}
           aria-label="Close dialog"
         >
-          <span className="modal-close-icon" aria-hidden="true">&times;</span>
+          <XMarkIcon className="modal-close-icon hero-icon hero-icon--md" aria-hidden="true" />
           <span className="modal-close-label">Close</span>
         </button>
         <div className="modal-layout">
@@ -70,7 +70,7 @@ export default function ContactModal({ isOpen, onClose }) {
             <div className="modal-details">
               <div className="modal-detail-item">
                 <span className="modal-detail-icon" aria-hidden="true">
-                  <Mail {...outlineIconSm} />
+                  <EnvelopeIcon {...heroIconSm} />
                 </span>
                 <div>
                   <span className="modal-detail-label">Email</span>
@@ -81,7 +81,7 @@ export default function ContactModal({ isOpen, onClose }) {
               </div>
               <div className="modal-detail-item">
                 <span className="modal-detail-icon" aria-hidden="true">
-                  <Phone {...outlineIconSm} />
+                  <PhoneIcon {...heroIconSm} />
                 </span>
                 <div>
                   <span className="modal-detail-label">Phone</span>
@@ -92,7 +92,7 @@ export default function ContactModal({ isOpen, onClose }) {
               </div>
               <div className="modal-detail-item">
                 <span className="modal-detail-icon" aria-hidden="true">
-                  <Clock {...outlineIconSm} />
+                  <ClockIcon {...heroIconSm} />
                 </span>
                 <div>
                   <span className="modal-detail-label">Response Time</span>

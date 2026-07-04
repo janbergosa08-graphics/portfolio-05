@@ -1,41 +1,7 @@
 import { useEffect } from 'react'
-import {
-  BookOpen,
-  ChevronRight,
-  FileText,
-  Scale,
-  Shield,
-  Sparkles,
-  Target,
-  Workflow,
-  Zap,
-  Brain,
-  Layout,
-  MessageSquare,
-  Rocket,
-} from 'lucide-react'
+import { ChevronRightIcon, DocIcon } from './HeroIcons'
 import { useDocScrollSpy } from '../hooks/useDocScrollSpy'
 import { useReducedMotion } from '../hooks/useReducedMotion'
-
-const ICONS = {
-  FileText,
-  Scale,
-  Shield,
-  Sparkles,
-  Target,
-  Workflow,
-  Zap,
-  Brain,
-  Layout,
-  MessageSquare,
-  Rocket,
-  BookOpen,
-}
-
-function DocIcon({ name, className = 'doc-nav-icon' }) {
-  const Icon = ICONS[name] ?? FileText
-  return <Icon className={className} aria-hidden="true" size={16} strokeWidth={1.75} />
-}
 
 function DocFieldGrid({ fields }) {
   if (!fields?.length) return null
@@ -119,6 +85,8 @@ export default function DocPageLayout({
   groups,
   contactEmail,
   homeLabel = 'Back to portfolio',
+  moreCaseStudies = null,
+  footerExtra = null,
 }) {
   const reducedMotion = useReducedMotion()
   const sectionIds = sections.map((s) => s.id)
@@ -148,7 +116,7 @@ export default function DocPageLayout({
             </a>
             <nav className="doc-breadcrumb" aria-label="Breadcrumb">
               <a href="/" className="doc-breadcrumb-link">Portfolio</a>
-              <ChevronRight className="doc-breadcrumb-sep" size={14} aria-hidden="true" />
+              <ChevronRightIcon className="doc-breadcrumb-sep" aria-hidden="true" />
               <span className="doc-breadcrumb-current">{page.breadcrumb}</span>
             </nav>
           </div>
@@ -230,6 +198,58 @@ export default function DocPageLayout({
                 <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
               </p>
             )}
+
+            {page.behanceUrl && (
+              <p className="doc-external-link">
+                Full visual case on{' '}
+                <a href={page.behanceUrl} target="_blank" rel="noopener noreferrer">
+                  Behance
+                </a>
+                {page.websiteUrl && (
+                  <>
+                    {' '}
+                    · Live product at{' '}
+                    <a href={page.websiteUrl} target="_blank" rel="noopener noreferrer">
+                      {page.websiteUrl.replace(/^https?:\/\//, '')}
+                    </a>
+                  </>
+                )}
+              </p>
+            )}
+
+            {moreCaseStudies?.length > 0 && (
+              <aside className="doc-next-case" aria-label="More case studies">
+                <p className="doc-next-eyebrow">Since you read this far…</p>
+                <h2 className="doc-next-heading">Read more case studies</h2>
+                <div className="doc-next-list">
+                  {moreCaseStudies.map((item) => (
+                    <a key={item.slug} href={item.href} className="doc-next-card">
+                      <div className="doc-next-thumb">
+                        <img
+                          src={item.image}
+                          alt=""
+                          width={640}
+                          height={360}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                      <div className="doc-next-body">
+                        <span className="doc-next-label">Case Study</span>
+                        <span className="doc-next-title">{item.title}</span>
+                        <p className="doc-next-teaser">{item.teaser}</p>
+                        <span className="doc-next-cta">
+                          Continue reading
+                          <ChevronRightIcon className="doc-next-chevron" aria-hidden="true" />
+                        </span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </aside>
+            )}
+
+            {footerExtra}
           </div>
         </div>
       </main>
@@ -248,4 +268,4 @@ export default function DocPageLayout({
   )
 }
 
-export { DocIcon, ICONS }
+export { DocIcon } from './HeroIcons'

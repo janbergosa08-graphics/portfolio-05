@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronUpIcon } from './HeroIcons'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
 const SCROLL_THRESHOLD = 300
@@ -42,7 +43,7 @@ export default function BackToTop() {
             aria-label="Back to top"
           >
             Back to top
-            <span className="back-to-top-icon" aria-hidden="true">&uarr;</span>
+            <ChevronUpIcon className="back-to-top-icon" aria-hidden="true" />
           </button>
         </motion.div>
       )}

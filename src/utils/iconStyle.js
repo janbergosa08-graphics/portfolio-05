@@ -1,22 +1,15 @@
-/** Shared outline icon props — Lucide (ContactModal, project stats). */
-export const outlineIconMd = {
-  size: 54,
-  strokeWidth: 1.75,
-  color: 'currentColor',
+/** Heroicons solid — shared size tokens (Apple-like filled glyphs). */
+export const heroIconSm = {
+  className: 'hero-icon hero-icon--sm',
+  'aria-hidden': true,
 }
 
-export const outlineIconSm = {
-  size: 16,
-  strokeWidth: 1.5,
-  color: 'currentColor',
+export const heroIconMd = {
+  className: 'hero-icon hero-icon--md',
+  'aria-hidden': true,
 }
 
-/** IconPark two-tone — soft layered look, neutral palette. */
-export const iconParkTwoToneMd = {
-  theme: 'two-tone',
-  size: 54,
-  fill: ['#c2c2bf', '#5f5f5c'],
-  strokeWidth: 3,
-  strokeLinecap: 'round',
-  strokeLinejoin: 'round',
+export const heroIconNav = {
+  className: 'hero-icon hero-icon--nav',
+  'aria-hidden': true,
 }

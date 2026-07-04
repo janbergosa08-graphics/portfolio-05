@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Download, X } from 'lucide-react'
+import { ArrowDownTrayIcon, XMarkIcon } from './HeroIcons'
 import { navLinks, sectionContent } from '../data/constants'
 
 export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobile, onCloseMobile, onScrollTo, onOpenModal }) {
@@ -61,7 +61,7 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
                   aria-label={sectionContent.nav.resumeLabel}
                   title={sectionContent.nav.resumeLabel}
                 >
-                  <Download className="nav-download-icon" size={18} strokeWidth={1.75} aria-hidden="true" />
+                  <ArrowDownTrayIcon className="nav-download-icon hero-icon hero-icon--nav" aria-hidden="true" />
                   <span className="nav-download-label">{sectionContent.nav.resumeLabel}</span>
                 </a>
               </div>
@@ -92,7 +92,7 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
         hidden={!mobileOpen}
       >
         <button type="button" className="mobile-close" onClick={onCloseMobile} aria-label="Close menu">
-          <X size={22} strokeWidth={1.75} aria-hidden="true" />
+          <XMarkIcon className="hero-icon hero-icon--md" aria-hidden="true" />
         </button>
         <div className="mobile-menu-panel">
           <nav className="mobile-nav" aria-label="Mobile section links">
@@ -117,7 +117,7 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
                 download={sectionContent.nav.resumeDownloadName}
                 onClick={onCloseMobile}
               >
-                <Download size={18} strokeWidth={1.75} aria-hidden="true" />
+                <ArrowDownTrayIcon className="hero-icon hero-icon--nav" aria-hidden="true" />
                 {sectionContent.nav.resumeLabel}
               </a>
               <a

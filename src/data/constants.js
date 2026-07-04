@@ -16,8 +16,8 @@ export const sectionContent = {
     ctaSecondary: 'View Projects',
   },
   expertise: {
-    kicker: 'Strategy',
-    title: 'Scale products. Deliver precision.',
+    kicker: 'Expertise',
+    title: 'Product UI/UX from research to launch.',
     intro:
       'End-to-end product design across UI/UX, web, graphic, and brand — from research and systems to launch-ready interfaces built for measurable growth.',
   },
@@ -27,22 +27,22 @@ export const sectionContent = {
     ['LottieFiles', 'Figma', 'Relume', 'Cursor'],
   ],
   workflow: {
-    kicker: 'Velocity',
-    title: 'Pilot AI. Execute design.',
+    kicker: 'Workflow',
+    title: 'AI-augmented design, human-led decisions.',
     intro:
       'Human-led strategy, agentic speed — a workflow built to research, prototype, and iterate without sacrificing rigor or clarity.',
   },
   process: {
-    kicker: 'Solutions',
-    title: 'Synthesize research. Impact growth.',
+    kicker: 'Method',
+    title: 'Six phases from research to scale.',
     intro:
       'Six structured phases that turn ambiguity into shipped product — each checkpoint tied to user friction removed and business outcomes.',
   },
   featured: {
-    kicker: 'Growth',
-    title: 'Quantify success. Maximize impact.',
+    kicker: 'Projects',
+    title: 'Case studies and shipped work.',
     intro:
-      'Selected work across SaaS, dashboards, branding, and visual design — each project framed around friction removed and results delivered.',
+      'Three deep case studies plus selected projects — each tied to friction removed and measurable outcomes.',
   },
   approach: {
     kicker: 'Philosophy',
@@ -51,7 +51,7 @@ export const sectionContent = {
       'Every decision passes the conversion story test: name the friction, map the process, prove the result.',
   },
   faq: {
-    kicker: 'Profile',
+    kicker: 'FAQ',
     title: 'Know the fit. See the value.',
     intro:
       'Direct answers on what I bring to a team, how I work with product and engineering, and where I add the most impact.',
@@ -71,11 +71,23 @@ export const sectionContent = {
   },
 };
 
+/** Scroll order — proof first, then fit, process, and contact */
+export const sectionOrder = [
+  'hero',
+  'featured',
+  'expertise',
+  'workflow',
+  'process',
+  'approach',
+  'faq',
+  'contact',
+];
+
 export const navLinks = [
   { label: 'Home', href: '#hero' },
+  { label: sectionContent.featured.kicker, href: '#featured' },
   { label: sectionContent.expertise.kicker, href: '#expertise' },
   { label: sectionContent.workflow.kicker, href: '#workflow' },
-  { label: sectionContent.featured.kicker, href: '#featured' },
   { label: sectionContent.process.kicker, href: '#process' },
   { label: sectionContent.approach.kicker, href: '#approach' },
   { label: sectionContent.faq.kicker, href: '#faq' },
@@ -150,7 +162,7 @@ export const projectsData = [
     id: 'dataflower-baas',
     title: 'Dataflower – Backend-as-a-Service Platform',
     desc: 'UI/UX for a BaaS platform — dashboard patterns, developer workflows, and a scalable product interface system.',
-    categories: ['web-ui-dashboard'],
+    categories: ['web-ui-dashboard', 'case-study'],
     tags: ['UI/UX', 'Dashboard', 'BaaS'],
     url: 'https://www.behance.net/gallery/232269585/Dataflower-Backend-as-a-Service-Platform',
     featured: true,
@@ -164,7 +176,7 @@ export const projectsData = [
     id: 'grafon-supply-chain',
     title: 'Grafon – Supply Chain Simulator Web App',
     desc: 'Web app UI for a supply chain simulator — data-dense views, simulation controls, and clear operational workflows.',
-    categories: ['web-ui-dashboard'],
+    categories: ['web-ui-dashboard', 'case-study'],
     tags: ['Web App', 'Dashboard', 'UI/UX'],
     url: 'https://www.behance.net/gallery/239508565/Grafon-Supply-Chain-Simulator-Web-App',
     featured: true,
@@ -291,7 +303,7 @@ export const projectsData = [
     id: 'tradedungeon-uiux',
     title: 'TradeDungeon – UI/UX Design',
     desc: 'Trading dashboard UI with dense data views, risk signals, and actionable market insights.',
-    categories: ['web-ui-dashboard'],
+    categories: ['web-ui-dashboard', 'case-study'],
     tags: ['Dashboard', 'Fintech', 'UI/UX'],
     url: 'https://www.behance.net/gallery/232273475/Tradedungeon-UIUX-Design',
     featured: true,
@@ -501,7 +513,9 @@ export const projectsData = [
   },
 ];
 
-export const filterCategories = [
+export const caseStudyFilter = { label: 'Case Study', value: 'case-study' }
+
+export const projectFilterCategories = [
   { label: 'All', value: 'all' },
   { label: 'Digital Art', value: 'digital-art' },
   { label: 'Branding', value: 'branding' },
@@ -509,14 +523,23 @@ export const filterCategories = [
   { label: 'Web UI / Dashboard', value: 'web-ui-dashboard' },
 ];
 
-/** Six strongest projects for the default All tab view */
+export const filterCategories = [...projectFilterCategories, caseStudyFilter];
+
+/** Flagship case studies — problem, process, outcome on Behance */
+export const caseStudyShowcase = [
+  { id: 'grafon-supply-chain', label: 'Case Study' },
+  { id: 'tradedungeon-uiux', label: 'Case Study' },
+  { id: 'dataflower-baas', label: 'Case Study' },
+];
+
+/** Six strongest projects for the default All tab — case studies first */
 export const allShowcase = [
-  { id: 'dataflower-baas', label: 'Web UI / Dashboard' },
-  { id: 'tradedungeon-uiux', label: 'Web UI / Dashboard' },
-  { id: 'florist-illustration', label: 'Digital Art' },
+  { id: 'grafon-supply-chain', label: 'Case Study' },
+  { id: 'tradedungeon-uiux', label: 'Case Study' },
+  { id: 'dataflower-baas', label: 'Case Study' },
   { id: 'prodbeat-ui', label: 'Web UI / Dashboard' },
   { id: '360-cellular-repair-logo', label: 'Branding' },
-  { id: 'vintage-anime', label: 'Digital Art' },
+  { id: 'florist-illustration', label: 'Digital Art' },
 ];
 
 export const workflowSteps = [
@@ -793,7 +816,7 @@ export const faqItems = [
       { label: 'Brand alignment', sub: 'Consistent identity across product touchpoints' },
       { label: 'Execution speed', sub: 'AI tools multiply output; strategy stays human-led' },
     ],
-    note: 'See the Growth and Solutions sections for how this shows up in shipped work.',
+    note: 'See the Projects and Method sections for how this shows up in shipped work.',
   },
   {
     question: 'How do you work day to day?',

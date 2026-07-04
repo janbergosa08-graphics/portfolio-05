@@ -1,15 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
+import { sectionOrder } from '../data/constants'
 
-const SECTION_IDS = [
-  'hero',
-  'expertise',
-  'workflow',
-  'featured',
-  'process',
-  'approach',
-  'faq',
-  'contact',
-]
+const SECTION_IDS = sectionOrder
 
 /** Nav height + breathing room — section top past this line becomes active */
 const SECTION_OFFSET = 112

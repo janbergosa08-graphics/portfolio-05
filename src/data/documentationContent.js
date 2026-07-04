@@ -109,7 +109,7 @@ export const documentationContent = {
         },
         {
           label: 'Block',
-          title: '06 — Profile (FAQ)',
+          title: '06 — FAQ',
           fields: [
             { label: 'Job', value: 'Answer fit, workflow, and contribution' },
             { label: 'Hook', value: 'Know the fit. See the value.' },

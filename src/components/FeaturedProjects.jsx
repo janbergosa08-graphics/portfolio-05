@@ -1,9 +1,13 @@
 import { useState, useCallback, useMemo, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { BookOpenIcon, EyeIcon, HeartIcon } from './HeroIcons'
 import {
   projectsData,
   filterCategories,
+  projectFilterCategories,
+  caseStudyFilter,
   allShowcase,
+  caseStudyShowcase,
   sectionContent,
 } from '../data/constants'
 import { useProjectStats, useProjectViewTracker } from '../hooks/useProjectStats'
@@ -20,6 +24,7 @@ function shortTitle(title) {
 }
 
 function labelForProject(project) {
+  if (project.categories.includes('case-study')) return 'Case Study'
   const showcase = allShowcase.find((s) => s.id === project.id)
   if (showcase) return showcase.label
   const tab = filterCategories.find(
@@ -29,6 +34,15 @@ function labelForProject(project) {
 }
 
 function getVisibleProjects(filter, expanded) {
+  if (filter === 'case-study') {
+    return caseStudyShowcase
+      .map(({ id, label }) => {
+        const project = projectsData.find((p) => p.id === id)
+        return project ? { project, displayLabel: label } : null
+      })
+      .filter(Boolean)
+  }
+
   if (filter === 'all') {
     if (!expanded) {
       return allShowcase
@@ -53,6 +67,11 @@ function getVisibleProjects(filter, expanded) {
 function ProjectCard({ project, stats, onView, onLike, index, displayLabel, instantReveal }) {
   const cardRef = useProjectViewTracker(project.id, onView)
   const { views, likes, liked } = stats
+  const isCaseStudy = project.categories.includes('case-study')
+  const projectHref = isCaseStudy ? `/case-study/${project.id}` : project.url
+  const linkLabel = isCaseStudy
+    ? `Read case study: ${project.title}`
+    : `${project.title} on Behance`
 
   const handleLike = (e) => {
     e.stopPropagation()
@@ -74,11 +93,11 @@ function ProjectCard({ project, stats, onView, onLike, index, displayLabel, inst
     >
       <div className="project-thumb">
         <a
-          href={project.url}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={projectHref}
+          target={isCaseStudy ? undefined : '_blank'}
+          rel={isCaseStudy ? undefined : 'noopener noreferrer'}
           className="project-thumb-link"
-          aria-label={`${project.title} on Behance`}
+          aria-label={linkLabel}
         >
           <div className="project-thumb-media">
             {project.image ? (
@@ -110,16 +129,11 @@ function ProjectCard({ project, stats, onView, onLike, index, displayLabel, inst
             aria-pressed={liked}
             onClick={handleLike}
           >
-            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </svg>
+            <HeartIcon aria-hidden="true" />
             <span>{likes}</span>
           </button>
           <span className="project-stat project-stat-views">
-            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
+            <EyeIcon aria-hidden="true" />
             <span aria-hidden="true">{views}</span>
             <span className="sr-only">{views} views</span>
           </span>
@@ -189,7 +203,7 @@ export default function FeaturedProjects() {
         </motion.div>
 
         <motion.div
-          className="filter-pills filter-pills--left"
+          className="filter-bar"
           role="tablist"
           aria-label="Filter projects by category"
           initial={{ opacity: 0, y: 20 }}
@@ -197,20 +211,34 @@ export default function FeaturedProjects() {
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          {filterCategories.map((cat) => (
-            <button
-              key={cat.value}
-              type="button"
-              role="tab"
-              id={`projects-tab-${cat.value}`}
-              className={`pill${filter === cat.value ? ' active' : ''}`}
-              aria-selected={filter === cat.value}
-              aria-controls="projects-panel"
-              onClick={() => handleFilter(cat.value)}
-            >
-              {cat.label}
-            </button>
-          ))}
+          <div className="filter-pills filter-pills--left">
+            {projectFilterCategories.map((cat) => (
+              <button
+                key={cat.value}
+                type="button"
+                role="tab"
+                id={`projects-tab-${cat.value}`}
+                className={`pill${filter === cat.value ? ' active' : ''}`}
+                aria-selected={filter === cat.value}
+                aria-controls="projects-panel"
+                onClick={() => handleFilter(cat.value)}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            role="tab"
+            id={`projects-tab-${caseStudyFilter.value}`}
+            className={`pill pill--case-study${filter === caseStudyFilter.value ? ' active' : ''}`}
+            aria-selected={filter === caseStudyFilter.value}
+            aria-controls="projects-panel"
+            onClick={() => handleFilter(caseStudyFilter.value)}
+          >
+            <BookOpenIcon className="pill-case-study-icon" aria-hidden="true" />
+            <span>{caseStudyFilter.label}</span>
+          </button>
         </motion.div>
 
         <div

@@ -17,16 +17,7 @@ import { useGlassHighlight } from './hooks/useGlassHighlight'
 import { useCursorSpotlight } from './hooks/useCursorSpotlight'
 import { useIdleReady } from './hooks/useIdleReady'
 
-const SECTION_ORDER = [
-  'hero',
-  'expertise',
-  'workflow',
-  'featured',
-  'process',
-  'approach',
-  'faq',
-  'contact',
-]
+import { sectionOrder } from './data/constants'
 
 const NAV_SCROLL_OFFSET = -88
 
@@ -164,7 +155,7 @@ export default function App() {
   }, [])
 
   const scrollTo = useCallback((id) => {
-    if (!SECTION_ORDER.includes(id)) return
+    if (!sectionOrder.includes(id)) return
 
     if (contactAutoScrollRafRef.current) {
       cancelAnimationFrame(contactAutoScrollRafRef.current)
@@ -184,7 +175,7 @@ export default function App() {
 
   useEffect(() => {
     const hash = window.location.hash.slice(1)
-    if (!hash || !SECTION_ORDER.includes(hash) || hash === 'hero') return
+    if (!hash || !sectionOrder.includes(hash) || hash === 'hero') return
     scrollTo(hash)
     // Run once on initial load for hash deep links.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -213,16 +204,16 @@ export default function App() {
         <Hero onScrollTo={scrollTo} onOpenModal={() => setModalOpen(true)} />
 
         <Suspense fallback={null}>
+          <section id="featured" className="section-featured" aria-labelledby="featured-heading">
+            <FeaturedProjects />
+          </section>
+
           <section id="expertise" aria-labelledby="expertise-heading">
             <Expertise />
           </section>
 
           <section id="workflow" aria-labelledby="workflow-heading">
             <Workflow />
-          </section>
-
-          <section id="featured" className="section-featured" aria-labelledby="featured-heading">
-            <FeaturedProjects />
           </section>
 
           <section id="process" aria-labelledby="process-heading">
