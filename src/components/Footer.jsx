@@ -1,11 +1,8 @@
 import { motion } from 'framer-motion'
 import { footerNavLinks, socialLinks } from '../data/constants'
-import MeshGradient from './MeshGradient'
 import { SocialIcon } from './SocialIcons'
-import { useReducedMotion } from '../hooks/useReducedMotion'
 
 export default function Footer({ onScrollTo }) {
-  const reducedMotion = useReducedMotion()
 
   return (
     <motion.footer
@@ -14,23 +11,11 @@ export default function Footer({ onScrollTo }) {
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="footer-banner-wrap">
-        <motion.div
-          className="footer-banner"
-          initial={reducedMotion ? false : { opacity: 0, y: 36, scale: 0.96 }}
-          whileInView={reducedMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="footer-banner-mesh" aria-hidden="true">
-            <MeshGradient intensity="footer" />
-          </div>
-          <p className="footer-banner-text" aria-hidden="true">
-            <span className={`text-metallic-glow${reducedMotion ? ' text-metallic-glow--static' : ''}`}>
-              AND UI UX DESIGN
-            </span>
-          </p>
-        </motion.div>
+      <div className="footer-banner-wrap footer-banner-wrap--outline">
+        <div className="footer-banner footer-banner--outline">
+          <span className="section-kicker section-kicker--indexed">06 / Footer</span>
+          <p className="footer-banner-text" aria-hidden="true">Built with intention</p>
+        </div>
       </div>
       <div className="glass-footer">
         <div className="footer-inner">

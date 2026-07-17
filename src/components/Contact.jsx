@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { sectionContent } from '../data/constants'
-import { useReducedMotion } from '../hooks/useReducedMotion'
 import BackToTop from './BackToTop'
+import AccentCTA from './AccentCTA'
 
 export default function Contact({ onOpenModal }) {
   const [available, setAvailable] = useState(false)
-  const reducedMotion = useReducedMotion()
-  const metallicGlow = `text-metallic-glow${reducedMotion ? ' text-metallic-glow--static' : ''}`
 
   useEffect(() => {
     function update() {
@@ -24,34 +22,36 @@ export default function Contact({ onOpenModal }) {
 
   return (
     <div className="contact-full">
-      <motion.div
-        className="contact-content"
-        initial={{ opacity: 0, scale: 1.08, y: 40 }}
-        whileInView={{ opacity: 1, scale: 1, y: 0 }}
-        viewport={{ once: true, margin: '-40px' }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="section-kicker">{sectionContent.contact.kicker}</div>
-        <h2 id="contact-heading" className="section-title section-title--narrow">
-          Build <span className={metallicGlow}>solutions</span>. Forge impact.
-        </h2>
-        <p>
-          {sectionContent.contact.intro}
-        </p>
-        <button type="button" className="btn-primary btn-large" onClick={onOpenModal}>
-          {sectionContent.contact.cta}
-        </button>
-        <div className="availability-row">
-          <span
-            className={`availability-dot${available ? ' active' : ' inactive'}`}
-            aria-hidden="true"
-          />
-          <span className={`availability-text${available ? '' : ' is-unavailable'}`}>
-            {available ? 'Available now — ' : 'Offline now — '}
-            <span className="availability-schedule">Mon–Fri 9AM–6PM PHT (GMT+8)</span>
-          </span>
-        </div>
-      </motion.div>
+      <div className="container contact-container contact-container--outline">
+        <motion.div
+          className="contact-panel outline-card"
+          initial={{ opacity: 0, scale: 1.02, y: 24 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="section-kicker section-kicker--indexed">05 / {sectionContent.contact.kicker}</div>
+          <h2 id="contact-heading" className="section-title section-title--narrow">
+            Build <span className="contact-accent-word">solutions</span>. Forge impact.
+          </h2>
+          <p className="section-intro">
+            {sectionContent.contact.intro}
+          </p>
+          <AccentCTA type="button" className="btn-large" onClick={onOpenModal}>
+            {sectionContent.contact.cta}
+          </AccentCTA>
+          <div className="availability-row">
+            <span
+              className={`availability-dot${available ? ' active' : ' inactive'}`}
+              aria-hidden="true"
+            />
+            <span className={`availability-text${available ? '' : ' is-unavailable'}`}>
+              {available ? 'Available now — ' : 'Offline now — '}
+              <span className="availability-schedule">Mon–Fri 9AM–6PM PHT (GMT+8)</span>
+            </span>
+          </div>
+        </motion.div>
+      </div>
 
       <BackToTop />
     </div>

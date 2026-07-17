@@ -13,7 +13,7 @@ import {
 import { useProjectStats, useProjectViewTracker } from '../hooks/useProjectStats'
 import { useMobileLite } from '../hooks/useMobileLite'
 import { useLerpScroll } from '../hooks/useLerpScroll'
-import MeshGradient from './MeshGradient'
+import SectionShell from './SectionShell'
 
 const PREVIEW_COUNT = 6
 const TITLE_MAX = 40
@@ -82,7 +82,7 @@ function ProjectCard({ project, stats, onView, onLike, index, displayLabel, inst
   return (
     <motion.article
       ref={cardRef}
-      className="project-card project-card--cosmo"
+      className="project-card project-card--plan-sheet outline-card"
       initial={instantReveal ? false : { opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -186,60 +186,54 @@ export default function FeaturedProjects() {
 
   return (
     <>
-      <MeshGradient className="projects-mesh" intensity="subtle" />
       <div className="container projects-section">
-        <motion.div
-          className="section-header section-header--left"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        <SectionShell
+          eyebrow={sectionContent.featured.kicker}
+          title={sectionContent.featured.title}
+          intro={sectionContent.featured.intro}
+          id="featured-heading"
+          index={1}
+          className="projects-shell"
         >
-          <div className="section-kicker">{sectionContent.featured.kicker}</div>
-          <h2 id="featured-heading" className="section-title">{sectionContent.featured.title}</h2>
-          <p className="section-intro">
-            {sectionContent.featured.intro}
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="filter-bar"
-          role="tablist"
-          aria-label="Filter projects by category"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="filter-pills filter-pills--left">
-            {projectFilterCategories.map((cat) => (
-              <button
-                key={cat.value}
-                type="button"
-                role="tab"
-                id={`projects-tab-${cat.value}`}
-                className={`pill${filter === cat.value ? ' active' : ''}`}
-                aria-selected={filter === cat.value}
-                aria-controls="projects-panel"
-                onClick={() => handleFilter(cat.value)}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-          <button
-            type="button"
-            role="tab"
-            id={`projects-tab-${caseStudyFilter.value}`}
-            className={`pill pill--case-study${filter === caseStudyFilter.value ? ' active' : ''}`}
-            aria-selected={filter === caseStudyFilter.value}
-            aria-controls="projects-panel"
-            onClick={() => handleFilter(caseStudyFilter.value)}
+          <motion.div
+            className="filter-bar"
+            role="tablist"
+            aria-label="Filter projects by category"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <BookOpenIcon className="pill-case-study-icon" aria-hidden="true" />
-            <span>{caseStudyFilter.label}</span>
-          </button>
-        </motion.div>
+            <div className="filter-pills filter-pills--left">
+              {projectFilterCategories.map((cat) => (
+                <button
+                  key={cat.value}
+                  type="button"
+                  role="tab"
+                  id={`projects-tab-${cat.value}`}
+                  className={`pill${filter === cat.value ? ' active' : ''}`}
+                  aria-selected={filter === cat.value}
+                  aria-controls="projects-panel"
+                  onClick={() => handleFilter(cat.value)}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              role="tab"
+              id={`projects-tab-${caseStudyFilter.value}`}
+              className={`pill pill--case-study${filter === caseStudyFilter.value ? ' active' : ''}`}
+              aria-selected={filter === caseStudyFilter.value}
+              aria-controls="projects-panel"
+              onClick={() => handleFilter(caseStudyFilter.value)}
+            >
+              <BookOpenIcon className="pill-case-study-icon" aria-hidden="true" />
+              <span>{caseStudyFilter.label}</span>
+            </button>
+          </motion.div>
+        </SectionShell>
 
         <div
           ref={panelRef}

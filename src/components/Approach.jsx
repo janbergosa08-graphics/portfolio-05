@@ -1,20 +1,19 @@
 import { motion } from 'framer-motion'
 import { APPROACH_ICONS } from './HeroIcons'
 import { approachCards, sectionContent } from '../data/constants'
+import SectionShell from './SectionShell'
+import OutlineCard from './OutlineCard'
 
 export default function Approach() {
   return (
     <div className="container">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-40px' }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="section-kicker">{sectionContent.approach.kicker}</div>
-        <h2 id="approach-heading" className="section-title">{sectionContent.approach.title}</h2>
-        <p className="section-intro">{sectionContent.approach.intro}</p>
-      </motion.div>
+      <SectionShell
+        eyebrow={sectionContent.approach.kicker}
+        title={sectionContent.approach.title}
+        intro={sectionContent.approach.intro}
+        id="approach-heading"
+        index={3}
+      />
 
       <motion.div
         className="approach-grid"
@@ -26,9 +25,10 @@ export default function Approach() {
         {approachCards.map((card) => {
           const Icon = APPROACH_ICONS[card.icon]
           return (
-            <motion.div
+            <OutlineCard
+              as={motion.div}
               key={card.title}
-              className="approach-card glass"
+              className="approach-card approach-card--outline"
               variants={{
                 hidden: { opacity: 0, scale: 1.06, y: 30 },
                 visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
@@ -39,7 +39,7 @@ export default function Approach() {
               </span>
               <h3>{card.title}</h3>
               <p>{card.desc}</p>
-            </motion.div>
+            </OutlineCard>
           )
         })}
       </motion.div>

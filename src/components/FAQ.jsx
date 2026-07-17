@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { faqItems, sectionContent } from '../data/constants'
+import SectionShell from './SectionShell'
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null)
@@ -12,16 +13,13 @@ export default function FAQ() {
   return (
     <>
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="section-kicker">{sectionContent.faq.kicker}</div>
-          <h2 id="faq-heading" className="section-title">{sectionContent.faq.title}</h2>
-          <p className="section-intro">{sectionContent.faq.intro}</p>
-        </motion.div>
+        <SectionShell
+          eyebrow={sectionContent.faq.kicker}
+          title={sectionContent.faq.title}
+          intro={sectionContent.faq.intro}
+          id="faq-heading"
+          index={4}
+        />
       </div>
 
       <div className="faq-stack">
@@ -35,7 +33,7 @@ export default function FAQ() {
         {faqItems.map((item, i) => (
           <motion.div
             key={i}
-            className={`faq-item glass${openIndex === i ? ' open' : ''}`}
+            className={`faq-item faq-item--outline outline-card${openIndex === i ? ' open' : ''}`}
             variants={{
               hidden: { opacity: 0, scale: 1.06, y: 20 },
               visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },

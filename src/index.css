@@ -4819,3 +4819,189 @@ select.form-input option { background: #1a1a1a; color: var(--text); }
     width: 100%;
   }
 }
+
+/* ═══ Architectural Control Plane — section restyles ═══ */
+
+.projects-section {
+  position: relative;
+}
+
+.projects-shell {
+  margin-bottom: var(--space-xl);
+}
+
+.project-card--plan-sheet {
+  border: 1px solid var(--glass-border);
+  background: rgba(24, 24, 24, 0.72);
+  border-radius: var(--radius-surface);
+  box-shadow: none;
+}
+
+.project-card--plan-sheet .project-thumb {
+  border-radius: calc(var(--radius-surface) - 2px);
+  background: #101010;
+}
+
+.project-card--plan-sheet .project-thumb-media {
+  border: 1px solid rgba(228, 228, 228, 0.08);
+}
+
+.project-thumb-label,
+.filter-pill.active,
+.pill.active {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  background: rgba(245, 78, 0, 0.08);
+}
+
+.project-card--plan-sheet .project-thumb-scrim {
+  background: linear-gradient(180deg, transparent 40%, rgba(20, 20, 20, 0.86));
+}
+
+.ps-card.outline-card {
+  border: 1px solid var(--glass-border);
+  background: rgba(24, 24, 24, 0.82);
+  box-shadow: none;
+}
+
+.ps-card.outline-card.active {
+  border-color: var(--accent-border);
+}
+
+.ps-card .ps-phase,
+.ps-card .ps-number {
+  color: var(--accent);
+}
+
+.ps-card .ps-card-inner {
+  background: transparent;
+}
+
+.ps-card .ps-visual-col {
+  border-color: var(--glass-border);
+  background: rgba(228, 228, 228, 0.025);
+}
+
+.approach-card--outline,
+.faq-item--outline,
+.contact-panel {
+  border: 1px solid var(--glass-border);
+  background: rgba(24, 24, 24, 0.72);
+  box-shadow: none;
+}
+
+.approach-card--outline {
+  padding: var(--space-lg);
+}
+
+.approach-card--outline:hover,
+.faq-item--outline.open,
+.contact-panel:hover {
+  border-color: var(--accent-border);
+}
+
+.approach-card--outline .approach-icon {
+  color: var(--accent);
+  background: rgba(245, 78, 0, 0.08);
+  border: 1px solid var(--accent-border);
+}
+
+.faq-item--outline .faq-question {
+  color: var(--text);
+}
+
+.faq-item--outline .faq-icon,
+.faq-item--outline .faq-step-num,
+.faq-item--outline .faq-tag {
+  color: var(--accent);
+}
+
+.contact-container--outline {
+  width: min(var(--content-max), calc(100% - var(--content-pad) * 2));
+  margin: 0 auto;
+}
+
+.contact-panel {
+  padding: clamp(var(--space-2xl), 6vw, var(--space-4xl));
+  border-radius: var(--radius-surface-lg);
+}
+
+.contact-accent-word {
+  color: var(--accent);
+}
+
+.footer-banner-wrap--outline {
+  width: min(var(--content-max), calc(100% - var(--content-pad) * 2));
+  margin: 0 auto var(--space-xl);
+}
+
+.footer-banner--outline,
+.glass-footer {
+  border: 1px solid var(--glass-border);
+  background: rgba(24, 24, 24, 0.72);
+  box-shadow: none;
+}
+
+.footer-banner--outline {
+  min-height: auto;
+  padding: var(--space-xl);
+  border-radius: var(--radius-surface-lg);
+}
+
+.footer-banner--outline .footer-banner-text {
+  opacity: 1;
+  color: var(--text-secondary);
+  font-size: clamp(2rem, 8vw, 6rem);
+  letter-spacing: -0.06em;
+}
+
+.footer-meta-link,
+.footer-legal-link,
+.footer-social-link,
+.footer-nav a {
+  color: var(--text-secondary);
+}
+
+.footer-meta-link:hover,
+.footer-legal-link:hover,
+.footer-social-link:hover,
+.footer-nav a:hover {
+  color: var(--accent);
+}
+
+.text-metallic-glow,
+.text-metallic-glow--static {
+  color: var(--text);
+  text-shadow: none;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.section-kicker--indexed {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+}
+
+@media (max-width: 1100px) {
+  .section-shell,
+  .hero-inner--blueprint,
+  .footer-banner-wrap--outline,
+  .contact-container--outline {
+    width: min(100% - var(--content-pad) * 2, var(--content-max));
+  }
+
+  .approach-grid,
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .outline-card,
+  .contact-panel,
+  .glass-footer {
+    border-radius: var(--radius-lg);
+  }
+}

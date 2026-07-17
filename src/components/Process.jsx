@@ -3,6 +3,7 @@ import { processSteps, sectionContent } from '../data/constants'
 import StepProgress from './StepProgress'
 import CardVisualPlaceholder, { CardMeshLayer } from './CardVisualPlaceholder'
 import DocBody from './DocBody'
+import SectionShell from './SectionShell'
 import {
   resolveProcessScrollState,
   PROCESS_STICKY_TOP,
@@ -146,11 +147,13 @@ export default function Process() {
 
   return (
     <>
-      <div className="container">
-        <div className="section-kicker">{sectionContent.process.kicker}</div>
-        <h2 id="process-heading" className="section-title">{sectionContent.process.title}</h2>
-        <p className="section-intro">{sectionContent.process.intro}</p>
-      </div>
+      <SectionShell
+        eyebrow={sectionContent.process.kicker}
+        title={sectionContent.process.title}
+        intro={sectionContent.process.intro}
+        id="process-heading"
+        index={2}
+      />
 
       <div className="ps-scroll-zone" ref={scrollZoneRef}>
         <div
@@ -170,7 +173,7 @@ export default function Process() {
         </div>
         <div className="ps-stack">
           {processSteps.map((step, i) => (
-            <div key={i} className="ps-card" data-step={i} ref={setCardRef(i)}>
+            <div key={i} className="ps-card outline-card" data-step={i} ref={setCardRef(i)}>
               <div className="ps-card-inner">
                 <CardMeshLayer stepIndex={i} fadeSide="right" />
                 <div className="ps-visual-col" aria-hidden="true">
