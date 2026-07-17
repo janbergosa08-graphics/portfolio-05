@@ -304,6 +304,9 @@
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--accent);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
 
 .doc-section-meta {
   min-width: 0;
