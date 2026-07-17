@@ -21,7 +21,7 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
 
   return (
     <>
-      <nav className={`nav-wrapper${scrolled ? ' scrolled' : ''}`} aria-label="Primary">
+      <nav className={`nav-wrapper nav-wrapper--runlayer${scrolled ? ' scrolled' : ''}`} aria-label="Primary">
         <div className="nav-inner">
           <div className="nav-system">
             <div className="nav-panel nav-left">
@@ -31,7 +31,7 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
             </div>
 
             <div className="nav-panel nav-center">
-              <div className="nav-links" role="group" aria-label="Section links">
+              <div className="nav-links nav-links--pill" role="group" aria-label="Section links">
                 <ul className="nav-links-list">
                   {navLinks.map((link) => (
                     <li key={link.href}>
@@ -50,7 +50,7 @@ export default function Nav({ scrolled, activeSection, mobileOpen, onToggleMobil
             </div>
 
             <div className="nav-panel nav-right">
-              <div className="nav-actions">
+              <div className="nav-actions nav-actions--pill">
                 <a href="mailto:janbergosa.graphics@gmail.com" className="nav-cta">
                   {sectionContent.nav.cta}
                 </a>

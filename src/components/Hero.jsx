@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
 import { sectionContent } from '../data/constants'
 import { useReducedMotion } from '../hooks/useReducedMotion'
-import { useMobileLite } from '../hooks/useMobileLite'
 import BlueprintGrid from './BlueprintGrid'
 import AccentCTA from './AccentCTA'
 
@@ -27,9 +25,7 @@ export default function Hero({ onScrollTo, onOpenModal }) {
   const [text, setText] = useState('')
   const fullLabel = sectionContent.hero.roleLabel
   const reducedMotion = useReducedMotion()
-  const mobileLite = useMobileLite()
   const staticHeroText = reducedMotion
-  const lightHeroMotion = reducedMotion || mobileLite
 
   useEffect(() => {
     if (staticHeroText) {
@@ -56,14 +52,15 @@ export default function Hero({ onScrollTo, onOpenModal }) {
   }, [staticHeroText, fullLabel])
 
   return (
-    <section id="hero" className="hero-section hero-section--blueprint" aria-label="Introduction">
-      <div className="hero-bg">
-        <BlueprintGrid density="hero" marks />
+    <section id="hero" className="hero-section hero-section--runlayer" aria-label="Introduction">
+      <div className="hero-bg" aria-hidden="true">
+        <div className="hero-ambient" />
+        <BlueprintGrid density="hero" />
       </div>
 
-      <div className="hero-inner hero-inner--blueprint">
-        <div className="hero-text hero-text--blueprint">
-          <div className="hero-kicker">
+      <div className="hero-inner hero-inner--runlayer">
+        <div className="hero-text hero-text--runlayer">
+          <div className="hero-kicker hero-kicker--pill">
             <span className="typewriter-text">{text}</span>
             {!staticHeroText && <span className="typewriter-cursor" aria-hidden="true">|</span>}
           </div>
@@ -85,16 +82,6 @@ export default function Hero({ onScrollTo, onOpenModal }) {
           </div>
         </div>
       </div>
-
-      <motion.div
-        className="scroll-indicator"
-        initial={lightHeroMotion ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
-      >
-        <span>Scroll</span>
-        <div className="scroll-line"></div>
-      </motion.div>
     </section>
   )
 }
