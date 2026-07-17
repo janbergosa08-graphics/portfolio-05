@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { sectionContent } from '../data/constants'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import { useMobileLite } from '../hooks/useMobileLite'
-import MeshGradient from './MeshGradient'
+import BlueprintGrid from './BlueprintGrid'
+import AccentCTA from './AccentCTA'
 
 function HeroHeadlineRow({ line, reducedMotion }) {
   if (typeof line === 'string') {
@@ -29,9 +30,6 @@ export default function Hero({ onScrollTo, onOpenModal }) {
   const mobileLite = useMobileLite()
   const staticHeroText = reducedMotion
   const lightHeroMotion = reducedMotion || mobileLite
-  const { scrollY } = useScroll()
-  const gridScale = useTransform(scrollY, [0, 800], [1, 0.85])
-  const gridOpacity = useTransform(scrollY, [0, 800], [0.08, 0.02])
 
   useEffect(() => {
     if (staticHeroText) {
@@ -58,13 +56,13 @@ export default function Hero({ onScrollTo, onOpenModal }) {
   }, [staticHeroText, fullLabel])
 
   return (
-    <section id="hero" className="hero-section" aria-label="Introduction">
+    <section id="hero" className="hero-section hero-section--blueprint" aria-label="Introduction">
       <div className="hero-bg">
-        <MeshGradient intensity="hero" />
+        <BlueprintGrid density="hero" marks />
       </div>
 
-      <div className="hero-inner">
-        <div className="hero-text">
+      <div className="hero-inner hero-inner--blueprint">
+        <div className="hero-text hero-text--blueprint">
           <div className="hero-kicker">
             <span className="typewriter-text">{text}</span>
             {!staticHeroText && <span className="typewriter-cursor" aria-hidden="true">|</span>}
@@ -80,40 +78,12 @@ export default function Hero({ onScrollTo, onOpenModal }) {
           </h1>
           <p className="hero-desc">{sectionContent.hero.description}</p>
           <div className="hero-actions">
-            <button type="button" className="btn-primary" onClick={onOpenModal}>{sectionContent.hero.ctaPrimary}</button>
-            <button type="button" className="btn-ghost" onClick={() => onScrollTo('featured')}>{sectionContent.hero.ctaSecondary}</button>
+            <AccentCTA type="button" onClick={onOpenModal}>{sectionContent.hero.ctaPrimary}</AccentCTA>
+            <AccentCTA type="button" variant="secondary" onClick={() => onScrollTo('featured')}>
+              {sectionContent.hero.ctaSecondary}
+            </AccentCTA>
           </div>
         </div>
-
-        <motion.div
-          className="hero-visual"
-          initial={lightHeroMotion ? false : { opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <motion.div
-            className="hero-grid"
-            style={{
-              scale: lightHeroMotion ? 1 : gridScale,
-              opacity: lightHeroMotion ? 0.08 : gridOpacity,
-            }}
-          >
-            {Array.from({ length: 16 }).map((_, i) => (
-              <span key={i}></span>
-            ))}
-          </motion.div>
-          <motion.div
-            className="hero-floating-card glass"
-            initial={lightHeroMotion ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="hfc-dot"></div>
-            <span className="hfc-bar"></span>
-            <span className="hfc-bar"></span>
-            <span className="hfc-bar-short"></span>
-          </motion.div>
-        </motion.div>
       </div>
 
       <motion.div

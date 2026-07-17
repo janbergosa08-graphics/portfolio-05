@@ -4609,3 +4609,213 @@ select.form-input option { background: #1a1a1a; color: var(--text); }
   .approach-card { padding: var(--space-lg); }
   .contact-full { padding: var(--section-pad-top) var(--content-pad); min-height: 70dvh; }
 }
+
+/* ═══ Blueprint Hero & Outline Navigation ═══ */
+#hero.hero-section--blueprint {
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at 50% 12%, rgba(245, 78, 0, 0.1), transparent 34%),
+    var(--bg);
+  border-bottom: 1px solid var(--glass-border);
+  overflow: hidden;
+}
+
+.hero-section--blueprint .hero-bg {
+  inset: 0;
+  bottom: 0;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.hero-inner--blueprint {
+  width: min(var(--content-max), calc(100% - var(--content-pad) * 2));
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-text--blueprint {
+  max-width: min(860px, 100%);
+  padding: clamp(7rem, 14vh, 11rem) 0 clamp(5rem, 10vh, 8rem);
+}
+
+.hero-text--blueprint::before {
+  content: '';
+  display: block;
+  width: min(100%, 760px);
+  height: 1px;
+  margin-bottom: var(--space-xl);
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0.72;
+}
+
+#hero.hero-section--blueprint .hero-headline {
+  max-width: 12ch;
+  letter-spacing: -0.055em;
+}
+
+#hero.hero-section--blueprint .hero-desc {
+  max-width: 44rem;
+}
+
+.hero-section--blueprint .hero-prism-word {
+  color: var(--accent);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  -webkit-text-stroke: 0;
+  filter: none;
+  animation: none;
+}
+
+.nav-wrapper {
+  background: rgba(20, 20, 20, 0.76);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: none;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.nav-panel,
+.nav-wrapper:not(.scrolled) .nav-panel,
+.nav-wrapper.scrolled .nav-panel,
+.nav-links,
+.nav-actions {
+  border-color: var(--glass-border);
+  background: rgba(24, 24, 24, 0.68);
+}
+
+.nav-panel,
+.nav-wrapper:not(.scrolled) .nav-panel,
+.nav-wrapper.scrolled .nav-panel {
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-control);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.nav-links {
+  border: 1px solid var(--glass-border);
+}
+
+.nav-actions {
+  padding: 2px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-control);
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  right: var(--space-sm);
+  bottom: 6px;
+  left: var(--space-sm);
+  height: 1px;
+  background: var(--accent);
+}
+
+.nav-link:focus-visible,
+.nav-cta:focus-visible,
+.nav-download:focus-visible,
+.burger:focus-visible,
+.mobile-close:focus-visible,
+.mobile-link:focus-visible,
+.mobile-download:focus-visible,
+.mobile-cta:focus-visible,
+.mobile-footer-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.nav-cta,
+.nav-download {
+  border-color: var(--glass-border);
+  background: transparent;
+  color: var(--text-secondary);
+  box-shadow: none;
+}
+
+.nav-cta:hover,
+.nav-cta:focus-visible,
+.nav-download:hover,
+.nav-download:focus-visible {
+  border-color: var(--accent-border);
+  color: var(--text);
+  background: rgba(245, 78, 0, 0.08);
+  box-shadow: none;
+  transform: none;
+}
+
+.mobile-menu {
+  background: rgba(20, 20, 20, 0.96);
+}
+
+.mobile-menu-panel {
+  background:
+    linear-gradient(var(--blueprint-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px),
+    var(--bg);
+  background-size: 40px 40px;
+}
+
+.mobile-link,
+.mobile-download,
+.mobile-cta,
+.mobile-footer-link {
+  border-color: var(--glass-border);
+  color: var(--text-secondary);
+}
+
+.mobile-link {
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.mobile-cta {
+  border: 1px solid var(--glass-border);
+  background: transparent;
+  box-shadow: none;
+}
+
+.mobile-link:hover,
+.mobile-link.active,
+.mobile-footer-link:hover,
+.mobile-footer-link:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
+@media (max-width: 768px) {
+  .hero-inner--blueprint {
+    min-height: 92svh;
+  }
+
+  .hero-text--blueprint {
+    padding-top: 7rem;
+  }
+
+  #hero.hero-section--blueprint .hero-headline {
+    max-width: 100%;
+  }
+
+  #hero.hero-section--blueprint .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-section--blueprint .hero-actions .accent-cta {
+    width: 100%;
+  }
+}
