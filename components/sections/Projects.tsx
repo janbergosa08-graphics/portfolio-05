@@ -39,25 +39,38 @@ export default function Projects() {
               <>
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 border border-line px-2 py-1 font-mono text-[9px] tracking-[0.14em] text-ink">
-                      <span aria-hidden>🔥</span>
+                    <span className="inline-flex items-center border border-line px-2 py-1 font-mono text-[9px] tracking-[0.14em] text-ink">
                       {project.label}
                     </span>
                     <span className="font-mono text-[9px] tracking-wider text-muted">
                       {project.category}
                     </span>
+                    {!project.internal ? (
+                      <span className="font-mono text-[9px] tracking-wider text-accent">
+                        Behance ↗
+                      </span>
+                    ) : null}
                   </div>
                   <h3 className="mt-3 text-base font-medium leading-snug text-ink group-hover:text-accent">
                     {project.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted">{project.blurb}</p>
                 </div>
-                <span
-                  className="mt-8 ml-auto inline-flex h-8 w-8 items-center justify-center border border-line text-muted group-hover:border-accent group-hover:text-accent"
-                  aria-hidden
-                >
-                  →
-                </span>
+                <div className="mt-6 flex items-end justify-between gap-3">
+                  <p className="max-w-[85%] border-l border-accent pl-3 text-xs leading-relaxed text-muted">
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-accent">
+                      Outcome
+                    </span>
+                    <br />
+                    {project.outcome}
+                  </p>
+                  <span
+                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center border border-line text-muted group-hover:border-accent group-hover:text-accent"
+                    aria-hidden
+                  >
+                    →
+                  </span>
+                </div>
               </>
             );
 

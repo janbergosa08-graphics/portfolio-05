@@ -5,7 +5,7 @@ import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'fr
 import { useRef } from 'react';
 import { RotatingWord } from '@/components/motion/RotatingWord';
 import { scrollSpring } from '@/lib/motion';
-import { hero } from '@/lib/content';
+import { hero, site } from '@/lib/content';
 
 const HeroIsoGraphic = dynamic(() => import('@/components/sections/HeroIsoGraphic'), {
   ssr: false,
@@ -56,13 +56,30 @@ export default function Hero() {
           <p className="mt-5 max-w-md text-sm leading-relaxed text-muted sm:mt-6 md:text-base">
             {hero.description}
           </p>
-          <div className="mt-7 sm:mt-8">
+          <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
             <a
               href="#contact"
-              className="ui-btn-lg inline-flex w-full border border-line bg-accent-soft text-ink hover:bg-accent hover:text-canvas sm:w-auto"
+              className="ui-btn-lg inline-flex w-full justify-center border border-line bg-accent-soft text-ink hover:bg-accent hover:text-canvas sm:w-auto"
             >
               {hero.primaryCta}
             </a>
+            <div className="flex items-stretch gap-3">
+              <a
+                href={site.resume.href}
+                download={site.resume.downloadName}
+                className="ui-btn-lg inline-flex flex-1 justify-center border border-line text-ink hover:border-accent hover:text-accent sm:flex-none"
+              >
+                {hero.resumeCta}
+              </a>
+              <a
+                href={site.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ui-btn-lg inline-flex flex-1 justify-center border border-line text-ink hover:border-accent hover:text-accent sm:flex-none"
+              >
+                {hero.linkedinCta}
+              </a>
+            </div>
           </div>
         </motion.div>
 

@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { navLinks, resourceLinks, site } from '@/lib/content';
+import { footerNavLinks, resourceLinks, site } from '@/lib/content';
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const links = navLinks.filter((l) => l.href !== '#hero' && l.href !== '#contact');
+  const links = footerNavLinks;
 
   return (
     <footer className="border-b border-line">
@@ -65,7 +65,7 @@ export default function Footer() {
         <div className="flex flex-col gap-2 border-t border-line py-4 text-xs text-muted sm:flex-row sm:items-center sm:justify-between shell-x">
           <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1">
             <span>
-              © {year} {site.name}. All rights reserved.
+              © {year} {site.fullName}. All rights reserved.
             </span>
             <span className="inline-flex gap-3">
               <Link href="/legal" className="hover:text-accent">

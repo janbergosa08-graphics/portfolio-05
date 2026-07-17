@@ -19,6 +19,30 @@ export const metadata: Metadata = {
   title: 'Jan Bergosa — Product UI/UX Designer',
   description:
     'Product UI/UX designer for web apps and dashboards. I reduce user friction, clarify requirements, and help teams ship with cleaner handoff.',
+  openGraph: {
+    title: 'Jan Bergosa — Product UI/UX Designer',
+    description:
+      'Product UI/UX designer for web apps and dashboards. I reduce user friction, clarify requirements, and help teams ship with cleaner handoff.',
+    url: 'https://janbergosa.vercel.app',
+    siteName: 'Jan Bergosa',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Jan Bergosa — Product UI/UX Designer portfolio hero',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Jan Bergosa — Product UI/UX Designer',
+    description:
+      'Product UI/UX designer for web apps and dashboards. I reduce user friction, clarify requirements, and help teams ship with cleaner handoff.',
+    images: ['/og-image.png'],
+  },
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
     shortcut: '/favicon.svg',

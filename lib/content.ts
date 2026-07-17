@@ -1,7 +1,9 @@
 export const site = {
   name: 'Jan Bergosa',
+  fullName: 'Marjan "Jan" Bergosa',
   role: 'PRODUCT UI/UX DESIGNER',
   email: 'janbergosa.graphics@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/marjan-bergosa-b973a9184/',
   tagline:
     'I design product interfaces that cut user friction and help teams ship clearer software.',
   resume: {
@@ -12,11 +14,15 @@ export const site = {
 };
 
 export const navLinks = [
-  { label: 'Home', href: '#hero' },
-  { label: 'Projects', href: '#projects' },
+  { label: 'Work', href: '#projects' },
+  { label: 'Expertise', href: '#expertise' },
+  { label: 'Contact', href: '#contact' },
+];
+
+export const footerNavLinks = [
+  { label: 'Work', href: '#projects' },
   { label: 'Expertise', href: '#expertise' },
   { label: 'Method', href: '#method' },
-  { label: 'Philosophy', href: '#philosophy' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -29,6 +35,8 @@ export const hero = {
   description:
     'From unclear requirements to usable interfaces — less friction, cleaner handoff, fewer revision loops.',
   primaryCta: 'Discuss a role or project',
+  resumeCta: 'Resume',
+  linkedinCta: 'LinkedIn',
 };
 
 export const projects = [
@@ -38,6 +46,7 @@ export const projects = [
     category: 'B2B ops',
     title: 'Grafon – Supply Chain Simulator',
     blurb: 'Simplified complex simulation flows so operators can run scenarios faster with less training.',
+    outcome: 'Operators run scenarios with less onboarding and fewer missteps.',
     href: '/case-study/grafon-supply-chain',
     internal: true,
   },
@@ -47,6 +56,7 @@ export const projects = [
     category: 'Fintech UX',
     title: 'TradeDungeon – Trading Product UI',
     blurb: 'Structured trading journeys and screens for clearer decisions under time pressure.',
+    outcome: 'Clearer trade decisions under time pressure, fewer costly missteps.',
     href: '/case-study/tradedungeon-uiux',
     internal: true,
   },
@@ -56,6 +66,7 @@ export const projects = [
     category: 'Developer platform',
     title: 'Dataflower – Backend-as-a-Service',
     blurb: 'Made backend setup and API workflows easier for builders adopting the platform.',
+    outcome: 'Faster first successful API call for developers new to the platform.',
     href: '/case-study/dataflower-baas',
     internal: true,
   },
@@ -65,20 +76,22 @@ export const projects = [
     category: 'Energy ops',
     title: 'Powerion – Energy Management',
     blurb: 'Dashboard patterns for monitoring energy data and acting on operational signals.',
+    outcome: 'Operators spot and act on energy signals from a single view.',
     href: 'https://www.behance.net/gallery/232269087/Powerion-Energy-Management-Platform',
     internal: false,
   },
 ];
 
 export const resourceLinks = [
-  { label: 'Legal Notice', href: '/legal' },
-  { label: 'Documentation', href: '/docs' },
-  { label: 'Behance', href: 'https://www.behance.net/janbergosa', external: true },
   {
     label: 'Resume',
     href: '/resume/marjan-bergosa-ui-ux-design-resume.pdf',
     download: 'Marjan-Bergosa-UI-UX-Design-Resume.pdf',
   },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/marjan-bergosa-b973a9184/', external: true },
+  { label: 'Behance', href: 'https://www.behance.net/janbergosa', external: true },
+  { label: 'Legal Notice', href: '/legal' },
+  { label: 'Documentation', href: '/docs' },
 ];
 
 export const socialLinks = [
@@ -271,7 +284,7 @@ export const faqs = [
 
 export const contactIntro = {
   kicker: 'CONTACT',
-  titleLine1: 'Need product UI/UX support?',
+  titleLine1: 'Hiring for product UI/UX?',
   titleLine2: 'Let’s talk outcomes.',
-  body: 'Open to full-time product design roles and selected project work. Share the product, users, timeline, and what success looks like — I reply within 24 hours with next steps.',
+  body: 'Primary focus: full-time or embedded product UI/UX roles. Selective project work when the problem and team fit are strong. Share the product, users, timeline, and what success looks like — I reply within 24 hours with next steps.',
 };
