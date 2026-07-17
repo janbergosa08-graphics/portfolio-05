@@ -1,38 +1,44 @@
 ﻿@import "tailwindcss";
 
 :root {
-  --bg: #06070a;
-  --bg-alt: rgba(237, 93, 69, 0.03);
-  --surface: rgba(237, 93, 69, 0.04);
-  --surface-hover: rgba(237, 93, 69, 0.08);
-  --surface-raised: rgba(255, 255, 255, 0.04);
-  --glass: rgba(63, 190, 216, 0.05);
-  --glass-hover: rgba(63, 190, 216, 0.09);
-  --glass-border: rgba(63, 126, 222, 0.12);
-  --glass-border-hover: rgba(63, 126, 222, 0.25);
-  --glass-blur: 20px;
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --coral: #ed5d45;
-  --gold: #f2b655;
-  --cyan: #3fbed8;
-  --blue: #3f7dde;
-  --brand-primary: var(--coral);
-  --brand-secondary: var(--blue);
-  --gradient-brand: linear-gradient(135deg, var(--coral), var(--gold), var(--cyan), var(--blue));
-  --gradient-accent: linear-gradient(135deg, var(--cyan), var(--blue));
+  --bg: #141414;
+  --bg-alt: #181818;
+  --surface: rgba(228, 228, 228, 0.035);
+  --surface-hover: rgba(228, 228, 228, 0.06);
+  --surface-raised: #1f1f1f;
+  --glass: rgba(228, 228, 228, 0.035);
+  --glass-hover: rgba(228, 228, 228, 0.06);
+  --glass-border: rgba(228, 228, 228, 0.12);
+  --glass-border-hover: rgba(245, 78, 0, 0.42);
+  --glass-blur: 18px;
+  --border-subtle: rgba(228, 228, 228, 0.1);
+  --accent: #f54e00;
+  --accent-soft: rgba(245, 78, 0, 0.1);
+  --accent-border: rgba(245, 78, 0, 0.42);
+  --accent-strong: #ff6a2a;
+  --brand-primary: var(--accent);
+  --brand-secondary: var(--accent);
+  --gradient-brand: linear-gradient(135deg, rgba(245, 78, 0, 0.18), rgba(228, 228, 228, 0.04));
+  --gradient-accent: linear-gradient(135deg, rgba(245, 78, 0, 0.18), rgba(245, 78, 0, 0.04));
   --warm-gradient: var(--gradient-accent);
   --cool-gradient: var(--gradient-accent);
-  --full-gradient: var(--gradient-brand);
-  --accent-gradient: var(--gradient-brand);
-  --warm-glow: rgba(237, 93, 69, 0.06);
-  --warm-glow-strong: rgba(237, 93, 69, 0.12);
-  --cool-glow: rgba(63, 190, 216, 0.05);
-  --cool-glow-strong: rgba(63, 190, 216, 0.1);
-  --orange-soft: var(--coral);
-  --text: #fafaf9;
-  --text-on-accent: #ffffff;
-  --text-secondary: rgba(250, 250, 249, 0.62);
-  --text-tertiary: rgba(250, 250, 249, 0.42);
+  --full-gradient: var(--gradient-accent);
+  --accent-gradient: var(--gradient-accent);
+  --warm-glow: rgba(245, 78, 0, 0.06);
+  --warm-glow-strong: rgba(245, 78, 0, 0.12);
+  --cool-glow: rgba(228, 228, 228, 0.04);
+  --cool-glow-strong: rgba(228, 228, 228, 0.08);
+  --orange-soft: var(--accent);
+  --text: rgba(228, 228, 228, 0.92);
+  --text-on-accent: #141414;
+  --text-secondary: rgba(228, 228, 228, 0.58);
+  --text-tertiary: rgba(228, 228, 228, 0.38);
+  --blueprint-line: rgba(228, 228, 228, 0.055);
+  --blueprint-line-strong: rgba(228, 228, 228, 0.12);
+  --coral: var(--accent);
+  --gold: var(--accent-strong);
+  --cyan: var(--accent);
+  --blue: var(--accent);
   --text-xs: 0.6875rem;
   --text-2xs: 0.625rem;
   --text-sm: 0.8125rem;
@@ -97,14 +103,14 @@
   --duration: 0.8s;
   --duration-slow: 1.2s;
   --duration-fast: 0.25s;
-  --shadow-accent: 0 4px 24px rgba(63, 190, 216, 0.25);
-  --shadow-accent-hover: 0 8px 32px rgba(63, 190, 216, 0.4);
+  --shadow-accent: 0 4px 24px rgba(245, 78, 0, 0.25);
+  --shadow-accent-hover: 0 8px 32px rgba(245, 78, 0, 0.4);
   --content-max: 1320px;
   --content-pad: 36px;
   --step-num-inactive: rgba(250, 250, 249, 0.22);
   --step-line-track: rgba(255, 255, 255, 0.08);
   --step-line-gradient-h: var(--gradient-brand);
-  --step-line-gradient-v: linear-gradient(180deg, var(--coral), var(--gold), var(--cyan), var(--blue));
+  --step-line-gradient-v: var(--gradient-accent);
   --success: #22c55e;
 }
 
@@ -254,6 +260,78 @@ a:focus:not(:focus-visible) {
   opacity: 0.04; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat; background-size: 512px 512px;
+}
+
+.blueprint-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 1;
+  background-image:
+    linear-gradient(var(--blueprint-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at 50% 35%, #000 0%, rgba(0, 0, 0, 0.72) 42%, transparent 78%);
+}
+
+.blueprint-grid--hero {
+  background-size: 56px 56px;
+  opacity: 0;
+  animation: blueprintFadeIn 900ms var(--ease) forwards;
+}
+
+.blueprint-grid--section {
+  background-size: 40px 40px;
+  opacity: 0.7;
+}
+
+.blueprint-corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-color: var(--blueprint-line-strong);
+  border-style: solid;
+}
+
+.blueprint-corner--tl {
+  top: var(--space-xl);
+  left: var(--content-pad);
+  border-width: 1px 0 0 1px;
+}
+
+.blueprint-corner--tr {
+  top: var(--space-xl);
+  right: var(--content-pad);
+  border-width: 1px 1px 0 0;
+}
+
+.blueprint-corner--bl {
+  bottom: var(--space-xl);
+  left: var(--content-pad);
+  border-width: 0 0 1px 1px;
+}
+
+.blueprint-corner--br {
+  right: var(--content-pad);
+  bottom: var(--space-xl);
+  border-width: 0 1px 1px 0;
+}
+
+@keyframes blueprintFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blueprint-grid--hero {
+    animation: none;
+    opacity: 0.72;
+  }
 }
 
 /* â•â•â• Cursor Spotlight â•â•â• */
