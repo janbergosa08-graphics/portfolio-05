@@ -1,11 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useContactModal } from '@/components/contact/ContactProvider';
 import { navLinks, site } from '@/lib/content';
+
+const navControlClass =
+  'inline-flex h-9 items-center justify-center border border-line px-3.5 text-xs leading-none';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('hero');
+  const { openContactModal } = useContactModal();
 
   useEffect(() => {
     const ids = navLinks.map((l) => l.href.slice(1));
@@ -27,20 +32,27 @@ export default function Header() {
     document.body.style.overflow = open ? 'hidden' : '';
   }, [open]);
 
+  const handleOpenContact = () => {
+    setOpen(false);
+    openContactModal();
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-canvas">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 md:px-6">
-        <a href="#hero" className="font-medium tracking-tight text-ink">
-          {site.name}
+      <div className="flex h-14 w-full items-center justify-between gap-2 sm:gap-3 shell-x">
+        <a href="#hero" className="inline-flex shrink-0 items-center" aria-label={site.name}>
+          <img src="/logo.svg" alt="" width={28} height={32} className="h-8 w-auto" />
         </a>
 
-        <nav className="hidden items-center gap-0 border border-line lg:flex" aria-label="Primary">
+        <nav className="hidden h-9 items-stretch border border-line lg:flex" aria-label="Primary">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className={`border-r border-line px-3 py-2 text-xs last:border-r-0 ${
-                active === link.href.slice(1) ? 'bg-accent-soft text-accent' : 'text-muted hover:text-ink'
+              className={`inline-flex h-full items-center justify-center border-r border-line px-3.5 text-xs leading-none last:border-r-0 ${
+                active === link.href.slice(1)
+                  ? 'nav-link--active text-ink'
+                  : 'text-muted hover:text-ink'
               }`}
             >
               {link.label}
@@ -48,29 +60,30 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <a
-            href={`mailto:${site.email}`}
-            className="hidden border border-line px-3 py-2 text-xs text-ink hover:border-accent hover:text-accent sm:inline-flex"
+        <div className="flex h-9 shrink-0 items-center gap-2">
+          <button
+            type="button"
+            onClick={openContactModal}
+            className={`${navControlClass} hidden text-ink hover:border-accent hover:text-ink sm:inline-flex`}
           >
             Let&apos;s talk
-          </a>
+          </button>
           <a
             href={site.resume.href}
             download={site.resume.downloadName}
-            className="border border-line px-3 py-2 text-xs text-muted hover:text-ink"
+            className={`${navControlClass} text-muted hover:text-ink`}
             aria-label={site.resume.label}
           >
             Resume
           </a>
           <button
             type="button"
-            className="border border-line px-3 py-2 text-xs text-ink lg:hidden"
+            className={`${navControlClass} text-ink lg:hidden`}
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? 'Close' : 'Menu'}
+            Menu
           </button>
         </div>
       </div>
@@ -82,13 +95,44 @@ export default function Header() {
               <li key={link.href} className="border-b border-r border-line">
                 <a
                   href={link.href}
-                  className="block px-4 py-3 text-sm text-muted hover:text-accent"
+                  className={`flex h-11 items-center px-4 text-sm ${
+                    active === link.href.slice(1)
+                      ? 'nav-link--active text-ink'
+                      : 'text-muted hover:text-ink'
+                  }`}
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
                 </a>
               </li>
             ))}
+            <li className="border-b border-r border-line">
+              <button
+                type="button"
+                className="flex h-11 w-full items-center px-4 text-left text-sm text-muted hover:text-ink"
+                onClick={handleOpenContact}
+              >
+                Let&apos;s talk
+              </button>
+            </li>
+            <li className="border-b border-r border-line">
+              <a
+                href="/legal"
+                className="flex h-11 items-center px-4 text-sm text-muted hover:text-ink"
+                onClick={() => setOpen(false)}
+              >
+                Legal
+              </a>
+            </li>
+            <li className="border-b border-line">
+              <a
+                href="/docs"
+                className="flex h-11 items-center px-4 text-sm text-muted hover:text-ink"
+                onClick={() => setOpen(false)}
+              >
+                Documents
+              </a>
+            </li>
           </ul>
         </div>
       )}

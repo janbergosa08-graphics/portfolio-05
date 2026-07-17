@@ -3,6 +3,8 @@ next-env.d.ts
 node_modules/
 dist/
 out/
+.tmp-ui-ux-pro-max-skill/
+legacy-pages/
 *.log
 .DS_Store
 .env*.local

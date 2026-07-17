@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://janbergosa.vercel.app/sitemap.xml

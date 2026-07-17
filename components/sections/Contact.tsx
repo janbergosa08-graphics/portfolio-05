@@ -1,38 +1,33 @@
 'use client';
 
+import ContactForm from '@/components/contact/ContactForm';
+import ContactGraphic from '@/components/contact/ContactGraphic';
 import { Reveal } from '@/components/motion/Reveal';
-import { site } from '@/lib/content';
 
 export default function Contact() {
   return (
     <section id="contact" className="border-b border-line">
-      <div className="mx-auto max-w-6xl">
-        <div className="grid md:grid-cols-2">
-          <div className="border-b border-line px-4 py-12 md:border-b-0 md:border-r md:px-6 md:py-16">
+      <div className="w-full">
+        <div className="grid lg:grid-cols-2 lg:items-stretch">
+          <div className="section-pad flex flex-col justify-center border-b border-line lg:border-b-0 lg:border-r lg:py-16 xl:py-20">
             <Reveal>
               <p className="font-mono text-[10px] tracking-[0.16em] text-accent">CONTACT</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+              <h2 className="section-heading-lg mt-3 max-w-md font-semibold">
                 Build solutions.
                 <br />
                 Forge impact.
               </h2>
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-muted">
+                Accepting new projects and collaborations. Share where users stall, what you&apos;re
+                building, and how we can improve the experience.
+              </p>
+              <ContactGraphic />
             </Reveal>
           </div>
-          <div className="flex flex-col justify-between px-4 py-12 md:px-6 md:py-16">
+
+          <div className="section-pad lg:py-16 xl:py-20">
             <Reveal delay={0.05}>
-              <p className="max-w-sm text-sm leading-relaxed text-muted">
-                Accepting new projects and collaborations. Tell me where users stall — we&apos;ll align
-                on goals and ship something that converts.
-              </p>
-              <a
-                href={`mailto:${site.email}`}
-                className="mt-8 inline-flex border border-accent bg-accent-soft px-5 py-3 text-sm text-ink hover:bg-accent hover:text-canvas"
-              >
-                Send a Message
-              </a>
-              <p className="mt-6 font-mono text-[10px] tracking-wider text-muted">
-                MON–FRI · 9AM–6PM PHT
-              </p>
+              <ContactForm formId="contact-section-form" submitLabel="Send Message" />
             </Reveal>
           </div>
         </div>

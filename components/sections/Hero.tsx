@@ -1,70 +1,72 @@
 'use client';
 
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 import { Reveal } from '@/components/motion/Reveal';
-import { hero, site } from '@/lib/content';
+import { RotatingWord } from '@/components/motion/RotatingWord';
+import HeroIsoGraphic from '@/components/sections/HeroIsoGraphic';
+import { hero } from '@/lib/content';
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+  const glowY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, 72]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.75], reduced ? [1, 1] : [1, 0.35]);
+  const copyY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, -18]);
+  const graphicY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, 28]);
+
   return (
-    <section id="hero" className="relative overflow-hidden border-b border-line">
-      <div
-        className="pointer-events-none absolute inset-0 grid-bg opacity-80"
-        aria-hidden
-        style={{
-          maskImage: 'radial-gradient(ellipse 70% 60% at 60% 20%, #000 0%, transparent 75%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 60% 20%, #000 0%, transparent 75%)',
-        }}
-      />
-      <div
+    <section ref={sectionRef} id="hero" className="relative overflow-hidden border-b border-line">
+      <motion.div
         className="pointer-events-none absolute inset-x-0 top-0 h-[50vh]"
         aria-hidden
         style={{
-          background:
-            'radial-gradient(ellipse 70% 55% at 50% 0%, rgba(255,77,0,0.2), transparent 70%)',
+          y: glowY,
+          opacity: glowOpacity,
+          background: 'var(--hero-glow)',
         }}
       />
 
-      <div className="relative mx-auto grid max-w-6xl md:grid-cols-[1.2fr_0.8fr]">
-        <div className="border-r border-line px-4 py-16 md:px-6 md:py-24">
+      <div className="relative grid w-full lg:grid-cols-2">
+        <motion.div
+          className="section-pad border-b border-line lg:border-b-0 lg:border-r lg:py-20 xl:py-24"
+          style={{ y: copyY }}
+        >
           <Reveal>
-            <p className="mb-6 inline-block border border-line px-3 py-1 font-mono text-[10px] tracking-[0.16em] text-ink">
+            <p className="mb-5 inline-flex items-center border border-line px-3 py-1.5 font-mono text-[10px] leading-none tracking-[0.16em] text-ink sm:mb-6">
               {hero.role}
             </p>
-            <h1 className="max-w-[11ch] text-[clamp(2.5rem,7vw,4.75rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-ink">
-              {hero.lines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
+            <h1 className="hero-title max-w-[14ch] font-semibold text-ink">
+              <span className="block">{hero.headlineLead}</span>
               <span className="block">
-                <span className="text-accent">{hero.accent}</span>
+                <RotatingWord words={hero.rotatingWords} intervalMs={3000} />
               </span>
+              <span className="block">{hero.headlineTail}</span>
             </h1>
-            <p className="mt-6 max-w-md text-sm leading-relaxed text-muted md:text-base">
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-muted sm:mt-6 md:text-base">
               {hero.description}
             </p>
-            <div className="mt-8 flex flex-col gap-0 border border-line sm:flex-row">
+            <div className="mt-7 sm:mt-8">
               <a
-                href={`mailto:${site.email}`}
-                className="border-b border-line bg-accent-soft px-5 py-3 text-center text-sm text-ink hover:bg-accent hover:text-canvas sm:border-b-0 sm:border-r"
+                href="#contact"
+                className="ui-btn-lg inline-flex w-full border border-line bg-accent-soft text-ink hover:bg-accent hover:text-canvas sm:w-auto"
               >
                 {hero.primaryCta}
               </a>
-              <a
-                href="#projects"
-                className="px-5 py-3 text-center text-sm text-muted hover:bg-white/5 hover:text-ink"
-              >
-                {hero.secondaryCta}
-              </a>
             </div>
           </Reveal>
-        </div>
+        </motion.div>
 
-        <div className="relative hidden min-h-[28rem] border-line md:block">
-          <div className="absolute inset-0 grid-bg opacity-60" aria-hidden />
-          <div className="absolute bottom-0 left-0 right-0 border-t border-line p-4 font-mono text-[10px] tracking-wider text-muted">
-            PORTFOLIO / {site.name.toUpperCase()}
-          </div>
-        </div>
+        <motion.div
+          className="relative hidden min-h-[28rem] overflow-hidden border-line lg:block lg:min-h-[34rem] xl:min-h-[38rem]"
+          style={{ y: graphicY }}
+        >
+          <HeroIsoGraphic />
+        </motion.div>
       </div>
     </section>
   );

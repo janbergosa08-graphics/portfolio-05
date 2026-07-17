@@ -6,11 +6,44 @@
   --color-muted: #a1a1a1;
   --color-line: rgba(255, 255, 255, 0.12);
   --color-line-strong: rgba(255, 255, 255, 0.2);
-  --color-accent: #ff4d00;
-  --color-accent-soft: rgba(255, 77, 0, 0.12);
+  /* Solid mid stop — aurora indigo/violet */
+  --color-accent: #a78bfa;
+  --color-accent-soft: rgba(167, 139, 250, 0.14);
   --color-panel: #0f0f0f;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+:root {
+  --accent-a: #67e8f9; /* cyan */
+  --accent-b: #818cf8; /* indigo */
+  --accent-c: #e879f9; /* fuchsia */
+  --accent-mid: #a78bfa; /* solid UI accent — borders, dots, strokes */
+  --accent-mid-soft: rgba(167, 139, 250, 0.4);
+  --accent-gradient: linear-gradient(120deg, var(--accent-a) 0%, var(--accent-b) 48%, var(--accent-c) 100%);
+  --accent-gradient-soft: linear-gradient(
+    120deg,
+    rgba(103, 232, 249, 0.14) 0%,
+    rgba(129, 140, 248, 0.14) 48%,
+    rgba(232, 121, 249, 0.14) 100%
+  );
+  --accent-glow: 0 0 28px rgba(129, 140, 248, 0.45);
+  --hero-glow: radial-gradient(
+      ellipse 55% 50% at 35% 0%,
+      color-mix(in srgb, var(--accent-a) 18%, transparent),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 50% 45% at 70% 10%,
+      color-mix(in srgb, var(--accent-c) 16%, transparent),
+      transparent 60%
+    );
+  /* Responsive rhythm — mobile-first (SE → iPad mini → desktop) */
+  --shell-gutter: 1.25rem;
+  --section-x: 1rem;
+  --section-y: 1.75rem;
+  --cell-x: 1.125rem;
+  --cell-y: 1.125rem;
 }
 
 * {
@@ -19,24 +52,178 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
-  background: var(--color-canvas);
+  background-color: var(--color-canvas);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.11) 0.55px, transparent 0.55px);
+  background-size: 11px 11px;
   color: var(--color-ink);
   font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+/* Runlayer-style center column — dotted gutters left/right outside the rails */
+.site-shell {
+  position: relative;
+  margin-inline: auto;
+  min-height: 100vh;
+  width: min(100% - var(--shell-gutter), 72rem);
+  border-left: 1px solid var(--color-line);
+  border-right: 1px solid var(--color-line);
+  background-color: var(--color-canvas);
+  background-image: none;
+  overflow-x: clip;
+}
+
+@media (max-width: 374px) {
+  :root {
+    --shell-gutter: 0.625rem;
+    --section-x: 0.875rem;
+    --section-y: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --section-x: 1.5rem;
+    --section-y: 2.25rem;
+    --cell-x: 1.375rem;
+    --cell-y: 1.375rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --section-y: 2.75rem;
+    --cell-x: 1.5rem;
+    --cell-y: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --section-x: 2rem;
+    --section-y: 3rem;
+  }
 }
 
 ::selection {
-  background: rgba(255, 77, 0, 0.35);
-  color: #fff;
+  background: color-mix(in srgb, var(--accent-b) 40%, transparent);
+  color: var(--color-ink);
+}
+
+/* Kill browser autofill white fill on dark inputs */
+input,
+textarea,
+select {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  color-scheme: dark;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-ink) !important;
+  caret-color: var(--color-ink);
+  box-shadow: 0 0 0 1000px var(--color-canvas) inset !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--color-canvas) inset !important;
+  transition: background-color 99999s ease-in-out 0s;
+  background-color: var(--color-canvas) !important;
 }
 
 .grid-bg {
   background-image:
-    linear-gradient(rgba(255, 77, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 77, 0, 0.04) 1px, transparent 1px);
+    linear-gradient(color-mix(in srgb, var(--accent-b) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent-c) 6%, transparent) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+/* Accent as gradient (noon.ai–style) — text / fills only */
+.text-accent {
+  background-image: var(--accent-gradient) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.bg-accent {
+  background-color: transparent !important;
+  background-image: var(--accent-gradient) !important;
+  color: var(--color-canvas) !important;
+  -webkit-text-fill-color: var(--color-canvas) !important;
+}
+
+.bg-accent-soft {
+  background-color: transparent !important;
+  background-image: var(--accent-gradient-soft) !important;
+}
+
+/* Solid mid accent for borders — same idle + hover (no purple→fuchsia jump) */
+.border-accent {
+  border-color: var(--accent-mid) !important;
+}
+
+.border-accent-muted {
+  border-color: var(--accent-mid-soft) !important;
+}
+
+.hover\:border-accent:hover {
+  border-color: var(--accent-mid) !important;
+}
+
+.group-hover\:border-accent:is(:where(.group):hover *) {
+  border-color: var(--accent-mid) !important;
+}
+
+/* Solid accent fill for tiny indicators (status dots) — not full gradient */
+.accent-dot {
+  background-color: var(--accent-mid) !important;
+  background-image: none !important;
+}
+
+/* Nav active — soft accent fill + solid ink text (avoids text-accent clip clash) */
+.nav-link--active {
+  background-color: transparent !important;
+  background-image: var(--accent-gradient-soft) !important;
+  color: var(--color-ink) !important;
+  -webkit-text-fill-color: var(--color-ink) !important;
+  box-shadow: inset 0 -2px 0 0 var(--accent-mid);
+}
+
+.hover\:bg-accent:hover {
+  background-color: transparent !important;
+  background-image: var(--accent-gradient) !important;
+  color: var(--color-canvas) !important;
+  -webkit-text-fill-color: var(--color-canvas) !important;
+}
+
+.hover\:text-accent:hover {
+  background-image: var(--accent-gradient) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.group-hover\:text-accent:is(:where(.group):hover *) {
+  background-image: var(--accent-gradient) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
 }
 
 .line-x {
@@ -45,4 +232,143 @@ body {
 
 .cell {
   border: 1px solid var(--color-line);
+}
+
+/* Shared rhythm — buttons, section, and cell padding */
+.ui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--color-line);
+  font-size: 0.75rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ui-btn-lg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+.shell-x {
+  padding-left: var(--section-x);
+  padding-right: var(--section-x);
+}
+
+.section-pad {
+  padding: var(--section-y) var(--section-x);
+}
+
+.cell-pad {
+  padding: var(--cell-y) var(--cell-x);
+}
+
+.section-heading {
+  font-size: clamp(1.5rem, 4.2vw, 1.875rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.section-heading-lg {
+  font-size: clamp(1.625rem, 4.8vw, 2.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 7.5vw, 4.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.split-pad-y {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding: var(--section-y) var(--section-x);
+  }
+
+  .cell-pad {
+    padding: var(--cell-y) var(--cell-x);
+  }
+}
+
+.faq-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+.faq-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.faq-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.faq-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border: 0;
+}
+
+/* Hero isometric interaction */
+.iso-box {
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  transition: filter 180ms ease, opacity 180ms ease;
+}
+
+.iso-box--glow {
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--accent-a) 45%, transparent))
+    drop-shadow(0 0 22px color-mix(in srgb, var(--accent-c) 35%, transparent));
+  z-index: 5;
+}
+
+.iso-label {
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.iso-label--active {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent-mid) 65%, transparent),
+    0 0 20px color-mix(in srgb, var(--accent-b) 35%, transparent),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  color: var(--color-ink) !important;
+  -webkit-text-fill-color: var(--color-ink) !important;
+}
+
+@keyframes iso-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-7px);
+  }
+}
+
+.iso-float {
+  animation: iso-float 3.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iso-float {
+    animation: none;
+  }
 }

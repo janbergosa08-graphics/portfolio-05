@@ -1,3 +1,4 @@
+import { ContactProvider } from '@/components/contact/ContactProvider';
 import Header from '@/components/sections/Header';
 import Hero from '@/components/sections/Hero';
 import Projects from '@/components/sections/Projects';
@@ -10,7 +11,7 @@ import Footer from '@/components/sections/Footer';
 
 export default function HomePage() {
   return (
-    <>
+    <ContactProvider>
       <Header />
       <main>
         <Hero />
@@ -22,6 +23,6 @@ export default function HomePage() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </ContactProvider>
   );
 }
