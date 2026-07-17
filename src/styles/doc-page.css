@@ -192,7 +192,7 @@
   overflow-y: auto;
   padding: var(--space-sm) var(--space-sm) var(--space-sm) 0;
   border-right: 1px solid var(--glass-border);
-  background: rgba(6, 7, 10, 0.62);
+  background: rgba(24, 24, 24, 0.78);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: var(--radius-control);
@@ -240,11 +240,13 @@
 }
 
 .doc-nav-link.is-active {
-  color: var(--text);
+  color: var(--accent);
+  background: rgba(245, 78, 0, 0.08);
+  border: 1px solid var(--accent-border);
 }
 
 .doc-nav-link.is-active .doc-nav-icon {
-  color: var(--text);
+  color: var(--accent);
 }
 
 .doc-nav-icon {
@@ -301,10 +303,7 @@
   font-size: var(--text-xs);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: var(--text-tertiary);
-  letter-spacing: 0.04em;
-  margin: 0;
-}
+  color: var(--accent);
 
 .doc-section-meta {
   min-width: 0;
@@ -321,7 +320,7 @@
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--text-secondary);
+  color: var(--accent);
   white-space: nowrap;
 }
 
