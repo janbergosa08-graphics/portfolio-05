@@ -1,24 +1,26 @@
 {
   "name": "portfolio-05",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "UI/UX Designer Portfolio — Frictionless Digital Experiences",
+  "description": "UI/UX Designer Portfolio — Runlayer-inspired grid landing",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "start": "vite"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.3.2",
-    "@vitejs/plugin-react": "^4.7.0",
-    "tailwindcss": "^4.3.2",
-    "vite": "^5.4.0"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
     "framer-motion": "^12.42.0",
+    "next": "^15.3.3",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.8",
+    "@types/node": "^22.15.21",
+    "@types/react": "^19.1.5",
+    "@types/react-dom": "^19.1.5",
+    "tailwindcss": "^4.1.8",
+    "typescript": "^5.8.3"
   }
 }
