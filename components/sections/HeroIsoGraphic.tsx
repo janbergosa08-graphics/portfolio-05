@@ -108,7 +108,7 @@ const nodes: NodeDef[] = [
     id: 'problems',
     label: 'REAL PROBLEMS',
     level: 'outcome',
-    hint: 'Headline close — measurable impact',
+    hint: 'Headline close — business outcomes',
     x: 50,
     y: 70,
     labelX: 50,
@@ -135,9 +135,9 @@ const RADIUS: Record<'sm' | 'md' | 'lg', number> = {
 };
 
 const LINE = 'rgba(255,255,255,0.2)';
-const LINE_HOVER = '#a78bfa';
+const LINE_HOVER = '#7fee64';
 const BORDER = 'rgba(255,255,255,0.2)';
-const BORDER_HOVER = '#a78bfa';
+const BORDER_HOVER = '#7fee64';
 
 const FILL_TOP = 'rgba(15,15,15,0.98)';
 const FILL_LEFT = 'rgba(10,10,10,0.98)';
@@ -324,7 +324,7 @@ export default function HeroIsoGraphic() {
                 markerHeight="6"
                 orient="auto-start-reverse"
               >
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa" />
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#7fee64" />
               </marker>
             </defs>
             {edges.map(([from, to]) => {

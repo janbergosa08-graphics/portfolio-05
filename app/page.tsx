@@ -1,26 +1,32 @@
+import dynamic from 'next/dynamic';
 import { ContactProvider } from '@/components/contact/ContactProvider';
+import { ScrollProgress } from '@/components/motion/ScrollProgress';
 import Header from '@/components/sections/Header';
 import Hero from '@/components/sections/Hero';
-import Projects from '@/components/sections/Projects';
-import Expertise from '@/components/sections/Expertise';
-import Method from '@/components/sections/Method';
-import Philosophy from '@/components/sections/Philosophy';
-import FAQ from '@/components/sections/FAQ';
-import Contact from '@/components/sections/Contact';
 import Footer from '@/components/sections/Footer';
+
+const Projects = dynamic(() => import('@/components/sections/Projects'));
+const Expertise = dynamic(() => import('@/components/sections/Expertise'));
+const Method = dynamic(() => import('@/components/sections/Method'));
+const Philosophy = dynamic(() => import('@/components/sections/Philosophy'));
+const FAQ = dynamic(() => import('@/components/sections/FAQ'));
+const Contact = dynamic(() => import('@/components/sections/Contact'));
 
 export default function HomePage() {
   return (
     <ContactProvider>
+      <ScrollProgress />
       <Header />
       <main>
         <Hero />
-        <Projects />
-        <Expertise />
-        <Method />
-        <Philosophy />
-        <FAQ />
-        <Contact />
+        <div className="below-fold">
+          <Projects />
+          <Expertise />
+          <Method />
+          <Philosophy />
+          <FAQ />
+          <Contact />
+        </div>
       </main>
       <Footer />
     </ContactProvider>

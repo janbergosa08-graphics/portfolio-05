@@ -50,14 +50,15 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
         <div className="border-b border-line shell-x py-4">
           <p className="font-mono text-[10px] tracking-[0.16em] text-accent">LET&apos;S TALK</p>
           <h2 id="contact-modal-title" className="mt-1 text-lg font-semibold tracking-tight text-ink">
-            Start a project
+            Role or product conversation
           </h2>
         </div>
 
         <div className="grid overflow-y-auto lg:grid-cols-2">
           <aside className="section-pad border-b border-line lg:border-b-0 lg:border-r">
             <p className="text-sm leading-relaxed text-muted">
-              Tell me about your product, users, and timeline. I&apos;ll reply within 24 hours with next steps.
+              Share the product, users, timeline, and what success looks like. I reply within 24 hours with
+              clear next steps.
             </p>
             <dl className="mt-6 space-y-4 text-sm">
               <div>

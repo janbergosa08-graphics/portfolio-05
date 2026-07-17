@@ -6,28 +6,29 @@
   --color-muted: #a1a1a1;
   --color-line: rgba(255, 255, 255, 0.12);
   --color-line-strong: rgba(255, 255, 255, 0.2);
-  /* Solid mid stop — aurora indigo/violet */
-  --color-accent: #a78bfa;
-  --color-accent-soft: rgba(167, 139, 250, 0.14);
+  /* Modal.com empowering-teams lime */
+  --color-accent: #7fee64;
+  --color-accent-soft: rgba(127, 238, 100, 0.14);
   --color-panel: #0f0f0f;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 :root {
-  --accent-a: #67e8f9; /* cyan */
-  --accent-b: #818cf8; /* indigo */
-  --accent-c: #e879f9; /* fuchsia */
-  --accent-mid: #a78bfa; /* solid UI accent — borders, dots, strokes */
-  --accent-mid-soft: rgba(167, 139, 250, 0.4);
+  /* Modal.com “Empowering teams” / Decagon card mesh */
+  --accent-a: #7fee64; /* lime */
+  --accent-b: #c3c640; /* chartreuse gold */
+  --accent-c: #5fd4a4; /* mint-teal */
+  --accent-mid: #7fee64; /* solid UI accent — borders, dots, strokes */
+  --accent-mid-soft: rgba(127, 238, 100, 0.4);
   --accent-gradient: linear-gradient(120deg, var(--accent-a) 0%, var(--accent-b) 48%, var(--accent-c) 100%);
   --accent-gradient-soft: linear-gradient(
     120deg,
-    rgba(103, 232, 249, 0.14) 0%,
-    rgba(129, 140, 248, 0.14) 48%,
-    rgba(232, 121, 249, 0.14) 100%
+    rgba(127, 238, 100, 0.14) 0%,
+    rgba(195, 198, 64, 0.14) 48%,
+    rgba(95, 212, 164, 0.14) 100%
   );
-  --accent-glow: 0 0 28px rgba(129, 140, 248, 0.45);
+  --accent-glow: 0 0 28px rgba(127, 238, 100, 0.42);
   --hero-glow: radial-gradient(
       ellipse 55% 50% at 35% 0%,
       color-mix(in srgb, var(--accent-a) 18%, transparent),
@@ -270,6 +271,40 @@ select:-webkit-autofill:active {
   padding: var(--cell-y) var(--cell-x);
 }
 
+/* Landing grid frames — hover lift to FAQ focus-card panel contrast */
+.frame-highlight {
+  background-color: transparent;
+  transition:
+    background-color 0.24s ease,
+    border-color 0.24s ease;
+}
+
+.frame-highlight:hover,
+.frame-highlight.frame-highlight--active {
+  background-color: var(--color-panel);
+}
+
+.frame-nested {
+  background-color: color-mix(in srgb, var(--color-panel) 42%, transparent);
+  border-color: var(--color-line);
+  transition:
+    background-color 0.24s ease,
+    border-color 0.24s ease;
+}
+
+.frame-highlight:hover .frame-nested,
+.frame-highlight.frame-highlight--active .frame-nested {
+  background-color: var(--color-panel);
+  border-color: var(--color-line-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame-highlight,
+  .frame-nested {
+    transition: none;
+  }
+}
+
 .section-heading {
   font-size: clamp(1.5rem, 4.2vw, 1.875rem);
   line-height: 1.15;
@@ -371,4 +406,32 @@ select:-webkit-autofill:active {
   .iso-float {
     animation: none;
   }
+}
+
+/* Expertise iso icon: accent color pulse only */
+@keyframes exp-iso-accent-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.exp-iso-accent {
+  animation: exp-iso-accent-pulse 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp-iso-accent {
+    animation: none;
+    opacity: 0.75;
+  }
+}
+
+/* Defer paint for below-fold sections on long pages */
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }

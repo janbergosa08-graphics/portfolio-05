@@ -5,17 +5,20 @@ import './globals.css';
 const geistSans = Geist({
   subsets: ['latin'],
   variable: '--font-geist-sans',
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
   subsets: ['latin'],
   variable: '--font-geist-mono',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Jan Bergosa — UI/UX Designer',
+  metadataBase: new URL('https://janbergosa.vercel.app'),
+  title: 'Jan Bergosa — Product UI/UX Designer',
   description:
-    'UI/UX designer crafting product interfaces from research to production-ready digital experiences.',
+    'Product UI/UX designer for web apps and dashboards. I reduce user friction, clarify requirements, and help teams ship with cleaner handoff.',
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
     shortcut: '/favicon.svg',

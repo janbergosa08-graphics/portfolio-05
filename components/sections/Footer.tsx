@@ -9,17 +9,14 @@ export default function Footer() {
     <footer className="border-b border-line">
       <div className="w-full">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3">
-          <div className="section-pad border-b border-line sm:border-r lg:border-b-0">
+          <div className="frame-highlight section-pad border-b border-line sm:border-r lg:border-b-0">
             <a href="#hero" className="inline-flex items-center" aria-label={site.name}>
               <img src="/logo.svg" alt="" width={28} height={32} className="h-8 w-auto" />
             </a>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
-              UI/UX designer crafting strategic digital experiences that bridge user needs and business
-              goals.
-            </p>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">{site.tagline}</p>
           </div>
 
-          <div className="section-pad border-b border-line sm:border-r lg:border-b-0">
+          <div className="frame-highlight section-pad border-b border-line sm:border-r lg:border-b-0">
             <p className="font-mono text-[10px] tracking-wider text-muted">NAVIGATION</p>
             <ul className="mt-4 space-y-2.5">
               {links.map((link) => (
@@ -32,7 +29,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="section-pad sm:col-span-2 lg:col-span-1 lg:border-b-0">
+          <div className="frame-highlight section-pad sm:col-span-2 lg:col-span-1 lg:border-b-0">
             <p className="font-mono text-[10px] tracking-wider text-muted">RESOURCES</p>
             <ul className="mt-4 space-y-2.5">
               {resourceLinks.map((link) => (

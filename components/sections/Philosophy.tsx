@@ -1,33 +1,31 @@
 'use client';
 
-import { Reveal } from '@/components/motion/Reveal';
-import { philosophy } from '@/lib/content';
+import { Reveal, RevealGroup, RevealItem } from '@/components/motion/Reveal';
+import { SectionEntrance } from '@/components/motion/SectionEntrance';
+import { philosophy, philosophyIntro } from '@/lib/content';
 
 export default function Philosophy() {
   return (
-    <section id="philosophy" className="border-b border-line">
+    <SectionEntrance id="philosophy" className="border-b border-line">
       <div className="w-full">
-        <div className="section-pad border-b border-line">
+        <div className="frame-highlight section-pad border-b border-line">
           <Reveal>
             <p className="font-mono text-[10px] tracking-[0.16em] text-accent">PHILOSOPHY</p>
-            <h2 className="section-heading-lg mt-3 font-semibold">
-              Design the flow. Prove the value.
-            </h2>
+            <h2 className="section-heading-lg mt-3 font-semibold">{philosophyIntro.title}</h2>
           </Reveal>
         </div>
-        <div className="grid md:grid-cols-2">
-          {philosophy.map((item, i) => (
-            <Reveal
+        <RevealGroup className="grid md:grid-cols-2">
+          {philosophy.map((item) => (
+            <RevealItem
               key={item.title}
-              delay={i * 0.04}
-              className="cell-pad border-b border-line md:border-r md:[&:nth-child(2n)]:border-r-0"
+              className="frame-highlight cell-pad border-b border-line md:border-r md:[&:nth-child(2n)]:border-r-0"
             >
               <h3 className="text-base font-medium text-ink">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{item.body}</p>
-            </Reveal>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
-    </section>
+    </SectionEntrance>
   );
 }

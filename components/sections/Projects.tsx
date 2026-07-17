@@ -1,39 +1,56 @@
 'use client';
 
 import Link from 'next/link';
-import { Reveal } from '@/components/motion/Reveal';
+import { Reveal, RevealGroup, RevealItem } from '@/components/motion/Reveal';
+import { SectionEntrance } from '@/components/motion/SectionEntrance';
 import { projects } from '@/lib/content';
 
 export default function Projects() {
   return (
-    <section id="projects" className="border-b border-line">
+    <SectionEntrance id="projects" className="border-b border-line">
       <div className="w-full">
-        <div className="flex flex-col gap-3 border-b border-line section-pad sm:flex-row sm:items-end sm:justify-between">
+        <div className="frame-highlight flex flex-col gap-3 border-b border-line section-pad sm:flex-row sm:items-end sm:justify-between">
           <Reveal>
-            <h2 className="section-heading-lg font-semibold">Projects</h2>
+            <div>
+              <h2 className="section-heading-lg font-semibold">Selected work</h2>
+              <p className="mt-2 max-w-md text-sm text-muted">
+                Product UI/UX with a clear business or ops problem behind each project.
+              </p>
+            </div>
           </Reveal>
-          <a
-            href="https://www.behance.net/janbergosa"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 shrink-0 items-center text-sm text-muted hover:text-accent"
-          >
-            View all →
-          </a>
+          <Reveal delay={0.08}>
+            <a
+              href="https://www.behance.net/janbergosa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 shrink-0 items-center text-sm text-muted hover:text-accent"
+            >
+              View all →
+            </a>
+          </Reveal>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4">
-          {projects.map((project, i) => {
+        <RevealGroup className="grid md:grid-cols-2 lg:grid-cols-4">
+          {projects.map((project) => {
             const className =
-              'group relative flex min-h-[220px] flex-col justify-between border-b border-line cell-pad transition-colors hover:bg-ink/[0.03] md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0';
+              'frame-highlight group relative flex min-h-[240px] flex-col justify-between border-b border-line cell-pad md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0';
 
             const body = (
               <>
                 <div>
-                  <p className="font-mono text-[10px] tracking-wider text-muted">{project.date}</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center gap-1.5 border border-line px-2 py-1 font-mono text-[9px] tracking-[0.14em] text-ink">
+                      <span aria-hidden>🔥</span>
+                      {project.label}
+                    </span>
+                    <span className="font-mono text-[9px] tracking-wider text-muted">
+                      {project.category}
+                    </span>
+                  </div>
                   <h3 className="mt-3 text-base font-medium leading-snug text-ink group-hover:text-accent">
                     {project.title}
                   </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">{project.blurb}</p>
                 </div>
                 <span
                   className="mt-8 ml-auto inline-flex h-8 w-8 items-center justify-center border border-line text-muted group-hover:border-accent group-hover:text-accent"
@@ -45,7 +62,7 @@ export default function Projects() {
             );
 
             return (
-              <Reveal key={project.id} delay={i * 0.04} className="contents">
+              <RevealItem key={project.id}>
                 {project.internal ? (
                   <Link href={project.href} className={className}>
                     {body}
@@ -60,11 +77,11 @@ export default function Projects() {
                     {body}
                   </a>
                 )}
-              </Reveal>
+              </RevealItem>
             );
           })}
-        </div>
+        </RevealGroup>
       </div>
-    </section>
+    </SectionEntrance>
   );
 }

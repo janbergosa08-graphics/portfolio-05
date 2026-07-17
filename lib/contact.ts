@@ -4,17 +4,17 @@ export const contactDetails = {
   phoneHref: 'tel:+639705890264',
   responseTime: 'Within 24 hours',
   hours: 'MON–FRI · 9AM–6PM PHT',
-  availability: 'Open for new projects',
-  availabilityNote: 'Limited capacity for product UI/UX and design system work.',
+  availability: 'Open to roles & select projects',
+  availabilityNote: 'Priority: product UI/UX, dashboards, and design-system work for shipping teams.',
 };
 
 export const projectTypes = [
-  'UI/UX Design',
-  'Website Design',
-  'Product Design',
-  'Branding',
-  'Illustration',
-  'Other',
+  'Full-time / Product design role',
+  'UI/UX for web product',
+  'Dashboard / ops tool',
+  'Design system',
+  'Website redesign',
+  'Other product work',
 ] as const;
 
 export type ContactFormValues = {

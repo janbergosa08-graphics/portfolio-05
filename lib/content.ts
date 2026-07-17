@@ -1,7 +1,9 @@
 export const site = {
   name: 'Jan Bergosa',
-  role: 'UI UX DESIGNER',
+  role: 'PRODUCT UI/UX DESIGNER',
   email: 'janbergosa.graphics@gmail.com',
+  tagline:
+    'I design product interfaces that cut user friction and help teams ship clearer software.',
   resume: {
     href: '/resume/marjan-bergosa-ui-ux-design-resume.pdf',
     label: 'Download Resume',
@@ -21,40 +23,48 @@ export const navLinks = [
 
 export const hero = {
   role: site.role,
-  headlineLead: 'Designing',
-  rotatingWords: ['solutions', 'experiences', 'products'],
-  headlineTail: 'that solve real problems.',
+  headlineLead: 'I design',
+  rotatingWords: ['product UI', 'workflows', 'systems'],
+  headlineTail: 'teams can ship.',
   description:
-    'I turn user research, interface design, and design systems into clear digital experiences — reducing friction, improving usability, and helping product teams ship with confidence.',
-  primaryCta: 'Get in Touch',
+    'From unclear requirements to usable interfaces — less friction, cleaner handoff, fewer revision loops.',
+  primaryCta: 'Discuss a role or project',
 };
 
 export const projects = [
   {
     id: 'grafon-supply-chain',
-    date: 'Case Study',
-    title: 'Grafon – Supply Chain Simulator Web App',
+    label: 'Case Study',
+    category: 'B2B ops',
+    title: 'Grafon – Supply Chain Simulator',
+    blurb: 'Simplified complex simulation flows so operators can run scenarios faster with less training.',
     href: '/case-study/grafon-supply-chain',
     internal: true,
   },
   {
     id: 'tradedungeon-uiux',
-    date: 'Case Study',
-    title: 'TradeDungeon – UI/UX Design',
+    label: 'Case Study',
+    category: 'Fintech UX',
+    title: 'TradeDungeon – Trading Product UI',
+    blurb: 'Structured trading journeys and screens for clearer decisions under time pressure.',
     href: '/case-study/tradedungeon-uiux',
     internal: true,
   },
   {
     id: 'dataflower-baas',
-    date: 'Case Study',
-    title: 'Dataflower – Backend-as-a-Service Platform',
+    label: 'Case Study',
+    category: 'Developer platform',
+    title: 'Dataflower – Backend-as-a-Service',
+    blurb: 'Made backend setup and API workflows easier for builders adopting the platform.',
     href: '/case-study/dataflower-baas',
     internal: true,
   },
   {
     id: 'powerion-energy',
-    date: 'Dashboard',
-    title: 'Powerion – Energy Management Platform',
+    label: 'Case Study',
+    category: 'Energy ops',
+    title: 'Powerion – Energy Management',
+    blurb: 'Dashboard patterns for monitoring energy data and acting on operational signals.',
     href: 'https://www.behance.net/gallery/232269087/Powerion-Energy-Management-Platform',
     internal: false,
   },
@@ -64,7 +74,11 @@ export const resourceLinks = [
   { label: 'Legal Notice', href: '/legal' },
   { label: 'Documentation', href: '/docs' },
   { label: 'Behance', href: 'https://www.behance.net/janbergosa', external: true },
-  { label: 'Resume', href: '/resume/marjan-bergosa-ui-ux-design-resume.pdf', download: 'Marjan-Bergosa-UI-UX-Design-Resume.pdf' },
+  {
+    label: 'Resume',
+    href: '/resume/marjan-bergosa-ui-ux-design-resume.pdf',
+    download: 'Marjan-Bergosa-UI-UX-Design-Resume.pdf',
+  },
 ];
 
 export const socialLinks = [
@@ -100,127 +114,164 @@ export const socialLinks = [
   },
 ];
 
+export const expertiseIntro = {
+  title: 'What I own on a product team.',
+  body: 'End-to-end product UI/UX for web apps and dashboards — from problem framing and flows to polished interfaces, reusable systems, and engineering-ready handoff.',
+};
+
 export const expertise = [
   {
+    icon: 'product-ui' as const,
     title: 'Product UI/UX',
-    body: 'End-to-end interface design for web apps and dashboards — research, flows, systems, and handoff.',
+    body: 'Research, flows, and high-fidelity UI for web products — tied to conversion, completion, and delivery goals.',
   },
   {
-    title: 'Design Systems',
-    body: 'Scalable tokens, components, and documentation that keep product teams aligned at speed.',
+    icon: 'design-systems' as const,
+    title: 'Design systems',
+    body: 'Tokens, components, and docs that keep product and engineering aligned as the product scales.',
   },
   {
-    title: 'AI-assisted craft',
-    body: 'Faster research, ideation, and documentation — with human judgment on friction and outcomes.',
+    icon: 'prototyping' as const,
+    title: 'Prototyping & validation',
+    body: 'Clickable prototypes that test risk early — before engineering spends weeks building the wrong path.',
   },
   {
-    title: 'Implementation',
-    body: 'Production-minded UI that bridges design intent and engineering reality.',
+    icon: 'handoff' as const,
+    title: 'Handoff & build support',
+    body: 'Specs, states, and design QA so implementation matches intent and ships with fewer revision loops.',
   },
 ];
+
+export const methodIntro = {
+  title: 'A delivery loop product teams can trust.',
+};
 
 export const method = [
-  { phase: '01', title: 'Discover', body: 'Map users, friction, and business constraints.' },
-  { phase: '02', title: 'Define', body: 'Lock problem framing, success metrics, and scope.' },
-  { phase: '03', title: 'Design', body: 'Shape flows, hierarchy, and interface systems.' },
-  { phase: '04', title: 'Validate', body: 'Pressure-test clarity with stakeholders and users.' },
-  { phase: '05', title: 'Build', body: 'Support implementation with precise handoff.' },
-  { phase: '06', title: 'Ship', body: 'Polish, measure, and iterate after launch.' },
+  { phase: '01', title: 'Discover', body: 'Map users, friction points, and business constraints.' },
+  { phase: '02', title: 'Define', body: 'Agree on problem, success metrics, and scope.' },
+  { phase: '03', title: 'Design', body: 'Build flows, hierarchy, and UI systems.' },
+  { phase: '04', title: 'Validate', body: 'Test clarity with stakeholders and users.' },
+  { phase: '05', title: 'Build', body: 'Support engineering with precise handoff.' },
+  { phase: '06', title: 'Ship', body: 'Launch, measure, and iterate on real usage.' },
 ];
 
+export const philosophyIntro = {
+  title: 'Decisions that protect delivery and outcomes.',
+};
+
 export const philosophy = [
-  { title: 'Design the flow', body: 'Start with the path users take — remove friction first.' },
-  { title: 'Prove the value', body: 'Every interface decision should move a measurable outcome.' },
-  { title: 'Systems over one-offs', body: 'Reusable patterns beat isolated screens.' },
-  { title: 'Clarity over decoration', body: 'Minimal structure, maximum signal.' },
+  {
+    title: 'Fix the path first',
+    body: 'If the flow is broken, visuals will not save the product. Remove friction before decorating screens.',
+  },
+  {
+    title: 'Tie UI to business goals',
+    body: 'Every major interface choice should support a clear outcome — completion, conversion, speed, or fewer support tickets.',
+  },
+  {
+    title: 'Systems beat one-offs',
+    body: 'Reusable patterns reduce inconsistency and cut design and engineering rework over time.',
+  },
+  {
+    title: 'Clarity over decoration',
+    body: 'Teams ship faster when screens communicate hierarchy, states, and next actions without noise.',
+  },
 ];
+
+export const faqIntro = {
+  title: 'Hiring and collaboration questions',
+  body: 'Straight answers for product, design, and engineering teams evaluating fit.',
+};
 
 export const faqs = [
   {
     q: 'What can you contribute to a product team?',
-    a: 'I bridge user needs and business goals — turning ambiguity into shipped interfaces that reduce friction and move metrics. My work spans research through launch-ready UI, with a bias for clarity, systems thinking, and outcomes teams can measure.',
+    a: 'I turn ambiguous product goals into shipped interfaces that reduce user friction and cut delivery rework. I work across research, UX flows, UI systems, prototyping, and engineering handoff.',
     points: [
-      { label: 'Product UX', sub: 'Flows, information architecture, and interface decisions tied to goals' },
-      { label: 'Design systems', sub: 'Tokens, components, and patterns that stay consistent as the product grows' },
-      { label: 'Rapid prototyping', sub: 'Clickable validation before engineering invests build time' },
-      { label: 'Dev-ready handoff', sub: 'Clear specs, assets, and front-end implementation support' },
-      { label: 'Visual craft', sub: 'Brand, graphic, and illustration support when the product needs it' },
-      { label: 'Accelerated delivery', sub: 'Faster research, ideation, documentation, and iteration cycles' },
+      { label: 'Product UX', sub: 'Flows and IA decisions tied to business goals' },
+      { label: 'UI systems', sub: 'Reusable components that stay consistent as features grow' },
+      { label: 'Prototypes', sub: 'Validate risky paths before build investment' },
+      { label: 'Handoff', sub: 'Specs, states, and QA support for engineering' },
+      { label: 'Delivery speed', sub: 'Faster alignment docs and fewer revision cycles' },
     ],
-    note: 'Every engagement starts with the problem your team is solving — not a fixed service menu.',
+    note: 'Best fit for teams shipping web products, dashboards, or platform tools — not brand-only campaigns.',
+  },
+  {
+    q: 'What business problems do you typically solve?',
+    a: 'Teams usually bring me in when users stall, requirements are unclear, or design and engineering are misaligned. The goal is clearer UX and faster, cleaner shipping.',
+    points: [
+      { label: 'User drop-off', sub: 'Find where people fail tasks and redesign the path' },
+      { label: 'Unclear scope', sub: 'Frame the problem and prioritize what to build first' },
+      { label: 'Inconsistent UI', sub: 'Stabilize patterns through a shared system' },
+      { label: 'Slow handoff', sub: 'Reduce back-and-forth with precise specs' },
+      { label: 'Post-launch gaps', sub: 'Iterate from usage feedback and support signals' },
+    ],
+    note: 'I prioritize measurable product impact over visual polish alone.',
   },
   {
     q: 'What are your core strengths?',
-    a: 'I combine strategic product thinking with hands-on visual execution. That means fewer handoffs, faster alignment, and interfaces that hold up from first prototype through production.',
+    a: 'I combine product judgment with hands-on UI execution. That means fewer handoffs, faster alignment, and interfaces that hold up from prototype to production.',
     points: [
-      { label: 'Problem framing', sub: 'Map the friction before designing the screen' },
-      { label: 'Research synthesis', sub: 'Turn interviews and data into actionable product direction' },
-      { label: 'High-fidelity UI', sub: 'Polished interfaces built around real technical and business constraints' },
-      { label: 'Cross-platform thinking', sub: 'Web, dashboard, and responsive patterns that stay coherent' },
-      { label: 'Brand alignment', sub: 'Consistent identity across product touchpoints' },
-      { label: 'Execution speed', sub: 'More time spent on user and business problems, less on rework' },
+      { label: 'Problem framing', sub: 'Map friction before designing screens' },
+      { label: 'Research synthesis', sub: 'Turn interviews and data into decisions' },
+      { label: 'High-fidelity UI', sub: 'Polished UI under real technical constraints' },
+      { label: 'Cross-team clarity', sub: 'Same language for PM, design, and eng' },
+      { label: 'Execution speed', sub: 'More time on outcomes, less on rework' },
     ],
-    note: 'See the Projects and Method sections for how this shows up in shipped work.',
+    note: 'See Projects and Method for how this shows up in shipped work.',
   },
   {
-    q: 'How do you work day to day?',
-    a: 'I follow a structured loop that keeps product, design, and engineering aligned — with clear checkpoints so nothing ships on assumption alone.',
+    q: 'How do you work with PMs and engineers?',
+    a: 'I keep goals, docs, and feedback loops tight. Shared context beats throw-over-the-wall deliverables.',
     points: [
-      { label: 'Align', sub: 'Goals, users, constraints, and success metrics' },
-      { label: 'Research', sub: 'Evidence before pixels; validate early with stakeholders and users' },
-      { label: 'Design', sub: 'Wireframes to high-fidelity UI with system consistency' },
-      { label: 'Prototype', sub: 'Test flows before full engineering investment' },
-      { label: 'Build', sub: 'Partner on implementation and design QA' },
-      { label: 'Measure', sub: 'Iterate from analytics, feedback, and conversion signals' },
+      { label: 'Shared metrics', sub: 'Align on users, scope, and success criteria' },
+      { label: 'Async docs', sub: 'Specs, annotated files, and decision notes' },
+      { label: 'Live prototypes', sub: 'Align before engineering commits build time' },
+      { label: 'Build partnership', sub: 'Design QA and implementation support' },
+      { label: 'Ship discipline', sub: 'Iterate from usage, not endless polish' },
     ],
-    note: 'The rhythm adapts to your team’s sprint cadence — async-friendly docs and prototypes included.',
+    note: 'I reply within 24 hours. A short note about your product and the open role or problem is enough to start.',
+  },
+  {
+    q: 'What roles and engagements are you open to?',
+    a: 'I am open to product design / UI/UX roles where design ownership affects delivery quality and user outcomes.',
+    points: [
+      { label: 'Full-time UI/UX', sub: 'Long-term ownership of product experience' },
+      { label: 'Product design', sub: 'Discovery through launch and iteration' },
+      { label: 'In-house teams', sub: 'Embedded with product and engineering' },
+      { label: 'Remote / hybrid', sub: 'Async-friendly collaboration' },
+      { label: 'Contract-to-hire', sub: 'Open when problem and team fit are strong' },
+    ],
+    note: 'Primary focus: full-time or embedded product work. Selective freelance for scoped product UI/UX.',
   },
   {
     q: 'How do you use AI in your work?',
-    a: 'I use AI to accelerate research, ideation, documentation, and implementation, so more time goes to solving user and business problems. Strategy, judgment, prioritization, and accountability stay human-led.',
+    a: 'I use AI to speed research synthesis, ideation, documentation, and iteration — so more time goes to product judgment and delivery quality. Final decisions stay human-owned.',
     points: [
-      { label: 'Research synthesis', sub: 'Faster clustering of insights, patterns, and opportunity areas' },
-      { label: 'Ideation support', sub: 'More options explored before locking a direction' },
-      { label: 'Documentation speed', sub: 'Clearer specs, flows, and handoff notes in less time' },
-      { label: 'Implementation aid', sub: 'Quicker iteration between design intent and working UI' },
+      { label: 'Faster synthesis', sub: 'Cluster insights and opportunity areas sooner' },
+      { label: 'More options', sub: 'Explore directions before locking a path' },
+      { label: 'Clearer docs', sub: 'Specs and handoff notes in less time' },
+      { label: 'Quicker loops', sub: 'Shorter cycles between intent and UI' },
     ],
-    note: 'Tooling flexes to your team’s stack; the workflow and design judgment stay consistent.',
+    note: 'AI is an accelerator, not a replacement for accountability on UX quality.',
   },
   {
-    q: 'What roles are you open to?',
-    a: 'I’m exploring opportunities where design directly impacts product outcomes — embedded with teams that value rigor, velocity, and clear communication.',
+    q: 'How can you help our team right now?',
+    a: 'I help teams move from unclear requirements to usable, buildable interfaces — so delivery is clearer, faster, and less dependent on rework.',
     points: [
-      { label: 'Full-time UI/UX', sub: 'Long-term ownership of product experience quality' },
-      { label: 'Product design', sub: 'End-to-end work from discovery through launch and iteration' },
-      { label: 'In-house teams', sub: 'Close collaboration with product and engineering' },
-      { label: 'Remote / hybrid', sub: 'Async-friendly collaboration across time zones' },
-      { label: 'Contract-to-hire', sub: 'Open when the product problem and team fit are strong' },
+      { label: 'Clarify the problem', sub: 'Define user stalls and business success' },
+      { label: 'Design the path', sub: 'Flows and priorities before build starts' },
+      { label: 'Systematize UI', sub: 'Reusable patterns the team can extend' },
+      { label: 'Support handoff', sub: 'Specs, states, and edge cases for eng' },
+      { label: 'Stay through launch', sub: 'QA, polish, and post-launch iteration' },
     ],
-    note: 'Open to discussing fit and timing — reach out via Let’s Talk or the contact form.',
-  },
-  {
-    q: 'How do you collaborate with PMs and engineers?',
-    a: 'Strong products come from shared context, not thrown-over-the-wall deliverables. I keep communication tight, documentation clear, and feedback loops short.',
-    points: [
-      { label: 'Shared goals', sub: 'Same language on users, metrics, and scope' },
-      { label: 'Async clarity', sub: 'Written specs, annotated files, and decision logs' },
-      { label: 'Live prototypes', sub: 'Clickable flows for alignment before build' },
-      { label: 'Implementation partnership', sub: 'Front-end support and design QA in code' },
-      { label: 'Constructive critique', sub: 'Direct feedback focused on outcomes, not preference' },
-      { label: 'Iteration discipline', sub: 'Ship, measure, refine — not endless polish' },
-    ],
-    note: 'I respond within 24 hours. A short intro about your team and the problem space is enough to start.',
-  },
-  {
-    q: 'How can I help the team?',
-    a: 'On product work, I help teams move from unclear requirements to usable interfaces — so delivery is clearer, faster, and less dependent on rework.',
-    points: [
-      { label: 'Clarify the problem', sub: 'Identify where users stall and what success looks like for the business' },
-      { label: 'Define the path', sub: 'Map flows, priorities, and interface decisions before build starts' },
-      { label: 'Design the system', sub: 'Create UI patterns and components the team can reuse' },
-      { label: 'Support the handoff', sub: 'Give engineering the specs, states, and edge cases they need' },
-      { label: 'Stay through launch', sub: 'Help with QA, polish, and post-launch iteration tied to real usage' },
-    ],
-    note: 'Best fit when the team needs a designer who can own UX quality and collaborate tightly with product and engineering.',
+    note: 'Best fit when you need a designer who owns UX quality and collaborates tightly with product and engineering.',
   },
 ];
+
+export const contactIntro = {
+  kicker: 'CONTACT',
+  titleLine1: 'Need product UI/UX support?',
+  titleLine2: 'Let’s talk outcomes.',
+  body: 'Open to full-time product design roles and selected project work. Share the product, users, timeline, and what success looks like — I reply within 24 hours with next steps.',
+};

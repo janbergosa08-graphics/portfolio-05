@@ -55,16 +55,16 @@ function fieldError(key: keyof ContactFormValues, values: ContactFormValues): st
       if (!EMAIL_RE.test(email)) return 'That email format looks wrong. Example: name@company.com';
       return undefined;
     case 'project':
-      if (!project) return 'Select a project type from the list — don’t leave this blank.';
-      if (!PROJECT_SET.has(project)) return 'Choose one of the listed project types, not a custom/random value.';
+      if (!project) return 'Select a work type from the list — role or product UI/UX scope.';
+      if (!PROJECT_SET.has(project)) return 'Choose one of the listed work types, not a custom value.';
       return undefined;
     case 'message':
-      if (!message) return 'Add a short message about your project or goal.';
+      if (!message) return 'Add a short note about the role, product, users, and desired outcome.';
       if (message.length < 20) {
-        return 'Message is too short — share at least a sentence about what you need help with.';
+        return 'Message is too short — include product context and what success looks like.';
       }
       if (looksRandom(message)) {
-        return 'That message looks random. Briefly describe the product, users, or problem — avoid keyboard spam.';
+        return 'That message looks random. Describe the product, users, and business goal clearly.';
       }
       return undefined;
     case 'terms':
@@ -285,7 +285,7 @@ export default function ContactForm({
 
       <div>
         <label htmlFor={`${formId}-project`} className="mb-2 block font-mono text-[10px] tracking-wider text-muted">
-          Project type <span className="text-accent">*</span>
+          Work type <span className="text-accent">*</span>
         </label>
         <select
           id={`${formId}-project`}
@@ -297,7 +297,7 @@ export default function ContactForm({
           aria-invalid={Boolean(projectError)}
           aria-describedby={`${formId}-project-tip`}
         >
-          <option value="">Select a project type</option>
+          <option value="">Select work type</option>
           {projectTypes.map((type) => (
             <option key={type} value={type}>
               {type}
@@ -307,7 +307,7 @@ export default function ContactForm({
         <FieldTip
           id={`${formId}-project-tip`}
           error={projectError}
-          tip="Pick the closest match from the list — don’t invent a custom type."
+          tip="Choose the closest option — role inquiry or product UI/UX scope."
         />
       </div>
 
@@ -319,7 +319,7 @@ export default function ContactForm({
           id={`${formId}-message`}
           name="message"
           rows={compact ? 4 : 5}
-          placeholder="What are you building, who is it for, and where are users getting stuck?"
+          placeholder="What product or role is this about, who is it for, and what outcome matters most?"
           className={`${messageError ? inputErrorClass : inputClass} resize-y min-h-[7rem]`}
           value={values.message}
           onChange={(event) => update('message', event.target.value)}
@@ -330,7 +330,7 @@ export default function ContactForm({
         <FieldTip
           id={`${formId}-message-tip`}
           error={messageError}
-          tip="Write a clear sentence or two. Avoid random characters or keyboard spam."
+          tip="Include product context, users, timeline, and the business outcome you need."
         />
       </div>
 

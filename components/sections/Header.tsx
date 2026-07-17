@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion, useMotionValueEvent, useReducedMotion, useScroll } from 'framer-motion';
 import { useContactModal } from '@/components/contact/ContactProvider';
 import { navLinks, site } from '@/lib/content';
 
@@ -10,7 +11,14 @@ const navControlClass =
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('hero');
+  const [scrolled, setScrolled] = useState(false);
+  const reduced = useReducedMotion();
+  const { scrollY } = useScroll();
   const { openContactModal } = useContactModal();
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    setScrolled(latest > 12);
+  });
 
   useEffect(() => {
     const ids = navLinks.map((l) => l.href.slice(1));
@@ -38,7 +46,18 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-canvas">
+    <motion.header
+      className="sticky top-0 z-50 border-b border-line bg-canvas"
+      animate={
+        reduced
+          ? undefined
+          : {
+              boxShadow: scrolled ? '0 12px 32px rgba(0,0,0,0.28)' : '0 0 0 rgba(0,0,0,0)',
+              borderColor: scrolled ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.12)',
+            }
+      }
+      transition={{ duration: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
+    >
       <div className="flex h-14 w-full items-center justify-between gap-2 sm:gap-3 shell-x">
         <a href="#hero" className="inline-flex shrink-0 items-center" aria-label={site.name}>
           <img src="/logo.svg" alt="" width={28} height={32} className="h-8 w-auto" />
@@ -136,6 +155,6 @@ export default function Header() {
           </ul>
         </div>
       )}
-    </header>
+    </motion.header>
   );
 }

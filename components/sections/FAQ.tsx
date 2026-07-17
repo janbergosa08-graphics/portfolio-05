@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Reveal } from '@/components/motion/Reveal';
-import { faqs } from '@/lib/content';
+import { SectionEntrance } from '@/components/motion/SectionEntrance';
+import { EASE_BUSINESS } from '@/lib/motion';
+import { faqIntro, faqs } from '@/lib/content';
 
 const graphicCards = [
   { id: '01', label: 'Product UX' },
@@ -65,7 +67,7 @@ function FaqCardGraphic() {
                           zIndex: graphicCards.length - depth,
                         }
                   }
-                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.55, ease: EASE_BUSINESS }}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-mono text-[9px] tracking-[0.16em] text-muted">ID · {card.id}</span>
@@ -95,7 +97,7 @@ function FaqCardGraphic() {
               initial={reduced ? false : { opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={reduced ? undefined : { opacity: 0, y: -6 }}
-              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.32, ease: EASE_BUSINESS }}
               className="font-mono text-[9px] tracking-[0.14em] text-muted"
             >
               CARD {graphicCards[active].id} · {graphicCards[active].label.toUpperCase()}
@@ -109,8 +111,34 @@ function FaqCardGraphic() {
 
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
+  const reduced = useReducedMotion();
+  const leftRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [frameHeight, setFrameHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    const left = leftRef.current;
+    if (!left) return;
+
+    const syncHeight = () => {
+      if (!window.matchMedia('(min-width: 1024px)').matches) {
+        setFrameHeight(null);
+        return;
+      }
+      const next = Math.round(left.getBoundingClientRect().height);
+      if (next > 0) setFrameHeight(next);
+    };
+
+    syncHeight();
+    const observer = new ResizeObserver(syncHeight);
+    observer.observe(left);
+    window.addEventListener('resize', syncHeight);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', syncHeight);
+    };
+  }, []);
 
   useEffect(() => {
     if (open === null) return;
@@ -131,16 +159,19 @@ export default function FAQ() {
   }, [open]);
 
   return (
-    <section id="faq" className="border-b border-line">
+    <SectionEntrance id="faq" className="border-b border-line">
       <div className="grid w-full lg:grid-cols-2 lg:items-start">
-        <div className="section-pad border-b border-line lg:border-b-0 lg:border-r">
+        <div
+          ref={leftRef}
+          className="frame-highlight section-pad border-b border-line lg:border-b-0 lg:border-r"
+        >
           <Reveal>
             <p className="font-mono text-[10px] tracking-[0.16em] text-accent">FAQ</p>
             <h2 className="section-heading-lg mt-3 max-w-md text-left font-semibold">
-              Frequently asked questions
+              {faqIntro.title}
             </h2>
             <p className="mt-4 max-w-md text-left text-sm leading-relaxed text-muted">
-              Expand a question for detail. Scroll inside the list to keep other topics reachable.
+              {faqIntro.body}
             </p>
             <FaqCardGraphic />
           </Reveal>
@@ -148,7 +179,8 @@ export default function FAQ() {
 
         <div
           ref={listRef}
-          className="faq-scroll max-h-[min(28rem,70vh)] overflow-y-auto overscroll-contain lg:max-h-[min(36rem,75vh)]"
+          className="faq-scroll max-h-[min(28rem,70vh)] overflow-y-auto overscroll-contain lg:max-h-none"
+          style={frameHeight ? { height: frameHeight } : undefined}
           role="region"
           aria-label="FAQ list"
         >
@@ -160,7 +192,7 @@ export default function FAQ() {
                 ref={(el) => {
                   itemRefs.current[i] = el;
                 }}
-                className="border-b border-line last:border-b-0"
+                className={`frame-highlight border-b border-line last:border-b-0 ${isOpen ? 'frame-highlight--active' : ''}`}
               >
                 <button
                   type="button"
@@ -181,43 +213,52 @@ export default function FAQ() {
                   </span>
                 </button>
 
-                {isOpen && (
-                  <div
-                    id={`faq-panel-${i}`}
-                    role="region"
-                    aria-labelledby={`faq-trigger-${i}`}
-                    className="border-t border-line px-[var(--section-x)] pb-5 pt-4"
-                  >
-                    <p className="text-sm leading-relaxed text-muted">{item.a}</p>
+                <AnimatePresence initial={false}>
+                  {isOpen ? (
+                    <motion.div
+                      key="panel"
+                      id={`faq-panel-${i}`}
+                      role="region"
+                      aria-labelledby={`faq-trigger-${i}`}
+                      initial={reduced ? false : { height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={reduced ? undefined : { height: 0, opacity: 0 }}
+                      transition={{ duration: 0.38, ease: EASE_BUSINESS }}
+                      className="overflow-hidden"
+                    >
+                      <div className="border-t border-line px-[var(--section-x)] pb-5 pt-4">
+                        <p className="text-sm leading-relaxed text-muted">{item.a}</p>
 
-                    {item.points?.length ? (
-                      <ul className="mt-4 border border-line">
-                        {item.points.map((point) => (
-                          <li
-                            key={point.label}
-                            className="grid gap-1 border-b border-line px-3 py-3 last:border-b-0 md:grid-cols-[9rem_1fr] md:gap-4"
-                          >
-                            <span className="font-mono text-[10px] tracking-wider text-accent">
-                              {point.label}
-                            </span>
-                            <span className="text-sm text-muted">{point.sub}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
+                        {item.points?.length ? (
+                          <ul className="mt-4 border border-line">
+                            {item.points.map((point) => (
+                              <li
+                                key={point.label}
+                                className="grid gap-1 border-b border-line px-3 py-3 last:border-b-0 md:grid-cols-[9rem_1fr] md:gap-4"
+                              >
+                                <span className="font-mono text-[10px] tracking-wider text-accent">
+                                  {point.label}
+                                </span>
+                                <span className="text-sm text-muted">{point.sub}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
 
-                    {item.note ? (
-                      <p className="mt-4 border-l border-accent pl-3 text-xs leading-relaxed text-muted">
-                        {item.note}
-                      </p>
-                    ) : null}
-                  </div>
-                )}
+                        {item.note ? (
+                          <p className="mt-4 border-l border-accent pl-3 text-xs leading-relaxed text-muted">
+                            {item.note}
+                          </p>
+                        ) : null}
+                      </div>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
               </div>
             );
           })}
         </div>
       </div>
-    </section>
+    </SectionEntrance>
   );
 }
