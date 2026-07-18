@@ -1,9 +1,16 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight, CircleCheck, Users, type LucideIcon } from 'lucide-react';
 import { Reveal, RevealGroup, RevealItem } from '@/components/motion/Reveal';
 import { SectionEntrance } from '@/components/motion/SectionEntrance';
 import { projects } from '@/lib/content';
+
+const META_ICONS: Record<'audience' | 'result', LucideIcon> = {
+  audience: Users,
+  result: CircleCheck,
+};
 
 export default function Projects() {
   return (
@@ -14,7 +21,7 @@ export default function Projects() {
             <div>
               <h2 className="section-heading-lg font-semibold">Selected work</h2>
               <p className="mt-2 max-w-md text-sm text-muted">
-                Product UI/UX with a clear business or ops problem behind each project.
+                Product UI case studies — role, who it served, and what improved.
               </p>
             </div>
           </Reveal>
@@ -23,9 +30,10 @@ export default function Projects() {
               href="https://www.behance.net/janbergosa"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 shrink-0 items-center text-sm text-muted hover:text-accent"
+              className="inline-flex min-h-11 shrink-0 items-center gap-1.5 text-sm text-muted hover:text-accent"
             >
-              View all →
+              View all
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden />
             </a>
           </Reveal>
         </div>
@@ -33,43 +41,56 @@ export default function Projects() {
         <RevealGroup className="grid md:grid-cols-2 lg:grid-cols-4">
           {projects.map((project) => {
             const className =
-              'frame-highlight group relative flex min-h-[240px] flex-col justify-between border-b border-line cell-pad md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0';
+              'frame-highlight group relative flex h-full flex-col border-b border-line md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0';
 
             const body = (
               <>
-                <div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-flex items-center border border-line px-2 py-1 font-mono text-[9px] tracking-[0.14em] text-ink">
-                      {project.label}
-                    </span>
-                    <span className="font-mono text-[9px] tracking-wider text-muted">
-                      {project.category}
-                    </span>
-                    {!project.internal ? (
-                      <span className="font-mono text-[9px] tracking-wider text-accent">
-                        Behance ↗
-                      </span>
-                    ) : null}
-                  </div>
-                  <h3 className="mt-3 text-base font-medium leading-snug text-ink group-hover:text-accent">
+                <div className="relative aspect-[5/2] overflow-hidden border-b border-line bg-panel">
+                  <Image
+                    src={project.image}
+                    alt={project.imageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                    className="object-cover object-center"
+                  />
+                </div>
+
+                <div className="flex flex-1 flex-col cell-pad">
+                  <h3 className="truncate text-base font-semibold leading-snug text-ink group-hover:text-accent">
                     {project.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">{project.blurb}</p>
-                </div>
-                <div className="mt-6 flex items-end justify-between gap-3">
-                  <p className="max-w-[85%] border-l border-accent pl-3 text-xs leading-relaxed text-muted">
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-accent">
-                      Outcome
-                    </span>
-                    <br />
-                    {project.outcome}
+                  <p className="mt-1.5 flex items-center gap-2 font-mono text-[10px] tracking-wider text-muted">
+                    <svg width="6" height="6" viewBox="0 0 6 6" aria-hidden className="icon-accent shrink-0">
+                      <circle cx="3" cy="3" r="3" fill="currentColor" />
+                    </svg>
+                    {project.role}
                   </p>
-                  <span
-                    className="inline-flex h-8 w-8 shrink-0 items-center justify-center border border-line text-muted group-hover:border-accent group-hover:text-accent"
-                    aria-hidden
-                  >
-                    →
-                  </span>
+                  <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">
+                    {project.blurb}
+                  </p>
+
+                  <ul className="mt-4 space-y-2">
+                    {project.meta.map((item) => {
+                      const Icon = META_ICONS[item.icon];
+                      return (
+                        <li key={item.text} className="flex min-w-0 items-center gap-2 text-xs text-muted">
+                          <Icon
+                            className="icon-accent h-3.5 w-3.5 shrink-0"
+                            strokeWidth={1.35}
+                            aria-hidden
+                          />
+                          <span className="min-w-0 truncate">{item.text}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  <div className="mt-auto pt-5">
+                    <span className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors group-hover:text-accent">
+                      View case study
+                      <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                    </span>
+                  </div>
                 </div>
               </>
             );

@@ -4,6 +4,7 @@ export const site = {
   role: 'PRODUCT UI/UX DESIGNER',
   email: 'janbergosa.graphics@gmail.com',
   linkedin: 'https://www.linkedin.com/in/marjan-bergosa-b973a9184/',
+  behance: 'https://www.behance.net/janbergosa',
   tagline:
     'I design product interfaces that cut user friction and help teams ship clearer software.',
   resume: {
@@ -35,50 +36,70 @@ export const hero = {
   description:
     'From unclear requirements to usable interfaces — less friction, cleaner handoff, fewer revision loops.',
   primaryCta: 'Discuss a role or project',
-  resumeCta: 'Resume',
+  behanceCta: 'Behance',
   linkedinCta: 'LinkedIn',
 };
 
 export const projects = [
   {
     id: 'grafon-supply-chain',
-    label: 'Case Study',
-    category: 'B2B ops',
-    title: 'Grafon – Supply Chain Simulator',
-    blurb: 'Simplified complex simulation flows so operators can run scenarios faster with less training.',
-    outcome: 'Operators run scenarios with less onboarding and fewer missteps.',
+    title: 'Grafon',
+    role: 'UI/UX · End-to-end',
+    image: '/projects/grafon.jpg',
+    imageAlt: 'Grafon supply chain simulator UI',
+    blurb:
+      'Designed a supply-chain simulator so ops teams can map complex logistics and run scenarios with less training and fewer missteps.',
+    meta: [
+      { icon: 'audience' as const, text: 'Ops teams · B2B logistics' },
+      { icon: 'result' as const, text: 'Faster scenarios, clearer flows' },
+    ],
     href: '/case-study/grafon-supply-chain',
     internal: true,
   },
   {
     id: 'tradedungeon-uiux',
-    label: 'Case Study',
-    category: 'Fintech UX',
-    title: 'TradeDungeon – Trading Product UI',
-    blurb: 'Structured trading journeys and screens for clearer decisions under time pressure.',
-    outcome: 'Clearer trade decisions under time pressure, fewer costly missteps.',
+    title: 'TradeDungeon',
+    role: 'UI/UX · End-to-end',
+    image: '/projects/tradedungeon.jpg',
+    imageAlt: 'TradeDungeon trading product UI',
+    blurb:
+      'Designed trading product flows that surface trust early — so players can decide and complete trades under time pressure with fewer errors.',
+    meta: [
+      { icon: 'audience' as const, text: 'Gamers · peer-to-peer trade' },
+      { icon: 'result' as const, text: 'Clearer trust before checkout' },
+    ],
     href: '/case-study/tradedungeon-uiux',
     internal: true,
   },
   {
     id: 'dataflower-baas',
-    label: 'Case Study',
-    category: 'Developer platform',
-    title: 'Dataflower – Backend-as-a-Service',
-    blurb: 'Made backend setup and API workflows easier for builders adopting the platform.',
-    outcome: 'Faster first successful API call for developers new to the platform.',
+    title: 'Dataflower',
+    role: 'UI/UX · End-to-end',
+    image: '/projects/dataflower.png',
+    imageAlt: 'Dataflower backend-as-a-service platform UI',
+    blurb:
+      'Designed BaaS dashboards and onboarding so developers understand setup paths and reach a first successful API call sooner.',
+    meta: [
+      { icon: 'audience' as const, text: 'Developers · BaaS platform' },
+      { icon: 'result' as const, text: 'Faster first API success' },
+    ],
     href: '/case-study/dataflower-baas',
     internal: true,
   },
   {
     id: 'powerion-energy',
-    label: 'Case Study',
-    category: 'Energy ops',
-    title: 'Powerion – Energy Management',
-    blurb: 'Dashboard patterns for monitoring energy data and acting on operational signals.',
-    outcome: 'Operators spot and act on energy signals from a single view.',
-    href: 'https://www.behance.net/gallery/232269087/Powerion-Energy-Management-Platform',
-    internal: false,
+    title: 'Powerion',
+    role: 'UI/UX · End-to-end',
+    image: '/projects/powerion.png',
+    imageAlt: 'Powerion energy management platform UI',
+    blurb:
+      'Designed energy monitoring UI so operators can see usage and impact signals in one view and act without hunting through charts.',
+    meta: [
+      { icon: 'audience' as const, text: 'Operators · energy ops' },
+      { icon: 'result' as const, text: 'Signal → action in one view' },
+    ],
+    href: '/case-study/powerion-energy',
+    internal: true,
   },
 ];
 
@@ -160,12 +181,42 @@ export const methodIntro = {
 };
 
 export const method = [
-  { phase: '01', title: 'Discover', body: 'Map users, friction points, and business constraints.' },
-  { phase: '02', title: 'Define', body: 'Agree on problem, success metrics, and scope.' },
-  { phase: '03', title: 'Design', body: 'Build flows, hierarchy, and UI systems.' },
-  { phase: '04', title: 'Validate', body: 'Test clarity with stakeholders and users.' },
-  { phase: '05', title: 'Build', body: 'Support engineering with precise handoff.' },
-  { phase: '06', title: 'Ship', body: 'Launch, measure, and iterate on real usage.' },
+  {
+    phase: '01',
+    icon: 'discover' as const,
+    title: 'Discover',
+    body: 'Map users, friction points, and business constraints.',
+  },
+  {
+    phase: '02',
+    icon: 'define' as const,
+    title: 'Define',
+    body: 'Agree on problem, success metrics, and scope.',
+  },
+  {
+    phase: '03',
+    icon: 'design' as const,
+    title: 'Design',
+    body: 'Build flows, hierarchy, and UI systems.',
+  },
+  {
+    phase: '04',
+    icon: 'validate' as const,
+    title: 'Validate',
+    body: 'Test clarity with stakeholders and users.',
+  },
+  {
+    phase: '05',
+    icon: 'build' as const,
+    title: 'Build',
+    body: 'Support engineering with precise handoff.',
+  },
+  {
+    phase: '06',
+    icon: 'ship' as const,
+    title: 'Ship',
+    body: 'Launch, measure, and iterate on real usage.',
+  },
 ];
 
 export const philosophyIntro = {

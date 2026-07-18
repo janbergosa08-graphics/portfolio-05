@@ -1,9 +1,17 @@
 'use client';
 
+import { Boxes, Layers, PenTool, Workflow, type LucideIcon } from 'lucide-react';
 import { Reveal, RevealGroup, RevealItem } from '@/components/motion/Reveal';
 import { SectionEntrance } from '@/components/motion/SectionEntrance';
 import ExpertiseIsoIcon from '@/components/sections/ExpertiseIsoIcon';
 import { expertise, expertiseIntro } from '@/lib/content';
+
+const EXPERTISE_GLYPHS: Record<(typeof expertise)[number]['icon'], LucideIcon> = {
+  'product-ui': PenTool,
+  'design-systems': Layers,
+  prototyping: Boxes,
+  handoff: Workflow,
+};
 
 export default function Expertise() {
   return (
@@ -23,17 +31,29 @@ export default function Expertise() {
           </div>
         </div>
 
-        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4">
-          {expertise.map((item) => (
-            <RevealItem
-              key={item.title}
-              className="frame-highlight cell-pad border-b border-line sm:border-r sm:[&:nth-child(2n)]:border-r-0 lg:border-b-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0"
-            >
-              <ExpertiseIsoIcon id={item.icon} />
-              <h3 className="text-sm font-medium text-ink">{item.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{item.body}</p>
-            </RevealItem>
-          ))}
+        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4 lg:items-stretch">
+          {expertise.map((item) => {
+            const Glyph = EXPERTISE_GLYPHS[item.icon];
+            return (
+              <RevealItem
+                key={item.title}
+                className="frame-highlight flex h-full min-h-0 flex-col cell-pad border-b border-line sm:border-r sm:[&:nth-child(2n)]:border-r-0 lg:border-b-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0"
+              >
+                <div className="flex min-h-11 items-center gap-2.5">
+                  <Glyph className="h-[1.125rem] w-[1.125rem] shrink-0 text-ink" strokeWidth={1.35} aria-hidden />
+                  <h3 className="text-base font-semibold leading-snug text-ink">
+                    {item.title}
+                  </h3>
+                </div>
+                <p className="mt-3 line-clamp-3 min-h-[4.5rem] text-sm leading-relaxed text-muted">
+                  {item.body}
+                </p>
+                <div className="mt-auto pt-5">
+                  <ExpertiseIsoIcon id={item.icon} />
+                </div>
+              </RevealItem>
+            );
+          })}
         </RevealGroup>
       </div>
     </SectionEntrance>

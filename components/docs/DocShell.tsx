@@ -194,7 +194,7 @@ export default function DocShell({
                       <a
                         href={`#${section.id}`}
                         className={`block px-4 py-3 text-sm md:px-5 ${
-                          activeId === section.id ? 'bg-accent-soft text-accent' : 'text-muted hover:text-ink'
+                          activeId === section.id ? 'text-ink' : 'text-muted hover:text-ink'
                         }`}
                         onClick={(e) => {
                           e.preventDefault();

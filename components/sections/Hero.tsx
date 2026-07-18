@@ -65,11 +65,12 @@ export default function Hero() {
             </a>
             <div className="flex items-stretch gap-3">
               <a
-                href={site.resume.href}
-                download={site.resume.downloadName}
+                href={site.behance}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="ui-btn-lg inline-flex flex-1 justify-center border border-line text-ink hover:border-accent hover:text-accent sm:flex-none"
               >
-                {hero.resumeCta}
+                {hero.behanceCta}
               </a>
               <a
                 href={site.linkedin}

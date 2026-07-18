@@ -134,18 +134,17 @@ const RADIUS: Record<'sm' | 'md' | 'lg', number> = {
   lg: 10,
 };
 
-const LINE = 'rgba(255,255,255,0.2)';
-const LINE_HOVER = '#7fee64';
+const LINE = 'rgba(255,255,255,0.12)';
+const LINE_HOVER = 'var(--accent-mid)';
 const BORDER = 'rgba(255,255,255,0.2)';
-const BORDER_HOVER = '#7fee64';
-
-const FILL_TOP = 'rgba(15,15,15,0.98)';
-const FILL_LEFT = 'rgba(10,10,10,0.98)';
-const FILL_RIGHT = 'rgba(12,12,12,0.98)';
-
-const FILL_TOP_ACTIVE = 'rgba(129, 140, 248, 0.28)';
-const FILL_LEFT_ACTIVE = 'rgba(103, 232, 249, 0.14)';
-const FILL_RIGHT_ACTIVE = 'rgba(232, 121, 249, 0.14)';
+const BORDER_HOVER = 'var(--accent-mid)';
+const SW = 1;
+const FILL_TOP = 'rgba(255,255,255,0.045)';
+const FILL_LEFT = 'rgba(255,255,255,0.02)';
+const FILL_RIGHT = 'rgba(255,255,255,0.03)';
+const FILL_TOP_ACTIVE = 'rgba(127,238,100,0.1)';
+const FILL_LEFT_ACTIVE = 'rgba(127,238,100,0.05)';
+const FILL_RIGHT_ACTIVE = 'rgba(127,238,100,0.07)';
 
 type BoxSpec = { w: number; h: number; d: number; viewW: number; viewH: number };
 
@@ -225,43 +224,18 @@ function IsoBox({
             </feMerge>
           </filter>
         </defs>
-        <g filter={active ? `url(#${uid}-glow)` : undefined}>
-          {/* Back-to-front: left wall, right wall, top cap — shared edges align */}
-          <polygon
-            points={faces.left}
-            fill={active ? FILL_LEFT_ACTIVE : FILL_LEFT}
-            stroke={stroke}
-            strokeWidth={1}
-            strokeLinejoin="round"
-            className="transition-[fill,stroke] duration-200"
-          />
-          <polygon
-            points={faces.right}
-            fill={active ? FILL_RIGHT_ACTIVE : FILL_RIGHT}
-            stroke={stroke}
-            strokeWidth={1}
-            strokeLinejoin="round"
-            className="transition-[fill,stroke] duration-200"
-          />
-          <polygon
-            points={faces.top}
-            fill={active ? FILL_TOP_ACTIVE : FILL_TOP}
-            stroke={stroke}
-            strokeWidth={1}
-            strokeLinejoin="round"
-            className="transition-[fill,stroke] duration-200"
-          />
-          {active ? (
-            <line
-              x1={faces.cx - spec.w * 0.35}
-              y1={faces.cy - spec.h * 0.15}
-              x2={faces.cx + spec.w * 0.35}
-              y2={faces.cy - spec.h * 0.15}
-              stroke="rgba(255,255,255,0.35)"
-              strokeWidth={1}
-              strokeDasharray="3 4"
-            />
-          ) : null}
+        <g
+          filter={active ? `url(#${uid}-glow)` : undefined}
+          stroke={stroke}
+          strokeWidth={SW}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          paintOrder="fill stroke"
+          className="transition-[fill,stroke] duration-200"
+        >
+          <polygon points={faces.left} fill={active ? FILL_LEFT_ACTIVE : FILL_LEFT} />
+          <polygon points={faces.right} fill={active ? FILL_RIGHT_ACTIVE : FILL_RIGHT} />
+          <polygon points={faces.top} fill={active ? FILL_TOP_ACTIVE : FILL_TOP} />
         </g>
       </svg>
     </button>
@@ -351,11 +325,11 @@ export default function HeroIsoGraphic() {
                   x2={`${x2}%`}
                   y2={`${y2}%`}
                   stroke={lit ? LINE_HOVER : LINE}
-                  strokeWidth={lit ? 1.4 : 1}
-                  strokeDasharray={lit ? undefined : '4 5'}
+                  strokeWidth={lit ? 1.1 : 1}
                   strokeLinecap="butt"
+                  strokeDasharray="4 6"
                   markerEnd={lit ? 'url(#iso-arrow-active)' : 'url(#iso-arrow)'}
-                  className="transition-[stroke] duration-200"
+                  className={`iso-dash-flow transition-[stroke] duration-200 ${lit ? 'iso-dash-flow--active' : ''}`}
                 />
               );
             })}

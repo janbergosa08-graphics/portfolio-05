@@ -29,7 +29,7 @@ function FaqCardGraphic() {
   return (
     <div className="relative mt-8 w-full max-w-sm" aria-hidden>
       <div className="absolute -inset-x-2 -inset-y-3 border border-line/70" />
-      <div className="relative overflow-hidden border border-line bg-panel">
+      <div className="method-panel relative overflow-hidden border border-line">
         <div className="flex items-center justify-between border-b border-line px-3 py-2">
           <span className="font-mono text-[9px] tracking-[0.16em] text-muted">FAQ · FOCUS STACK</span>
           <span className="font-mono text-[9px] tracking-[0.14em] text-muted">
@@ -38,15 +38,6 @@ function FaqCardGraphic() {
         </div>
 
         <div className="relative h-44 px-3 py-4">
-          <div
-            className="pointer-events-none absolute inset-0 opacity-40"
-            style={{
-              backgroundImage:
-                'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
-              backgroundSize: '24px 24px',
-            }}
-          />
-
           <div className="relative mx-auto h-full w-[88%]">
             {graphicCards.map((card, index) => {
               const offset = (index - active + graphicCards.length) % graphicCards.length;
@@ -71,18 +62,20 @@ function FaqCardGraphic() {
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-mono text-[9px] tracking-[0.16em] text-muted">ID · {card.id}</span>
-                    <span className={`font-mono text-[9px] tracking-[0.14em] ${isFront ? 'text-ink' : 'text-muted/60'}`}>
+                    <span
+                      className={`font-mono text-[9px] tracking-[0.14em] ${isFront ? 'text-ink' : 'text-muted'}`}
+                    >
                       {isFront ? 'FOCUS' : 'READY'}
                     </span>
                   </div>
-                  <p className={`mt-3 text-sm tracking-tight ${isFront ? 'text-ink' : 'text-muted/70'}`}>
+                  <p className={`mt-3 text-sm tracking-tight ${isFront ? 'text-ink' : 'text-muted'}`}>
                     {card.label}
                   </p>
                   <div className="mt-3 h-px w-full bg-line" />
                   <div className="mt-3 flex gap-1.5">
-                    <span className="h-1 w-8 bg-ink/20" />
-                    <span className={`h-1 w-5 ${isFront ? 'bg-ink/40' : 'bg-ink/15'}`} />
-                    <span className="h-1 w-6 bg-ink/10" />
+                    <span className="h-1 w-8 bg-ink/25" />
+                    <span className={`h-1 w-5 ${isFront ? 'bg-ink/45' : 'bg-ink/20'}`} />
+                    <span className="h-1 w-6 bg-ink/15" />
                   </div>
                 </motion.div>
               );

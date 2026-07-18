@@ -160,6 +160,15 @@ select:-webkit-autofill:active {
   -webkit-text-fill-color: transparent !important;
 }
 
+/* Solid accent for SVG/Lucide icons (gradient clip hides strokes) */
+.icon-accent {
+  color: var(--accent-mid);
+  -webkit-text-fill-color: var(--accent-mid);
+  background-image: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+}
+
 .bg-accent {
   background-color: transparent !important;
   background-image: var(--accent-gradient) !important;
@@ -428,6 +437,275 @@ select:-webkit-autofill:active {
     animation: none;
     opacity: 0.75;
   }
+}
+
+/* Hero connector lines — marching dashes in flow direction */
+@keyframes iso-dash-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.iso-dash-flow {
+  animation: iso-dash-flow 1.1s linear infinite;
+}
+
+.iso-dash-flow--active {
+  animation-duration: 0.7s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iso-dash-flow {
+    animation: none;
+  }
+}
+
+/* Method panel accents — directional motion, check draw, wave pulse */
+@keyframes method-node-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes method-wave-ring {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.45);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes method-core-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes method-check-draw {
+  0% {
+    stroke-dashoffset: 22;
+    opacity: 0.25;
+  }
+  40% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  70% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 22;
+    opacity: 0.25;
+  }
+}
+
+@keyframes method-arrow-x {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(2.5px);
+    opacity: 1;
+  }
+}
+
+@keyframes method-arrow-y {
+  0%,
+  100% {
+    transform: translateY(1.5px);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-2.5px);
+    opacity: 1;
+  }
+}
+
+@keyframes method-layer-lift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate(1px, -1.5px);
+    opacity: 1;
+  }
+}
+
+/* Expertise design-systems — cubes sit, then swap clockwise around the 2×2 */
+@keyframes method-cube-swap {
+  0%,
+  18% {
+    transform: translate(0px, 0px);
+  }
+  25%,
+  43% {
+    transform: translate(18px, 0px);
+  }
+  50%,
+  68% {
+    transform: translate(18px, 14px);
+  }
+  75%,
+  93% {
+    transform: translate(0px, 14px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+.method-anim-node,
+.method-anim-core,
+.method-anim-wave,
+.method-anim-arrow-x,
+.method-anim-arrow-y,
+.method-anim-layer {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.method-anim-cube {
+  animation: method-cube-swap 4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.method-anim-cube--d1 {
+  animation-delay: -1s;
+}
+
+.method-anim-cube--d2 {
+  animation-delay: -3s;
+}
+
+.method-anim-cube--d3 {
+  animation-delay: -2s;
+}
+
+.method-anim-node {
+  animation: method-node-pulse 2.2s ease-in-out infinite;
+}
+
+.method-anim-node--delay {
+  animation-delay: 0.55s;
+}
+
+.method-anim-node--delay-2 {
+  animation-delay: 1.1s;
+}
+
+.method-anim-core {
+  animation: method-core-pulse 2s ease-in-out infinite;
+}
+
+.method-anim-wave {
+  animation: method-wave-ring 2.4s ease-out infinite;
+}
+
+.method-anim-wave--delay {
+  animation-delay: 1.2s;
+}
+
+.method-anim-check {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 0;
+  animation: method-check-draw 2.6s ease-in-out infinite;
+}
+
+.method-anim-arrow-x {
+  animation: method-arrow-x 1.35s ease-in-out infinite;
+}
+
+.method-anim-arrow-y {
+  animation: method-arrow-y 1.5s ease-in-out infinite;
+}
+
+.method-anim-layer {
+  animation: method-layer-lift 2.8s ease-in-out infinite;
+}
+
+.method-anim-flow {
+  stroke-dasharray: 3 4;
+  animation: iso-dash-flow 1.2s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .method-anim-node,
+  .method-anim-core,
+  .method-anim-wave,
+  .method-anim-check,
+  .method-anim-arrow-x,
+  .method-anim-arrow-y,
+  .method-anim-layer,
+  .method-anim-flow,
+  .method-anim-cube {
+    animation: none;
+  }
+
+  .method-anim-wave {
+    opacity: 0;
+  }
+
+  .method-anim-check {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  .method-anim-cube--d1 {
+    transform: translate(18px, 0px);
+  }
+
+  .method-anim-cube--d2 {
+    transform: translate(0px, 14px);
+  }
+
+  .method-anim-cube--d3 {
+    transform: translate(18px, 14px);
+  }
+}
+
+/* Demo graphic frames — slant stripe texture, solid frame.
+   contain + content-visibility: skip paint and pause CSS animations while offscreen
+   (Chromium); limits invalidation when stroke-dash / transform loops tick. */
+.method-panel {
+  position: relative;
+  contain: layout paint style;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 12.5rem;
+  background-color: #0c0c0c;
+  background-image: repeating-linear-gradient(
+    -55deg,
+    transparent 0,
+    transparent 4px,
+    rgba(255, 255, 255, 0.055) 4px,
+    rgba(255, 255, 255, 0.055) 5px
+  );
+}
+
+.method-panel svg {
+  display: block;
+  position: relative;
+  z-index: 1;
+  contain: paint;
 }
 
 /* Defer paint for below-fold sections on long pages */
