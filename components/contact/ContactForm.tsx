@@ -182,21 +182,31 @@ export default function ContactForm({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       });
-      const data = (await response.json()) as { message?: string; error?: string };
+      const data = (await response.json()) as { message?: string; error?: string; errorCode?: string };
 
       if (!response.ok) {
-        throw new Error(data.error ?? 'Unable to send your message right now.');
+        const fallbackMessage =
+          data.errorCode === 'SMTP_CONFIG_MISSING'
+            ? 'Email delivery is not configured in this environment yet. You can email janbergosa.graphics@gmail.com directly or add the SMTP credentials to .env.local.'
+            : data.error ?? 'Unable to deliver your message right now. Please try again shortly.';
+        throw new Error(fallbackMessage);
       }
 
       setStatus('success');
-      setStatusMessage(data.message ?? 'Message sent. I will reply within 24 hours.');
+      setStatusMessage(
+        data.message ?? "Message sent successfully. I'll get back to you within 24 hours.",
+      );
       setValues(contactFormDefaults);
       setErrors({});
       setTouched({});
       onSuccess?.();
     } catch (error) {
       setStatus('error');
-      setStatusMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
+      setStatusMessage(
+        error instanceof Error && error.message
+          ? error.message
+          : 'Unable to deliver your message right now. Please try again shortly.',
+      );
     }
   };
 
@@ -362,9 +372,15 @@ export default function ContactForm({
       </div>
 
       {status === 'error' && (
-        <p className="border border-accent-muted bg-accent-soft px-3 py-2 text-sm text-ink" role="alert">
-          {statusMessage}
-        </p>
+        <div className="border border-accent-muted bg-accent-soft px-3 py-3 text-sm text-ink" role="alert">
+          <p>{statusMessage}</p>
+          <a
+            href="mailto:janbergosa.graphics@gmail.com?subject=Portfolio%20Inquiry"
+            className="mt-2 inline-flex text-ink underline decoration-line underline-offset-4 hover:text-accent"
+          >
+            Send email directly
+          </a>
+        </div>
       )}
 
       <button
