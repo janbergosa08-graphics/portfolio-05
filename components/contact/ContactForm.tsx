@@ -186,10 +186,9 @@ export default function ContactForm({
 
       if (!response.ok) {
         const fallbackMessage =
-          data.errorCode === 'EMAIL_PROVIDER_CONFIG_MISSING'
-            ? 'Email delivery is not configured in this environment yet. You can email janbergosa.graphics@gmail.com directly or add the Resend API key to .env.local.'
-            : data.error ?? 'Unable to deliver your message right now. Please try again shortly.';
-        throw new Error(fallbackMessage);
+        data.error ??
+        'Unable to deliver your message right now. Please try again shortly.';
+      throw new Error(fallbackMessage);
       }
 
       setStatus('success');
