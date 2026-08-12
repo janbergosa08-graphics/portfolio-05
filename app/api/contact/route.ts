@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 type ContactPayload = {
   name?: string;
   email?: string;
@@ -14,8 +17,8 @@ function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function getRequiredEnv(name: string) {
-  const value = process.env[name];
+function getRequiredEnv(name: string, fallbackName?: string) {
+  const value = process.env[name] ?? (fallbackName ? process.env[fallbackName] : undefined);
   return value && value.trim() ? value.trim() : undefined;
 }
 
@@ -50,7 +53,7 @@ export async function POST(request: Request) {
 
   const apiKey = getRequiredEnv('RESEND_API_KEY');
   const recipientAddress = getRequiredEnv('CONTACT_TO') ?? 'janbergosa.graphics@gmail.com';
-  const fromAddress = getRequiredEnv('RESEND_FROM') ?? 'Portfolio Contact <onboarding@resend.dev>';
+  const fromAddress = getRequiredEnv('RESEND_FROM');
 
   if (!apiKey) {
     console.error('Contact email delivery failed: missing Resend API key.', {
@@ -61,7 +64,22 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          'Email delivery is not configured in this environment. Add your Resend API key and verified sender to .env.local or email janbergosa.graphics@gmail.com directly.',
+          'Email delivery is not configured in this environment. Add your Resend API key to .env.local or email janbergosa.graphics@gmail.com directly.',
+        errorCode: 'EMAIL_PROVIDER_CONFIG_MISSING',
+      },
+      { status: 500 },
+    );
+  }
+
+  if (!fromAddress) {
+    console.error('Contact email delivery failed: missing Resend sender address.', {
+      recipient: recipientAddress,
+    });
+
+    return NextResponse.json(
+      {
+        error:
+          'Email delivery is not configured in this environment. Add your Resend verified sender address to .env.local.',
         errorCode: 'EMAIL_PROVIDER_CONFIG_MISSING',
       },
       { status: 500 },
