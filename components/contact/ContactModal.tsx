@@ -47,11 +47,20 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
         aria-labelledby="contact-modal-title"
         tabIndex={-1}
       >
-        <div className="border-b border-line shell-x py-4">
-          <p className="font-mono text-[10px] tracking-[0.16em] text-accent">LET&apos;S TALK</p>
-          <h2 id="contact-modal-title" className="mt-1 text-lg font-semibold tracking-tight text-ink">
-            Role or product conversation
-          </h2>
+        <div className="border-b border-line shell-x py-4 flex items-start justify-between gap-4">
+          <div>
+            <p className="font-mono text-[10px] tracking-[0.16em] text-accent">LET&apos;S TALK</p>
+            <h2 id="contact-modal-title" className="mt-1 text-lg font-semibold tracking-tight text-ink">
+              Role or product conversation
+            </h2>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="self-start rounded border border-line bg-transparent px-3 py-2 text-sm font-medium text-muted transition hover:border-accent hover:text-accent"
+          >
+            Close
+          </button>
         </div>
 
         <div className="grid overflow-y-auto lg:grid-cols-2">
@@ -85,7 +94,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
           </aside>
 
           <div className="section-pad">
-            <ContactForm formId="contact-modal-form" compact onSuccess={onClose} />
+            <ContactForm formId="contact-modal-form" compact />
           </div>
         </div>
       </div>

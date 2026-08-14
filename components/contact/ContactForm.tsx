@@ -170,6 +170,7 @@ export default function ContactForm({
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors);
       setStatus('idle');
+      setStatusMessage('');
       return;
     }
 
@@ -208,26 +209,6 @@ export default function ContactForm({
       );
     }
   };
-
-  if (status === 'success') {
-    return (
-      <div
-        className="border border-line bg-accent-soft px-4 py-5"
-        role="status"
-        aria-live="polite"
-      >
-        <p className="text-sm font-medium text-ink">Message sent</p>
-        <p className="mt-2 text-sm text-muted">{statusMessage}</p>
-        <button
-          type="button"
-          className="mt-4 ui-btn text-muted hover:border-accent hover:text-accent"
-          onClick={() => setStatus('idle')}
-        >
-          Send another message
-        </button>
-      </div>
-    );
-  }
 
   const nameError = showError('name');
   const emailError = showError('email');
@@ -341,6 +322,16 @@ export default function ContactForm({
           error={messageError}
           tip="Include product context, users, timeline, and the business outcome you need."
         />
+
+        {status === 'success' && (
+          <div
+            className="mt-4 rounded border border-accent-soft bg-accent-soft px-4 py-3 text-sm text-ink"
+            role="status"
+            aria-live="polite"
+          >
+            {statusMessage || "Message sent successfully! I'll get back to you within 24 hours."}
+          </div>
+        )}
       </div>
 
       <div>
