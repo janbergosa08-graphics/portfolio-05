@@ -1,5 +1,4 @@
 'use client';
-
 import { Reveal, RevealGroup, RevealItem } from '@/components/motion/Reveal';
 import { SectionEntrance } from '@/components/motion/SectionEntrance';
 import { MethodGlyph, MethodPanel } from '@/components/sections/MethodIsoIcon';
