@@ -65,10 +65,20 @@ function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initi
     return (
       <div 
         className="flex h-8 w-8 items-center justify-center shrink-0"
+        style={{ 
+          color: 'white',
+          '--svg-color': 'white'
+        } as React.CSSProperties & { '--svg-color': string }}
       >
         <div
           aria-label={label}
-          className="h-full w-full [&_svg]:h-full [&_svg]:w-full [&_svg]:block [&_path]:fill-white [&_path]:stroke-white [&_rect]:stroke-white [&_circle]:fill-white [&_circle]:stroke-white"
+          className="h-full w-full"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white'
+          }}
           dangerouslySetInnerHTML={{ __html: markup }}
         />
       </div>
@@ -92,17 +102,17 @@ export default function Tools() {
           <h2 className="section-heading-lg mt-3 font-semibold">Tools I Use to Build & Ship</h2>
         </div>
 
-        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0">
+        <RevealGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0">
           {TOOLS.map((tool) => (
             <RevealItem
               key={tool.id}
-              className="frame-highlight flex h-28 w-full flex-row items-center justify-center gap-3 cell-pad border-b border-line border-r sm:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0"
+              className="frame-highlight flex h-20 sm:h-24 lg:h-28 w-full flex-row items-center justify-center gap-2 sm:gap-3 cell-pad border-b border-line border-r sm:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0"
             >
               <div className="flex shrink-0">
                 <BrandIcon icon={tool.icon} label={tool.label} initials={tool.initials} />
               </div>
               <div className="flex min-w-0 items-center">
-                <span className="text-sm font-medium leading-tight text-white break-words">{tool.label}</span>
+                <span className="text-xs sm:text-sm font-medium leading-tight text-white break-words">{tool.label}</span>
               </div>
             </RevealItem>
           ))}

@@ -45,7 +45,7 @@ export default function Projects() {
 
             const body = (
               <>
-                <div className="relative aspect-[5/2] overflow-hidden border-b border-line bg-panel">
+                <div className="relative aspect-video sm:aspect-[5/2] overflow-hidden border-b border-line bg-panel">
                   <Image
                     src={project.image}
                     alt={project.imageAlt}
