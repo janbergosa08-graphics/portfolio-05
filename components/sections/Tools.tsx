@@ -18,6 +18,43 @@ import claudeIcon from "thesvg/claude";
 import cursorIcon from "thesvg/cursor";
 import figmaIcon from "thesvg/figma";
 
+const releumIcon = {
+  svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+    <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+      <path 
+        d="M 100,18 
+           L 165,55.5 
+           a 12,12 0 0 1 6,10.4 
+           L 171,134.1 
+           a 12,12 0 0 1 -6,10.4 
+           L 100,182 
+           a 12,12 0 0 1 -12,0 
+           L 35,144.5 
+           a 12,12 0 0 1 -6,-10.4 
+           L 29,65.9 
+           a 12,12 0 0 1 6,-10.4 
+           L 100,18 Z" 
+        stroke-width="12" 
+      />
+      <path 
+        d="M 100,52 
+           L 142,76 
+           L 142,124 
+           L 100,148 
+           L 58,124 
+           L 58,76 
+           Z" 
+        stroke-width="10" 
+        fill="none" 
+      />
+      <path 
+        d="M 100,52 L 100,148 M 100,100 L 142,76 M 100,100 L 58,76" 
+        stroke-width="10" 
+      />
+    </g>
+  </svg>`
+};
+
 const TOOLS = [
   { id: "figma", label: "Figma", icon: siFigma },
   { id: "figjam", label: "Figma Jam", icon: figmaIcon },
@@ -33,7 +70,7 @@ const TOOLS = [
   { id: "codex", label: "OpenAI Codex", icon: siOpenai },
   { id: "cursor", label: "Cursor", icon: cursorIcon },
   { id: "copilot", label: "GitHub Copilot", icon: siGithub, initials: "GP" },
-  { id: "relume", label: "Relume", initials: "RL" },
+  { id: "relume", label: "Relume", icon: releumIcon },
   { id: "lottiefiles", label: "LottieFiles", initials: "LF" },
 ];
 
