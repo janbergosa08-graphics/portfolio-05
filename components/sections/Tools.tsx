@@ -28,17 +28,9 @@ const releumIcon = {
 };
 
 const lottieFilesIcon = {
-  svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
-    <g fill="none" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
-      <!-- Outer Rounded Frame -->
-      <rect x="20" y="20" width="160" height="160" rx="40" />
-
-      <!-- Inner 'L' Curve Geometry -->
-      <path d="M 65 60 L 65 140 L 135 140" />
-
-      <!-- Accent Dot -->
-      <circle cx="135" cy="65" r="6" fill="#FFFFFF" />
-    </g>
+  svg: `<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="6" y="6" width="148" height="148" rx="38" stroke="white" stroke-width="12"/>
+    <path d="M117 52C108.094 52.582 87.203 56.2403 79.6922 80.4351C72.1814 104.63 51.7011 107.041 43 106.999" stroke="white" stroke-width="12" stroke-linecap="round"/>
   </svg>`
 };
 
