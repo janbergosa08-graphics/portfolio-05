@@ -20,7 +20,7 @@ import figmaIcon from "thesvg/figma";
 
 const releumIcon = {
   svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
-    <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
       <path 
         d="M 100,18 
            L 165,55.5 
@@ -45,7 +45,6 @@ const releumIcon = {
            L 58,76 
            Z" 
         stroke-width="10" 
-        fill="none" 
       />
       <path 
         d="M 100,52 L 100,148 M 100,100 L 142,76 M 100,100 L 58,76" 
@@ -57,14 +56,13 @@ const releumIcon = {
 
 const lottieFilesIcon = {
   svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
-    <rect x="20" y="20" width="160" height="160" rx="36" fill="none" stroke="#FFFFFF" stroke-width="12"/>
+    <rect x="20" y="20" width="160" height="160" rx="36" stroke="#FFFFFF" stroke-width="12"/>
     <path 
       d="M 60 135 
          C 85 135, 80 65, 110 65 
          C 130 65, 135 85, 135 95 
          C 135 115, 115 135, 95 135 
          C 75 135, 65 115, 65 100" 
-      fill="none" 
       stroke="#FFFFFF" 
       stroke-width="12" 
       stroke-linecap="round" 
