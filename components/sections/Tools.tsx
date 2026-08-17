@@ -65,11 +65,10 @@ function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initi
     return (
       <div 
         className="flex h-8 w-8 items-center justify-center shrink-0"
-        style={{ filter: 'brightness(0) invert(1)' }}
       >
         <div
           aria-label={label}
-          className="h-full w-full [&_svg]:h-full [&_svg]:w-full [&_svg]:block"
+          className="h-full w-full [&_svg]:h-full [&_svg]:w-full [&_svg]:block [&_path]:fill-white [&_path]:stroke-white [&_rect]:stroke-white [&_circle]:fill-white [&_circle]:stroke-white"
           dangerouslySetInnerHTML={{ __html: markup }}
         />
       </div>
