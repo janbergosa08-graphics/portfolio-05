@@ -49,7 +49,7 @@ export default function Philosophy() {
                 return (
                   <RevealItem
                     key={item.title}
-                    className="frame-highlight cell-pad border border-line flex h-full flex-col"
+                    className="frame-highlight cell-pad border-b border-line md:border-r md:[&:nth-child(2n)]:border-r-0 flex h-full flex-col"
                   >
                     <div className="flex items-start gap-3">
                       <Glyph className="h-5 w-5 shrink-0 text-ink" strokeWidth={1.3} aria-hidden />
