@@ -81,13 +81,13 @@ export default function Tools() {
           {TOOLS.map((tool) => (
             <RevealItem
               key={tool.id}
-              className="frame-highlight flex h-28 w-full flex-col items-center justify-center gap-2 cell-pad border-b border-line border-r sm:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0"
+              className="frame-highlight flex h-28 w-full flex-row items-center justify-center gap-3 cell-pad border-b border-line border-r sm:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0"
             >
               <div className="flex shrink-0">
                 <BrandIcon icon={tool.icon} label={tool.label} initials={tool.initials} />
               </div>
-              <div className="flex min-w-0 items-center text-center">
-                <span className="text-xs font-medium leading-tight text-white break-words">{tool.label}</span>
+              <div className="flex min-w-0 items-center">
+                <span className="text-sm font-medium leading-tight text-white break-words">{tool.label}</span>
               </div>
             </RevealItem>
           ))}
