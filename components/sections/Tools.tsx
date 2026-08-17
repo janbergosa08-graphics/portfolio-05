@@ -20,7 +20,7 @@ import figmaIcon from "thesvg/figma";
 
 const releumIcon = {
   svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
-    <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round">
       <path 
         d="M 100,18 
            L 165,55.5 
