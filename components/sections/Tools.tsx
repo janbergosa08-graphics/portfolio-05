@@ -1,5 +1,7 @@
 "use client";
 
+import relumeLogo from "@/asset/relume.svg";
+import lottieFilesLogo from "@/asset/LottieFiles.svg";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { SectionEntrance } from "@/components/motion/SectionEntrance";
 import {
@@ -18,20 +20,12 @@ import claudeIcon from "thesvg/claude";
 import cursorIcon from "thesvg/cursor";
 import figmaIcon from "thesvg/figma";
 
-const releumIcon = {
-  svg: `<svg width="160" height="169" viewBox="0 0 160 169" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M74 7.60863C77.7128 5.46504 82.2872 5.46504 86 7.60863L143.282 40.6804C146.995 42.824 149.282 46.7855 149.282 51.0727V117.216C149.282 121.504 146.995 125.465 143.282 127.609L86 160.68C82.2872 162.824 77.7128 162.824 74 160.68L16.718 127.609C13.0051 125.465 10.718 121.504 10.718 117.216V51.0727C10.718 46.7855 13.0052 42.824 16.718 40.6804L74 7.60863Z" stroke="white" stroke-width="12"/>
-    <path d="M12 44.1445L79 80.6445L146 44.1445" stroke="white" stroke-width="12"/>
-    <path d="M79 80.1445V162.645" stroke="white" stroke-width="12"/>
-    <path d="M10 45.6445L80 82.1445V161.645L10 122.145V45.6445Z" fill="white"/>
-  </svg>`
+const relumeIcon = {
+  src: typeof relumeLogo === "string" ? relumeLogo : relumeLogo.src,
 };
 
 const lottieFilesIcon = {
-  svg: `<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="6" y="6" width="148" height="148" rx="38" stroke="white" stroke-width="12"/>
-    <path d="M117 52C108.094 52.582 87.203 56.2403 79.6922 80.4351C72.1814 104.63 51.7011 107.041 43 106.999" stroke="white" stroke-width="12" stroke-linecap="round"/>
-  </svg>`
+  src: typeof lottieFilesLogo === "string" ? lottieFilesLogo : lottieFilesLogo.src,
 };
 
 const TOOLS = [
@@ -49,24 +43,44 @@ const TOOLS = [
   { id: "codex", label: "OpenAI Codex", icon: siOpenai },
   { id: "cursor", label: "Cursor", icon: cursorIcon },
   { id: "copilot", label: "GitHub Copilot", icon: siGithub, initials: "GP" },
-  { id: "relume", label: "Relume", icon: releumIcon },
+  { id: "relume", label: "Relume", icon: relumeIcon },
   { id: "lottiefiles", label: "LottieFiles", icon: lottieFilesIcon },
 ];
 
 function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initials?: string }) {
-  if (icon && (icon.path || icon.svg)) {
+  if (icon && (icon.path || icon.svg || icon.src)) {
+    if (icon.src) {
+      return (
+        <div
+          className="flex h-8 w-8 items-center justify-center shrink-0"
+          style={{ filter: "brightness(0) invert(1)" }}
+        >
+          <img
+            src={icon.src}
+            alt={label}
+            className="h-full w-full object-contain"
+          />
+        </div>
+      );
+    }
+
     const markup = typeof icon.svg === "string"
       ? icon.svg
           .replace(/fill="[^"]*"/g, 'fill="white"')
           .replace(/stroke="[^"]*"/g, 'stroke="white"')
+          .replace(/stroke-width="[^"]*"/g, 'stroke-width="1.2"')
           .replace(/color="[^"]*"/g, 'color="white"')
-      : `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="${label}" style="fill: white;"><title>${label}</title><path d="${icon.path}" fill="white" /></svg>`;
+          .replace(/style="[^"]*"/g, 'style="fill: white; stroke: white; color: white;"')
+      : `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="${label}" style="fill: white; stroke: white; color: white;"><title>${label}</title><path d="${icon.path}" fill="white" stroke="white" /></svg>`;
+
+    const isFigmaJam = label === 'Figma Jam';
 
     return (
-      <div 
+      <div
         className="flex h-8 w-8 items-center justify-center shrink-0"
-        style={{ 
+        style={{
           color: 'white',
+          filter: 'brightness(0) invert(1)',
           '--svg-color': 'white'
         } as React.CSSProperties & { '--svg-color': string }}
       >
@@ -77,7 +91,10 @@ function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initi
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: 'white'
+            color: 'white',
+            filter: 'brightness(0) invert(1)',
+            transform: isFigmaJam ? 'scale(0.82)' : 'none',
+            transformOrigin: 'center',
           }}
           dangerouslySetInnerHTML={{ __html: markup }}
         />

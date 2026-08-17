@@ -90,10 +90,25 @@ export default function Header() {
           <a
             href={site.resume.href}
             download={site.resume.downloadName}
-            className={`${navControlClass} text-muted hover:text-ink`}
+            className={`${navControlClass} gap-2 text-muted hover:text-ink`}
             aria-label={site.resume.label}
+            title="Download Resume"
           >
-            Resume
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="h-3.5 w-3.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 3v10" />
+              <path d="M8.5 19.5 12 23l3.5-3.5" />
+              <path d="M4 15v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+            </svg>
+            <span>Resume</span>
           </a>
           <button
             type="button"
