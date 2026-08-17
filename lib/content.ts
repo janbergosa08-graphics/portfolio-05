@@ -251,8 +251,8 @@ export const faqIntro = {
 };
 export const faqs = [
   {
-    q: 'What can you contribute to a product team?',
-    a: 'I contribute across UX flows, UI design, design systems, prototyping, responsive behavior, and developer handoff.',
+    q: 'What should a product team expect from you?',
+    a: 'End-to-end ownership: UX clarity, system-ready components, responsive specs, and hands-on build support. I move fast and stay product-focused.',
   },
   {
     q: 'What type of products do you design?',

@@ -15,11 +15,11 @@ export default function Method() {
           </Reveal>
         </div>
 
-        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 lg:items-start">
+        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 lg:items-stretch">
           {method.map((step) => (
             <RevealItem
               key={step.phase}
-              className="frame-highlight flex h-full flex-col cell-pad border-b border-line sm:border-r sm:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0"
+              className="frame-highlight flex h-full flex-col cell-pad border-b border-line sm:border-r sm:[&:nth-child(2n)]:border-r-0 lg:border-b-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0"
             >
               {/* Hierarchy: phase → title+icon → body → visual (aligned bottom) */}
               <p className="font-mono text-[10px] tracking-[0.16em] text-accent">{step.phase}</p>
