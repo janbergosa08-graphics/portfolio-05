@@ -26,7 +26,7 @@ export default function Contact() {
 
           <div className="frame-highlight section-pad lg:py-16 xl:py-20">
             <Reveal delay={0.08}>
-              <ContactForm formId="contact-section-form" submitLabel="Let\'s talk" />
+              <ContactForm formId="contact-section-form" submitLabel="Let's talk" />
             </Reveal>
           </div>
         </div>
