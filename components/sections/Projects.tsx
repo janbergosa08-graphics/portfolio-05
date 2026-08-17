@@ -38,7 +38,7 @@ export default function Projects() {
           </Reveal>
         </div>
 
-        <RevealGroup className="grid md:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4">
           {projects.map((project) => {
             const className =
               'frame-highlight group relative flex h-full flex-col border-b border-line md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0';
