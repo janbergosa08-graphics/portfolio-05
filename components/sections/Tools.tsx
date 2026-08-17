@@ -66,11 +66,9 @@ export default function Tools() {
   return (
     <SectionEntrance id="tools" className="border-b border-line">
       <div className="w-full">
-        <div className="border-b border-line">
-          <div className="frame-highlight section-pad border-b border-line">
-            <p className="font-mono text-[10px] tracking-[0.16em] text-accent">TOOLS I USE</p>
-            <h2 className="section-heading-lg mt-3 font-semibold">Tools I Use to Build & Ship</h2>
-          </div>
+        <div className="frame-highlight section-pad border-b border-line">
+          <p className="font-mono text-[10px] tracking-[0.16em] text-accent">TOOLS I USE</p>
+          <h2 className="section-heading-lg mt-3 font-semibold">Tools I Use to Build & Ship</h2>
         </div>
 
         <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0">
