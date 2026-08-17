@@ -44,11 +44,13 @@ function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initi
           .replace(/fill="[^"]*"/g, 'fill="white"')
           .replace(/stroke="[^"]*"/g, 'stroke="white"')
           .replace(/color="[^"]*"/g, 'color="white"')
-          .replace(/stop-color="[^"]*"/g, 'stop-color="white"')
-      : `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="${label}" class="h-full w-full" style="fill: white"><title>${label}</title><path d="${icon.path}" fill="white" /></svg>`;
+      : `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="${label}" style="fill: white;"><title>${label}</title><path d="${icon.path}" fill="white" /></svg>`;
 
     return (
-      <div className="flex h-8 w-8 items-center justify-center shrink-0 text-white">
+      <div 
+        className="flex h-8 w-8 items-center justify-center shrink-0"
+        style={{ filter: 'brightness(0) invert(1)' }}
+      >
         <div
           aria-label={label}
           className="h-full w-full [&_svg]:h-full [&_svg]:w-full [&_svg]:block"
@@ -60,8 +62,8 @@ function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initi
 
   const displayText = initials || label.charAt(0);
   return (
-    <div className="flex h-8 w-8 items-center justify-center shrink-0 rounded-sm bg-white bg-opacity-20 border border-white border-opacity-40">
-      <span className="text-xs font-semibold text-white leading-none">{displayText}</span>
+    <div className="flex h-8 w-8 items-center justify-center shrink-0 rounded-sm bg-white bg-opacity-25 border border-white border-opacity-40">
+      <span className="text-xs font-bold text-white leading-none">{displayText}</span>
     </div>
   );
 }
