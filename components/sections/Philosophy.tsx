@@ -18,11 +18,11 @@ export default function Philosophy() {
       <div className="w-full">
         <div className="grid gap-0 lg:grid-cols-2 lg:items-stretch">
           {/* LEFT: portrait container (no frame) */}
-          <div className="frame-highlight flex items-center justify-center bg-transparent pt-0 pb-0 pl-0 pr-0" aria-hidden>
-            <div className="relative h-full w-full min-h-[20rem] overflow-hidden method-panel pl-0 pr-0">
+          <div className="frame-highlight bg-transparent pt-0 pb-0 pl-0 pr-0 h-full" aria-hidden>
+            <div className="relative w-full h-full overflow-hidden method-panel pl-0 pr-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={encodeURI('/asset/img_marjan.webp')}
+                src="/asset/img_marjan_about.webp"
                 alt="Portrait of Jan Bergosa"
                 className="h-full w-full object-cover"
                 style={{ objectPosition: 'center' }}
@@ -32,10 +32,10 @@ export default function Philosophy() {
           </div>
 
           {/* RIGHT: intro + philosophy cards (separator on left) */}
-          <div className="lg:border-l lg:border-line">
-            <div className="frame-highlight section-pad border-b border-line">
+          <div className="lg:border-l lg:border-line flex flex-col h-full">
+            <div className="frame-highlight section-pad border-b border-line flex-shrink-0">
               <Reveal>
-                <p className="font-mono text-[10px] tracking-[0.16em] text-accent">PHILOSOPHY</p>
+                <p className="font-mono text-[10px] tracking-[0.16em] text-accent">ABOUT ME</p>
                 <h2 className="section-heading-lg mt-3 font-semibold">{philosophyIntro.title}</h2>
                 {philosophyIntro.body && (
                   <p className="mt-3 max-w-md text-sm leading-relaxed text-muted">{philosophyIntro.body}</p>
@@ -43,13 +43,13 @@ export default function Philosophy() {
               </Reveal>
             </div>
 
-            <RevealGroup className="grid md:grid-cols-2 gap-0">
+            <RevealGroup className="grid gap-0 flex-1 overflow-y-auto">
               {philosophy.map((item) => {
                 const Glyph = PHILOSOPHY_GLYPHS[item.title];
                 return (
                   <RevealItem
                     key={item.title}
-                    className="frame-highlight cell-pad border-b border-line md:border-r md:[&:nth-child(2n)]:border-r-0 flex h-full flex-col"
+                    className="frame-highlight cell-pad border-b border-line flex h-full flex-col"
                   >
                     <div className="flex items-start gap-3">
                       <Glyph className="h-5 w-5 shrink-0 text-ink" strokeWidth={1.3} aria-hidden />
