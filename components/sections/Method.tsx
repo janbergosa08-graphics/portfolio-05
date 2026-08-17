@@ -15,7 +15,7 @@ export default function Method() {
           </Reveal>
         </div>
 
-        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3">
+        <RevealGroup className="grid sm:grid-cols-2 lg:grid-cols-3 lg:items-start">
           {method.map((step) => (
             <RevealItem
               key={step.phase}

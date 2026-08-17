@@ -8,6 +8,8 @@ import Footer from '@/components/sections/Footer';
 const Projects = dynamic(() => import('@/components/sections/Projects'));
 const Expertise = dynamic(() => import('@/components/sections/Expertise'));
 const Method = dynamic(() => import('@/components/sections/Method'));
+const Philosophy = dynamic(() => import('@/components/sections/Philosophy'));
+const Tools = dynamic(() => import('@/components/sections/Tools'));
 const Contact = dynamic(() => import('@/components/sections/Contact'));
 const FAQ = dynamic(() => import('@/components/sections/FAQ'));
 
@@ -22,6 +24,8 @@ export default function HomePage() {
           <Projects />
           <Expertise />
           <Method />
+          <Philosophy />
+          <Tools />
           <Contact />
           <FAQ />
         </div>

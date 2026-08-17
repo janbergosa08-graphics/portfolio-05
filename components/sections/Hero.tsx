@@ -58,19 +58,19 @@ export default function Hero() {
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
             <a
-              href="#contact"
+              href="#projects"
               className="ui-btn-lg inline-flex w-full justify-center border border-line bg-accent-soft text-ink hover:bg-accent hover:text-canvas sm:w-auto"
             >
               {hero.primaryCta}
             </a>
             <div className="flex items-stretch gap-3">
               <a
-                href={site.behance}
+                href={site.resume.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ui-btn-lg inline-flex flex-1 justify-center border border-line text-ink hover:border-accent hover:text-accent sm:flex-none"
               >
-                {hero.behanceCta}
+                {hero.resumeCta}
               </a>
               <a
                 href={site.linkedin}

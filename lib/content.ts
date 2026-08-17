@@ -6,7 +6,7 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/marjan-bergosa-b973a9184/',
   behance: 'https://www.behance.net/janbergosa',
   tagline:
-    'I design clear, practical interfaces for products people actually need to use.',
+    'Product UI/UX designer focused on clear interfaces, scalable systems, and shippable experiences.',
   resume: {
     href: '/resume/marjan-bergosa-ui-ux-design-resume.pdf',
     label: 'Download Resume',
@@ -15,9 +15,11 @@ export const site = {
 };
 
 export const navLinks = [
+  { label: 'Home', href: '#hero' },
   { label: 'Work', href: '#projects' },
   { label: 'Expertise', href: '#expertise' },
   { label: 'Method', href: '#method' },
+  { label: 'About', href: '#philosophy' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -32,12 +34,12 @@ export const footerNavLinks = [
 export const hero = {
   role: site.role,
   headlineLead: 'I design',
-  rotatingWords: ['products', 'workflows', 'systems'],
-  headlineTail: 'people can actually use.',
+  rotatingWords: ['product UI'],
+  headlineTail: 'teams can ship.',
   description:
-    'I turn messy requirements into clear, usable products — from the first flow to the final interface and everything in between.',
-  primaryCta: "Let\u2019s work together",
-  behanceCta: 'Behance',
+    'From ambiguous requirements to usable interfaces — I turn complex product problems into clear flows, scalable UI systems, and developer-ready designs.',
+  primaryCta: 'View selected work',
+  resumeCta: 'View resume',
   linkedinCta: 'LinkedIn',
 };
 
@@ -45,14 +47,13 @@ export const projects = [
   {
     id: 'grafon-supply-chain',
     title: 'Grafon',
-    role: 'UI/UX · End-to-end',
+    role: 'Product/UI Designer',
     image: '/projects/grafon.jpg',
     imageAlt: 'Grafon supply chain simulator UI',
-    blurb:
-      'Designed a supply-chain simulator that helps operations teams map logistics, explore scenarios, and make complex workflows easier to understand.',
+    blurb: 'An interactive simulator that visualizes multi-step supply-chain processes so teams can explore scenarios without heavy documentation.',
     meta: [
-      { icon: 'audience' as const, text: 'Ops teams · B2B logistics' },
-      { icon: 'result' as const, text: 'Faster scenarios, clearer flows' },
+      { icon: 'audience' as const, text: 'Flow visualization · Simulation' },
+      { icon: 'result' as const, text: 'Clearer process orientation' },
     ],
     href: '/case-study/grafon-supply-chain',
     internal: true,
@@ -60,14 +61,13 @@ export const projects = [
   {
     id: 'tradedungeon-uiux',
     title: 'TradeDungeon',
-    role: 'UI/UX · End-to-end',
+    role: 'Product/UI Designer',
     image: '/projects/tradedungeon.jpg',
     imageAlt: 'TradeDungeon trading product UI',
-    blurb:
-      'Redesigned trading flows around clarity and trust, helping players understand what they\u2019re getting into before committing to a trade.',
+    blurb: 'Redesigned listing and trade flows to surface security cues and make transaction states easy to scan before committing.',
     meta: [
-      { icon: 'audience' as const, text: 'Gamers · peer-to-peer trade' },
-      { icon: 'result' as const, text: 'Clearer trust before checkout' },
+      { icon: 'audience' as const, text: 'Trust · Onboarding · Transaction states' },
+      { icon: 'result' as const, text: 'Clearer trade confidence and reusable status components' },
     ],
     href: '/case-study/tradedungeon-uiux',
     internal: true,
@@ -75,14 +75,13 @@ export const projects = [
   {
     id: 'dataflower-baas',
     title: 'Dataflower',
-    role: 'UI/UX · End-to-end',
+    role: 'Product/UI Designer',
     image: '/projects/dataflower.png',
     imageAlt: 'Dataflower backend-as-a-service platform UI',
-    blurb:
-      'Designed dashboards and onboarding that make API setup easier to understand — helping developers get from setup to their first successful call with less guesswork.',
+    blurb: 'Dashboard and onboarding work that clarifies API setup and surfaces the next actions developers need to get to first success.',
     meta: [
-      { icon: 'audience' as const, text: 'Developers · BaaS platform' },
-      { icon: 'result' as const, text: 'Faster first API success' },
+      { icon: 'audience' as const, text: 'Developer onboarding · API setup' },
+      { icon: 'result' as const, text: 'Improved first-call clarity' },
     ],
     href: '/case-study/dataflower-baas',
     internal: true,
@@ -90,14 +89,13 @@ export const projects = [
   {
     id: 'powerion-energy',
     title: 'Powerion',
-    role: 'UI/UX · End-to-end',
+    role: 'Product/UI Designer',
     image: '/projects/powerion.png',
     imageAlt: 'Powerion energy management platform UI',
-    blurb:
-      'Designed an energy monitoring experience that brings usage and impact into one clear view, so operators can spot what matters and act faster.',
+    blurb: 'Energy dashboards that surface usage and impact signals with clear next actions so operators can intervene quickly.',
     meta: [
-      { icon: 'audience' as const, text: 'Operators · energy ops' },
-      { icon: 'result' as const, text: 'Signal → action in one view' },
+      { icon: 'audience' as const, text: 'Energy ops · Data visualization' },
+      { icon: 'result' as const, text: 'Signal → action clarity' },
     ],
     href: '/case-study/powerion-energy',
     internal: true,
@@ -150,141 +148,129 @@ export const socialLinks = [
 ];
 
 export const expertiseIntro = {
-  title: 'What I bring to the table.',
+  title: 'What I own on a product team',
   body:
-    'I design digital products from the messy first idea to the polished final interface. That means figuring out the problem, shaping the experience, building the UI, creating reusable patterns, and working closely with developers to get it right.',
+    'I work across the product lifecycle — from defining flows and interfaces to validating, documenting, and supporting the build.',
 };
 
 export const expertise = [
   {
     icon: 'product-ui' as const,
     title: 'Product UI/UX',
-    body: 'I turn requirements and user needs into flows and interfaces that are clear, practical, and easy to use.',
+    body: 'Flows, information architecture, interaction design, and product interfaces.',
   },
   {
     icon: 'design-systems' as const,
-    title: 'Design systems',
-    body: 'I build reusable components and patterns that keep products consistent without slowing the team down.',
+    title: 'Design Systems',
+    body: 'Reusable components, patterns, and UI foundations that scale across products.',
   },
   {
     icon: 'prototyping' as const,
-    title: 'Prototyping & validation',
-    body: 'I prototype ideas early, test the important parts, and use what I learn before the team commits to a direction.',
+    title: 'Prototyping & Validation',
+    body: 'Interactive prototypes used to explore flows, test assumptions, and align teams.',
   },
   {
     icon: 'handoff' as const,
-    title: 'Handoff & build support',
-    body: 'I stay involved beyond the design file — clarifying details, checking implementation, and helping the final product match the original intent.',
+    title: 'Handoff & Build Support',
+    body: 'Implementation-ready states, responsive behavior, specifications, and developer collaboration.',
   },
 ];
-
-export const methodIntro = {
-  title: 'How I take an idea from messy to shipped.',
-  body:
-    "There\u2019s no magic five-step formula. Every project is different, but I usually move through these stages — learning, shaping, testing, and refining as we go.",
-};
 
 export const method = [
   {
     phase: '01',
     icon: 'discover' as const,
     title: 'Discover',
-    body: "Understand the users, the product, and what we're trying to solve.",
+    body: 'Understand users, requirements, and constraints.',
   },
   {
     phase: '02',
     icon: 'define' as const,
     title: 'Define',
-    body: "Turn what we learned into a clear problem and direction.",
+    body: 'Align on the problem, scope, and success criteria.',
   },
   {
     phase: '03',
     icon: 'design' as const,
     title: 'Design',
-    body: 'Explore the flows, interactions, and interface.',
+    body: 'Create flows, interfaces, and scalable UI patterns.',
   },
   {
     phase: '04',
     icon: 'validate' as const,
     title: 'Validate',
-    body: "Test the important parts, challenge assumptions, and refine.",
+    body: 'Test assumptions and refine the experience.',
   },
   {
     phase: '05',
     icon: 'build' as const,
     title: 'Build',
-    body: 'Work closely with developers and make sure the design works in the real product.',
+    body: 'Collaborate with engineering through implementation.',
   },
   {
     phase: '06',
     icon: 'ship' as const,
     title: 'Ship',
-    body: 'Launch, learn from real usage, and improve where needed.',
+    body: 'Support launch and learn from the real product.',
   },
 ];
 
+export const methodIntro = {
+  title: 'A delivery loop product teams can trust.',
+  body: 'A practical loop from problem definition to shipped product.',
+};
+
 export const philosophyIntro = {
-  title: 'Decisions that protect delivery and outcomes.',
+  title: 'Designing between product, people, and code.',
+  body:
+    "I turn complex product requirements into clear, shippable interfaces. I blend product thinking, visual systems, and engineering-aware workflows to move ideas into production.",
 };
 
 export const philosophy = [
   {
     title: 'Fix the path first',
-    body: 'If the flow is broken, visuals will not save the product. Remove friction before decorating screens.',
-  },
-  {
-    title: 'Tie UI to business goals',
-    body: 'Every major interface choice should support a clear outcome — completion, conversion, speed, or fewer support tickets.',
+    body: "Remove friction before visuals. Fix flows so the product works first.",
   },
   {
     title: 'Systems beat one-offs',
-    body: 'Reusable patterns reduce inconsistency and cut design and engineering rework over time.',
+    body: 'Prefer reusable patterns over one-off fixes to reduce rework and inconsistency.',
   },
   {
     title: 'Clarity over decoration',
-    body: 'Teams ship faster when screens communicate hierarchy, states, and next actions without noise.',
+    body: 'Make hierarchy and next actions obvious — not decorative noise.',
+  },
+  {
+    title: 'Design with AI, not around it',
+    body: 'Use AI to speed exploration and iteration while keeping design judgment human-led.',
   },
 ];
 
 export const faqIntro = {
-  title: 'Hiring and collaboration questions',
+  title: 'Hiring & collaboration',
   body: 'Straight answers for product, design, and engineering teams evaluating fit.',
 };
-
 export const faqs = [
   {
     q: 'What can you contribute to a product team?',
-    a: 'I can take a messy problem and turn it into a clearer product experience — from research and UX flows to high-fidelity UI, prototypes, systems, and handoff.',
+    a: 'I contribute across UX flows, UI design, design systems, prototyping, responsive behavior, and developer handoff.',
   },
   {
-    q: 'What kind of problems do you solve?',
-    a: "Usually the ones where users get stuck, products feel harder than they should, or teams aren't quite aligned on what they're building.",
+    q: 'What type of products do you design?',
+    a: 'I focus on web applications, dashboards, SaaS products, and workflow-heavy digital experiences.',
   },
   {
-    q: 'What are your strongest areas?',
-    a: 'Product thinking, UX flows, high-fidelity UI, design systems, prototyping, and turning complex requirements into something the team can actually work with.',
+    q: 'How do you work with engineers?',
+    a: 'I provide clear states, responsive behavior, specifications, and design context while collaborating with engineers throughout implementation.',
   },
   {
-    q: 'How do you work with PMs and engineers?',
-    a: 'Early and often. I like getting aligned before the design gets too far, sharing work as it develops, and staying available when the design moves into code.',
-  },
-  {
-    q: 'What roles are you looking for?',
-    a: "Full-time UI/UX and product design roles, particularly with teams building web products. I'm also open to selective project work when there's a good fit.",
-  },
-  {
-    q: 'How do you use AI in your design process?',
-    a: 'As a tool, not a decision-maker. I use it to speed up research synthesis, exploration, documentation, and iteration — but the design decisions still come from the problem, the users, and the context.',
-  },
-  {
-    q: 'How can you help my team?',
-    a: 'I can help make the problem clearer, simplify the experience, build the interface, create reusable patterns, and work with engineering to get the final product shipped.',
+    q: 'What role are you looking for?',
+    a: 'Product Designer or UI/UX Designer roles where I can contribute across UX, interface design, systems, prototyping, and product delivery.',
   },
 ];
 
 export const contactIntro = {
   kicker: 'CONTACT',
-  titleLine1: 'Have a product problem to solve?',
-  titleLine2: "Let\u2019s talk.",
-  body: 'I\u2019m open to full-time product UI/UX roles and a small number of projects where I can make a real contribution. Tell me what you\u2019re building, who it\u2019s for, and where you\u2019re stuck. I\u2019ll get back to you within 24 hours.',
+  titleLine1: 'Hiring for product UI/UX?',
+  titleLine2: "Let\u2019s talk outcomes.",
+  body: "I'm open to product UI/UX opportunities where I can contribute across UX, interface design, systems, prototyping, and developer collaboration.",
 };

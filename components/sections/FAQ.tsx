@@ -222,9 +222,9 @@ export default function FAQ() {
                       <div className="border-t border-line px-[var(--section-x)] pb-5 pt-4">
                         <p className="text-sm leading-relaxed text-muted">{item.a}</p>
 
-                        {item.points?.length ? (
+                        {('points' in item && (item as any).points?.length) ? (
                           <ul className="mt-4 border border-line">
-                            {item.points.map((point) => (
+                            {(item as any).points.map((point: any) => (
                               <li
                                 key={point.label}
                                 className="grid gap-1 border-b border-line px-3 py-3 last:border-b-0 md:grid-cols-[9rem_1fr] md:gap-4"
@@ -238,9 +238,9 @@ export default function FAQ() {
                           </ul>
                         ) : null}
 
-                        {item.note ? (
+                        {('note' in item && (item as any).note) ? (
                           <p className="mt-4 border-l border-accent pl-3 text-xs leading-relaxed text-muted">
-                            {item.note}
+                            {(item as any).note}
                           </p>
                         ) : null}
                       </div>
