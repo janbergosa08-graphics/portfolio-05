@@ -19,20 +19,11 @@ import cursorIcon from "thesvg/cursor";
 import figmaIcon from "thesvg/figma";
 
 const releumIcon = {
-  svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
-    <g fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-      <!-- Center Top Diamond -->
-      <path d="M 100 30 L 135 65 L 100 100 L 65 65 Z" />
-
-      <!-- Left Outer Diamond -->
-      <path d="M 50 80 L 85 115 L 50 150 L 15 115 Z" />
-
-      <!-- Right Outer Diamond -->
-      <path d="M 150 80 L 185 115 L 150 150 L 115 115 Z" />
-
-      <!-- Center Bottom Diamond -->
-      <path d="M 100 110 L 135 145 L 100 180 L 65 145 Z" />
-    </g>
+  svg: `<svg width="160" height="169" viewBox="0 0 160 169" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M74 7.60863C77.7128 5.46504 82.2872 5.46504 86 7.60863L143.282 40.6804C146.995 42.824 149.282 46.7855 149.282 51.0727V117.216C149.282 121.504 146.995 125.465 143.282 127.609L86 160.68C82.2872 162.824 77.7128 162.824 74 160.68L16.718 127.609C13.0051 125.465 10.718 121.504 10.718 117.216V51.0727C10.718 46.7855 13.0052 42.824 16.718 40.6804L74 7.60863Z" stroke="white" stroke-width="12"/>
+    <path d="M12 44.1445L79 80.6445L146 44.1445" stroke="white" stroke-width="12"/>
+    <path d="M79 80.1445V162.645" stroke="white" stroke-width="12"/>
+    <path d="M10 45.6445L80 82.1445V161.645L10 122.145V45.6445Z" fill="white"/>
   </svg>`
 };
 
