@@ -55,6 +55,24 @@ const releumIcon = {
   </svg>`
 };
 
+const lottieFilesIcon = {
+  svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+    <rect x="20" y="20" width="160" height="160" rx="36" fill="none" stroke="#FFFFFF" stroke-width="12"/>
+    <path 
+      d="M 60 135 
+         C 85 135, 80 65, 110 65 
+         C 130 65, 135 85, 135 95 
+         C 135 115, 115 135, 95 135 
+         C 75 135, 65 115, 65 100" 
+      fill="none" 
+      stroke="#FFFFFF" 
+      stroke-width="12" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+    />
+  </svg>`
+};
+
 const TOOLS = [
   { id: "figma", label: "Figma", icon: siFigma },
   { id: "figjam", label: "Figma Jam", icon: figmaIcon },
@@ -71,7 +89,7 @@ const TOOLS = [
   { id: "cursor", label: "Cursor", icon: cursorIcon },
   { id: "copilot", label: "GitHub Copilot", icon: siGithub, initials: "GP" },
   { id: "relume", label: "Relume", icon: releumIcon },
-  { id: "lottiefiles", label: "LottieFiles", initials: "LF" },
+  { id: "lottiefiles", label: "LottieFiles", icon: lottieFilesIcon },
 ];
 
 function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initials?: string }) {
