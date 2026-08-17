@@ -20,36 +20,18 @@ import figmaIcon from "thesvg/figma";
 
 const releumIcon = {
   svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
-    <g stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
-      <path 
-        d="M 100,18 
-           L 165,55.5 
-           a 12,12 0 0 1 6,10.4 
-           L 171,134.1 
-           a 12,12 0 0 1 -6,10.4 
-           L 100,182 
-           a 12,12 0 0 1 -12,0 
-           L 35,144.5 
-           a 12,12 0 0 1 -6,-10.4 
-           L 29,65.9 
-           a 12,12 0 0 1 6,-10.4 
-           L 100,18 Z" 
-        stroke-width="12" 
-      />
-      <path 
-        d="M 100,52 
-           L 142,76 
-           L 142,124 
-           L 100,148 
-           L 58,124 
-           L 58,76 
-           Z" 
-        stroke-width="10" 
-      />
-      <path 
-        d="M 100,52 L 100,148 M 100,100 L 142,76 M 100,100 L 58,76" 
-        stroke-width="10" 
-      />
+    <g fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Center Top Diamond -->
+      <path d="M 100 30 L 135 65 L 100 100 L 65 65 Z" />
+
+      <!-- Left Outer Diamond -->
+      <path d="M 50 80 L 85 115 L 50 150 L 15 115 Z" />
+
+      <!-- Right Outer Diamond -->
+      <path d="M 150 80 L 185 115 L 150 150 L 115 115 Z" />
+
+      <!-- Center Bottom Diamond -->
+      <path d="M 100 110 L 135 145 L 100 180 L 65 145 Z" />
     </g>
   </svg>`
 };
