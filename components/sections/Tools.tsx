@@ -33,15 +33,19 @@ const TOOLS = [
   { id: "codex", label: "OpenAI Codex", icon: siOpenai },
   { id: "cursor", label: "Cursor", icon: cursorIcon },
   { id: "copilot", label: "GitHub Copilot", icon: siGithub, initials: "GP" },
+  { id: "relume", label: "Relume", initials: "RL" },
+  { id: "lottiefiles", label: "LottieFiles", initials: "LF" },
 ];
 
 function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initials?: string }) {
   if (icon && (icon.path || icon.svg)) {
     const markup = typeof icon.svg === "string"
       ? icon.svg
-          .replace(/fill="[^"]+"/g, 'fill="currentColor"')
-          .replace(/stroke="[^"]+"/g, 'stroke="currentColor"')
-      : `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="${label}" class="h-full w-full" style="fill: currentColor"><title>${label}</title><path d="${icon.path}" fill="currentColor" /></svg>`;
+          .replace(/fill="[^"]*"/g, 'fill="white"')
+          .replace(/stroke="[^"]*"/g, 'stroke="white"')
+          .replace(/color="[^"]*"/g, 'color="white"')
+          .replace(/stop-color="[^"]*"/g, 'stop-color="white"')
+      : `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="${label}" class="h-full w-full" style="fill: white"><title>${label}</title><path d="${icon.path}" fill="white" /></svg>`;
 
     return (
       <div className="flex h-8 w-8 items-center justify-center shrink-0 text-white">
@@ -56,8 +60,8 @@ function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initi
 
   const displayText = initials || label.charAt(0);
   return (
-    <div className="flex h-8 w-8 items-center justify-center shrink-0 rounded-sm bg-accent bg-opacity-15 border border-accent border-opacity-30">
-      <span className="text-xs font-semibold text-accent leading-none">{displayText}</span>
+    <div className="flex h-8 w-8 items-center justify-center shrink-0 rounded-sm bg-white bg-opacity-20 border border-white border-opacity-40">
+      <span className="text-xs font-semibold text-white leading-none">{displayText}</span>
     </div>
   );
 }
