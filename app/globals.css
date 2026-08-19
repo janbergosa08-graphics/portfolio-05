@@ -62,16 +62,16 @@
   --color-muted: #5d685f;
   --color-line: rgba(22, 32, 24, 0.14);
   --color-line-strong: rgba(22, 32, 24, 0.24);
-  --color-accent: #278c36;
-  --color-accent-soft: rgba(39, 140, 54, 0.13);
+  --color-accent: #1f762d;
+  --color-accent-soft: rgba(31, 118, 45, 0.13);
   --color-panel: #ffffff;
   --color-panel-demo: #eef2e9;
-  --accent-a: #278c36;
-  --accent-b: #9b7a16;
-  --accent-c: #168b72;
-  --accent-mid: #278c36;
-  --accent-mid-soft: rgba(39, 140, 54, 0.4);
-  --accent-glow: 0 0 28px rgba(39, 140, 54, 0.3);
+  --accent-a: #1f762d;
+  --accent-b: #80620f;
+  --accent-c: #11705c;
+  --accent-mid: #1f762d;
+  --accent-mid-soft: rgba(31, 118, 45, 0.4);
+  --accent-glow: 0 0 28px rgba(31, 118, 45, 0.3);
 }
 
 * {
@@ -113,6 +113,26 @@ body {
 .theme-tool-icon,
 .theme-tool-icon svg {
   color: var(--color-ink);
+}
+
+.mermaid-diagram svg {
+  display: block;
+  min-width: 34rem;
+  max-width: none;
+  height: auto;
+  margin: 0 auto;
+}
+
+.mermaid-diagram .nodeLabel,
+.mermaid-diagram .edgeLabel {
+  color: var(--color-ink) !important;
+  fill: var(--color-ink) !important;
+}
+
+@media (max-width: 640px) {
+  .mermaid-diagram svg {
+    min-width: 30rem;
+  }
 }
 
 .theme-switcher-option,

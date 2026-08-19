@@ -2,6 +2,29 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import MermaidDiagram from './MermaidDiagram';
+import {
+  Accessibility,
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  Brain,
+  CheckCircle2,
+  Code2,
+  FileText,
+  Layout,
+  MessageSquare,
+  Rocket,
+  Search,
+  Scale,
+  Sparkles,
+  Shield,
+  Target,
+  Users,
+  Workflow,
+  Zap,
+  type LucideIcon,
+} from 'lucide-react';
 
 type Field = { label: string; value: string };
 type ListItem = { label?: string; text: string };
@@ -11,6 +34,7 @@ export type DocSection = {
   id: string;
   step?: string;
   shortLabel?: string;
+  icon?: string;
   heading: string;
   badge?: string;
   summary?: string;
@@ -28,6 +52,8 @@ export type DocPage = {
   version?: string;
   lastUpdated?: string;
   status?: string;
+  icon?: string;
+  diagram?: { definition: string; summary: string };
   behanceUrl?: string;
   websiteUrl?: string;
   heroImage?: string;
@@ -41,6 +67,34 @@ type MoreStudy = {
   title: string;
   teaser?: string;
 };
+
+type PaginationLink = { href: string; title: string };
+
+const sectionIcons: Record<string, LucideIcon> = {
+  Accessibility,
+  BookOpen,
+  Brain,
+  CheckCircle2,
+  Code2,
+  FileText,
+  Layout,
+  MessageSquare,
+  Rocket,
+  Search,
+  Scale,
+  Sparkles,
+  Shield,
+  Target,
+  Users,
+  Workflow,
+  Zap,
+};
+
+function SectionIcon({ name }: { name?: string }) {
+  const Icon = name ? sectionIcons[name] : null;
+  if (!Icon) return null;
+  return <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden />;
+}
 
 function FieldGrid({ fields }: { fields?: Field[] }) {
   if (!fields?.length) return null;
@@ -81,6 +135,7 @@ export default function DocShell({
   contactEmail,
   homeLabel = 'Back to portfolio',
   moreCaseStudies = null,
+  pagination = null,
 }: {
   page: DocPage;
   sections: DocSection[];
@@ -93,6 +148,10 @@ export default function DocShell({
     title: string;
     teaser?: string;
   }> | null;
+  pagination?: {
+    previous?: PaginationLink;
+    next?: PaginationLink;
+  } | null;
 }) {
   const [activeId, setActiveId] = useState(sections[0]?.id ?? '');
   const navGroups = useMemo(
@@ -118,11 +177,17 @@ export default function DocShell({
 
   return (
     <div className="min-h-screen bg-canvas text-ink">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:border focus:border-accent focus:bg-panel focus:px-3 focus:py-2 focus:text-sm focus:text-ink"
+      >
+        Skip to content
+      </a>
       <header className="sticky top-0 z-50 border-b border-line bg-canvas">
         <div className="flex h-14 w-full items-center justify-between px-4 md:px-6">
           <div className="flex min-w-0 items-center gap-3">
             <Link href="/" className="inline-flex shrink-0 items-center" aria-label="Jan Bergosa">
-              <img src="/logo.svg" alt="" width={24} height={28} className="h-7 w-auto" />
+              <img src="/logo.svg" alt="" width={24} height={28} className="theme-logo h-7 w-auto" />
             </Link>
             <span className="hidden text-muted sm:inline">/</span>
             <span className="truncate text-sm text-muted">{page.breadcrumb}</span>
@@ -133,10 +198,13 @@ export default function DocShell({
         </div>
       </header>
 
-      <main className="w-full">
+          <main id="main-content" className="w-full">
         <div className="border-b border-line px-4 py-10 md:px-6 md:py-12">
           <p className="font-mono text-[10px] tracking-[0.16em] text-accent">{page.kicker}</p>
-          <h1 className="mt-3 max-w-3xl text-3xl font-semibold tracking-tight md:text-4xl">{page.title}</h1>
+          <div className="mt-3 flex items-start gap-3">
+            <SectionIcon name={page.icon} />
+            <h1 className="max-w-3xl text-3xl font-semibold tracking-tight md:text-4xl">{page.title}</h1>
+          </div>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted md:text-base">{page.subtitle}</p>
           <div className="mt-6 flex flex-wrap gap-0 border border-line">
             {page.version && (
@@ -179,6 +247,9 @@ export default function DocShell({
               )}
             </div>
           )}
+          {page.diagram && (
+            <MermaidDiagram definition={page.diagram.definition} summary={page.diagram.summary} />
+          )}
         </div>
 
         <div className="grid lg:grid-cols-[16rem_1fr]">
@@ -193,16 +264,18 @@ export default function DocShell({
                     <li key={section.id} className="border-t border-line">
                       <a
                         href={`#${section.id}`}
-                        className={`block px-4 py-3 text-sm md:px-5 ${
+                        className={`flex items-center gap-2 px-4 py-3 text-sm md:px-5 ${
                           activeId === section.id ? 'text-ink' : 'text-muted hover:text-ink'
                         }`}
+                        aria-current={activeId === section.id ? 'location' : undefined}
                         onClick={(e) => {
                           e.preventDefault();
                           document.getElementById(section.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                           setActiveId(section.id);
                         }}
                       >
-                        {section.shortLabel ?? section.heading}
+                        <SectionIcon name={section.icon} />
+                        <span>{section.shortLabel ?? section.heading}</span>
                       </a>
                     </li>
                   ))}
@@ -216,22 +289,51 @@ export default function DocShell({
               <section
                 key={section.id}
                 id={section.id}
-                className="scroll-mt-20 border-b border-line px-4 py-8 md:px-6 md:py-10"
+                className={`scroll-mt-20 border-b border-line px-4 py-8 md:px-6 md:py-10 ${
+                  index % 2 === 1 ? 'bg-panel/25' : ''
+                }`}
               >
                 <p className="font-mono text-[10px] tracking-wider text-accent">
                   {section.step ?? String(index + 1).padStart(2, '0')} / {section.badge ?? section.shortLabel}
                 </p>
-                <h2 className="mt-2 text-xl font-semibold tracking-tight md:text-2xl">{section.heading}</h2>
-                {section.summary && (
-                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">{section.summary}</p>
+                <div className="mt-2 flex items-center gap-2">
+                  <SectionIcon name={section.icon} />
+                  <h2 className="text-xl font-semibold tracking-tight md:text-2xl">{section.heading}</h2>
+                </div>
+                {(section.summary || section.body?.length) && (
+                  <div className="mt-4 max-w-2xl border-l-2 border-accent pl-4">
+                    <p className="font-mono text-[10px] tracking-[0.16em] text-accent">CONTEXT</p>
+                    {section.summary && (
+                      <p className="mt-2 text-base leading-relaxed text-ink">{section.summary}</p>
+                    )}
+                    {section.body?.map((paragraph) =>
+                      section.id === 'reflection' ? (
+                        <blockquote
+                          key={paragraph.slice(0, 40)}
+                          className="mt-3 border-l border-line-strong pl-3 text-sm italic leading-relaxed text-muted"
+                        >
+                          &ldquo;{paragraph}&rdquo;
+                        </blockquote>
+                      ) : (
+                        <p key={paragraph.slice(0, 40)} className="mt-3 text-sm leading-relaxed text-muted">
+                          {paragraph}
+                        </p>
+                      ),
+                    )}
+                  </div>
                 )}
-                <FieldGrid fields={section.fields} />
-                {section.body?.map((paragraph) => (
-                  <p key={paragraph.slice(0, 40)} className="mt-4 max-w-2xl text-sm leading-relaxed text-muted">
-                    {paragraph}
-                  </p>
-                ))}
-                <ItemList items={section.items} />
+                {section.fields?.length ? (
+                  <div className="mt-5">
+                    <p className="font-mono text-[10px] tracking-[0.16em] text-muted">AT A GLANCE</p>
+                    <FieldGrid fields={section.fields} />
+                  </div>
+                ) : null}
+                {section.items?.length ? (
+                  <div className="mt-5">
+                    <p className="font-mono text-[10px] tracking-[0.16em] text-muted">DETAILS</p>
+                    <ItemList items={section.items} />
+                  </div>
+                ) : null}
                 {section.blocks?.map((block) => (
                   <div key={block.title} className="mt-4 border border-line">
                     <div className="flex flex-wrap items-center gap-2 border-b border-line px-3 py-2">
@@ -242,7 +344,7 @@ export default function DocShell({
                     </div>
                     <div className="p-3">
                       <FieldGrid fields={block.fields} />
-                      {block.body && <p className="mt-3 text-sm text-muted">{block.body}</p>}
+                      {block.body && <p className="max-w-2xl text-sm leading-relaxed text-muted">{block.body}</p>}
                     </div>
                   </div>
                 ))}
@@ -265,6 +367,37 @@ export default function DocShell({
                   ))}
                 </div>
               </div>
+            )}
+
+            {pagination && (
+              <nav className="grid border-b border-line sm:grid-cols-2" aria-label="Case study pagination">
+                {pagination.previous ? (
+                  <Link
+                    href={pagination.previous.href}
+                    className="group border-r border-line px-4 py-5 text-left hover:bg-accent-soft md:px-6"
+                  >
+                    <span className="flex items-center gap-2 font-mono text-[10px] tracking-wider text-muted group-hover:text-accent">
+                      <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
+                      PREVIOUS CASE STUDY
+                    </span>
+                    <span className="mt-2 block text-sm text-ink">{pagination.previous.title}</span>
+                  </Link>
+                ) : (
+                  <div aria-hidden className="hidden border-r border-line sm:block" />
+                )}
+                {pagination.next ? (
+                  <Link
+                    href={pagination.next.href}
+                    className="group px-4 py-5 text-right hover:bg-accent-soft md:px-6"
+                  >
+                    <span className="flex items-center justify-end gap-2 font-mono text-[10px] tracking-wider text-muted group-hover:text-accent">
+                      NEXT CASE STUDY
+                      <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                    </span>
+                    <span className="mt-2 block text-sm text-ink">{pagination.next.title}</span>
+                  </Link>
+                ) : null}
+              </nav>
             )}
 
             {contactEmail && (

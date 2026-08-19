@@ -4,6 +4,7 @@ import DocShell from '@/components/docs/DocShell';
 import {
   caseStudySlugs,
   getCaseStudy,
+  getCaseStudyPagination,
   getOtherCaseStudies,
 } from '@/lib/docs/caseStudiesContent.js';
 
@@ -62,6 +63,10 @@ export default async function CaseStudyPage({ params }: PageProps) {
         title: string;
         teaser?: string;
       }>}
+      pagination={getCaseStudyPagination(slug) as {
+        previous?: { href: string; title: string };
+        next?: { href: string; title: string };
+      }}
       homeLabel="Back to portfolio"
     />
   );
