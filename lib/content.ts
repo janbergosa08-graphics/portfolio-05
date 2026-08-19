@@ -34,7 +34,7 @@ export const footerNavLinks = [
 export const hero = {
   role: site.role,
   headlineLead: 'I design',
-  rotatingWords: ['product UI'],
+  rotatingWords: ['products', 'systems', 'experiences'],
   headlineTail: 'teams can ship.',
   description:
     'From ambiguous requirements to usable interfaces — I turn complex product problems into clear flows, scalable UI systems, and developer-ready designs.',

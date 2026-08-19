@@ -116,11 +116,11 @@ export default function Tools() {
           <h2 className="section-heading-lg mt-3 font-semibold">Tools I Use to Build & Ship</h2>
         </div>
 
-        <RevealGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0">
+        <RevealGroup className="grid grid-cols-1 gap-0 md:grid-cols-2 lg:grid-cols-4">
           {TOOLS.map((tool) => (
             <RevealItem
               key={tool.id}
-              className="frame-highlight flex h-20 sm:h-24 lg:h-28 w-full flex-row items-center justify-center gap-2 sm:gap-3 cell-pad border-b border-line border-r sm:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0"
+              className="frame-highlight flex h-20 w-full flex-row items-center justify-center gap-2 border-b border-r border-line cell-pad sm:h-24 sm:gap-3 md:[&:nth-child(2n)]:border-r-0 lg:h-28 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0"
             >
               <div className="flex shrink-0">
                 <BrandIcon icon={tool.icon} label={tool.label} initials={tool.initials} />
