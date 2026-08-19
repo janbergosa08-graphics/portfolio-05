@@ -26,7 +26,11 @@ export async function POST(request: Request) {
   let payload: ContactPayload;
 
   try {
-    payload = (await request.json()) as ContactPayload;
+    const body = await request.json();
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
+    }
+    payload = body as ContactPayload;
   } catch {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
   }
@@ -67,7 +71,7 @@ export async function POST(request: Request) {
           'Email delivery is not configured in this environment. Add your Resend API key to .env.local or email janbergosa.graphics@gmail.com directly.',
         errorCode: 'EMAIL_PROVIDER_CONFIG_MISSING',
       },
-      { status: 500 },
+      { status: 503 },
     );
   }
 
@@ -82,7 +86,7 @@ export async function POST(request: Request) {
           'Email delivery is not configured in this environment. Add your Resend verified sender address to .env.local.',
         errorCode: 'EMAIL_PROVIDER_CONFIG_MISSING',
       },
-      { status: 500 },
+      { status: 503 },
     );
   }
 

@@ -60,7 +60,7 @@ export default function Header() {
     >
       <div className="flex h-14 w-full items-center justify-between gap-2 sm:gap-3 shell-x">
         <a href="#hero" className="inline-flex shrink-0 items-center" aria-label={site.name}>
-          <img src="/logo.svg" alt="" width={28} height={32} className="h-8 w-auto" />
+          <img src="/logo.svg" alt="" width={28} height={32} className="theme-logo h-8 w-auto" />
         </a>
 
         <nav className="hidden h-9 items-stretch border border-line lg:flex" aria-label="Primary">

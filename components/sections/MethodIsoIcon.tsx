@@ -87,8 +87,8 @@ function Chip({ x, y, label }: { x: number; y: number; label: string }) {
         width={w}
         height={h}
         rx={1}
-        fill="#111111"
-        stroke="rgba(255,255,255,0.22)"
+        fill="var(--color-panel)"
+        stroke="var(--color-line-strong)"
         strokeWidth={SW}
       />
       <text
@@ -96,7 +96,7 @@ function Chip({ x, y, label }: { x: number; y: number; label: string }) {
         y={y + 0.25}
         textAnchor="middle"
         dominantBaseline="central"
-        fill="#ffffff"
+        fill="var(--color-ink)"
         stroke="none"
         fontSize="3.1"
         fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"

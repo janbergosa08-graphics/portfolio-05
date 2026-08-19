@@ -1,12 +1,12 @@
 export const site = {
   name: 'Jan Bergosa',
   fullName: 'Marjan "Jan" Bergosa',
-  role: 'PRODUCT UI/UX DESIGNER',
+  role: 'UI/UX DESIGNER',
   email: 'janbergosa.graphics@gmail.com',
   linkedin: 'https://www.linkedin.com/in/marjan-bergosa-b973a9184/',
   behance: 'https://www.behance.net/janbergosa',
   tagline:
-    'Product UI/UX designer focused on clear interfaces, scalable systems, and shippable experiences.',
+    'UI/UX designer focused on clear interfaces, scalable systems, and shippable experiences.',
   resume: {
     href: '/resume/marjan-bergosa-ui-ux-design-resume.pdf',
     label: 'Download Resume',
@@ -251,20 +251,44 @@ export const faqIntro = {
 };
 export const faqs = [
   {
-    q: 'What should a product team expect from you?',
-    a: 'End-to-end ownership: UX clarity, system-ready components, responsive specs, and hands-on build support. I move fast and stay product-focused.',
+    q: 'What should a team expect from you as a UI/UX designer?',
+    a: 'You can expect a UI/UX designer who turns ambiguous requirements into clear decisions, usable flows, and implementation-ready interface work.',
+    points: [
+      { label: 'Scope', sub: 'User flows, information architecture, interaction design, visual systems, and responsive states.' },
+      { label: 'Output', sub: 'A focused prototype or interface direction, reusable components, and clear handoff context.' },
+      { label: 'Mindset', sub: 'I prioritize the path users need to complete over decorative polish that does not improve the product.' },
+    ],
+    note: 'The goal is less rework: clearer decisions for product teams and fewer unanswered questions for engineering.',
   },
   {
     q: 'What type of products do you design?',
-    a: 'I focus on web applications, dashboards, SaaS products, and workflow-heavy digital experiences.',
+    a: 'My strongest fit is complex web software where people need to understand information, make decisions, and complete repeatable workflows with confidence.',
+    points: [
+      { label: 'Best fit', sub: 'SaaS products, operations tools, dashboards, marketplaces, and developer-facing platforms.' },
+      { label: 'Typical problems', sub: 'Dense information, unclear next steps, fragmented flows, inconsistent UI, and difficult onboarding.' },
+      { label: 'Success signal', sub: 'Users can find the right information, understand the state, and take the next action without guesswork.' },
+    ],
+    note: 'I can also support marketing or portfolio surfaces when the work needs product-level clarity rather than decoration alone.',
   },
   {
     q: 'How do you work with engineers?',
-    a: 'I provide clear states, responsive behavior, specifications, and design context while collaborating with engineers throughout implementation.',
+    a: 'I treat engineering collaboration as part of the design process, not a final handoff event. I share the reasoning behind decisions and stay available as the work becomes real.',
+    points: [
+      { label: 'Handoff', sub: 'Documented states, responsive behavior, component intent, edge cases, and interaction details.' },
+      { label: 'During build', sub: 'Fast clarification, tradeoff discussions, implementation review, and alignment on what matters most.' },
+      { label: 'Shared goal', sub: 'A practical solution that preserves the user outcome while respecting technical constraints and delivery time.' },
+    ],
+    note: 'The best handoff is a shared understanding of the problem, not a larger pile of files.',
   },
   {
     q: 'What role are you looking for?',
-    a: 'Product Designer or UI/UX Designer roles where I can contribute across UX, interface design, systems, prototyping, and product delivery.',
+    a: 'I am looking for a UI/UX Designer role where I can contribute from problem framing through interface design, validation, and delivery.',
+    points: [
+      { label: 'Role fit', sub: 'UI/UX Designer roles close to product and engineering decisions, with room for both interface craft and user experience thinking.' },
+      { label: 'Contribution', sub: 'UX structure, interface craft, design systems, prototyping, documentation, and developer collaboration.' },
+      { label: 'Team fit', sub: 'Teams that value clarity, thoughtful constraints, direct communication, and measurable product progress.' },
+    ],
+    note: 'I am open to conversations about full-time UI/UX roles and select interface-focused projects.',
   },
 ];
 

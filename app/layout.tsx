@@ -1,7 +1,21 @@
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { ThemeProvider } from '@/components/theme/ThemeProvider';
+import ThemeSwitcher from '@/components/theme/ThemeSwitcher';
 import './globals.css';
+
+const themeBootstrapScript = `(() => {
+  try {
+    const stored = localStorage.getItem('portfolio-theme');
+    const mode = stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'dark';
+    const resolved = mode === 'system'
+      ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+      : mode;
+    document.documentElement.dataset.theme = resolved;
+    document.documentElement.style.colorScheme = resolved;
+  } catch {}
+})();`;
 
 const geistSans = Geist({
   subsets: ['latin'],
@@ -53,9 +67,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
+      </head>
       <body className="text-ink antialiased">
-        <div className="site-shell">{children}</div>
+        <ThemeProvider>
+          <div className="site-shell">{children}</div>
+          <ThemeSwitcher />
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

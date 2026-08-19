@@ -1,19 +1,19 @@
 /** Shared graphic tokens — matched to grid `--color-line` / `--color-line-strong` */
 export const ISO = {
   /** Same as --color-line */
-  stroke: 'rgba(255, 255, 255, 0.12)',
+  stroke: 'var(--color-line)',
   /** Same as --color-line-strong */
-  strokeStrong: 'rgba(255, 255, 255, 0.2)',
-  /** Panel illustration outlines — readable white */
-  strokeGraphic: 'rgba(255, 255, 255, 0.72)',
+  strokeStrong: 'var(--color-line-strong)',
+  /** Panel illustration outlines — matched to the hero box treatment */
+  strokeGraphic: 'var(--color-line-strong)',
   accent: 'var(--accent-mid)',
-  accentSoft: 'rgba(127, 238, 100, 0.14)',
-  fillTop: 'rgba(255, 255, 255, 0.045)',
-  fillLeft: 'rgba(255, 255, 255, 0.02)',
-  fillRight: 'rgba(255, 255, 255, 0.03)',
-  fillTopAccent: 'rgba(127, 238, 100, 0.1)',
-  fillLeftAccent: 'rgba(127, 238, 100, 0.05)',
-  fillRightAccent: 'rgba(127, 238, 100, 0.07)',
+  accentSoft: 'color-mix(in srgb, var(--accent-mid) 10%, transparent)',
+  fillTop: 'color-mix(in srgb, var(--color-ink) 4.5%, transparent)',
+  fillLeft: 'color-mix(in srgb, var(--color-ink) 2%, transparent)',
+  fillRight: 'color-mix(in srgb, var(--color-ink) 3%, transparent)',
+  fillTopAccent: 'color-mix(in srgb, var(--accent-mid) 10%, transparent)',
+  fillLeftAccent: 'color-mix(in srgb, var(--accent-mid) 5%, transparent)',
+  fillRightAccent: 'color-mix(in srgb, var(--accent-mid) 7%, transparent)',
   /** ~1px at typical panel width (viewBox 100 → ~280–320px) */
   swPanel: 0.4,
   swGlyph: 1.25,

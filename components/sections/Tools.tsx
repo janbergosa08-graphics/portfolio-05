@@ -52,13 +52,12 @@ function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initi
     if (icon.src) {
       return (
         <div
-          className="flex h-8 w-8 items-center justify-center shrink-0"
-          style={{ filter: "brightness(0) invert(1)" }}
+          className="theme-tool-icon flex h-8 w-8 items-center justify-center shrink-0"
         >
           <img
             src={icon.src}
             alt={label}
-            className="h-full w-full object-contain"
+            className="theme-tool-image h-full w-full object-contain"
           />
         </div>
       );
@@ -66,22 +65,21 @@ function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initi
 
     const markup = typeof icon.svg === "string"
       ? icon.svg
-          .replace(/fill="[^"]*"/g, 'fill="white"')
-          .replace(/stroke="[^"]*"/g, 'stroke="white"')
+          .replace(/fill="[^"]*"/g, 'fill="var(--color-ink)"')
+          .replace(/stroke="[^"]*"/g, 'stroke="var(--color-ink)"')
           .replace(/stroke-width="[^"]*"/g, 'stroke-width="1.2"')
-          .replace(/color="[^"]*"/g, 'color="white"')
-          .replace(/style="[^"]*"/g, 'style="fill: white; stroke: white; color: white;"')
-      : `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="${label}" style="fill: white; stroke: white; color: white;"><title>${label}</title><path d="${icon.path}" fill="white" stroke="white" /></svg>`;
+          .replace(/color="[^"]*"/g, 'color="var(--color-ink)"')
+          .replace(/style="[^"]*"/g, 'style="fill: var(--color-ink); stroke: var(--color-ink); color: var(--color-ink);"')
+          : `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-label="${label}" style="fill: var(--color-ink); stroke: var(--color-ink); color: var(--color-ink);"><title>${label}</title><path d="${icon.path}" fill="var(--color-ink)" stroke="var(--color-ink)" /></svg>`;
 
     const isFigmaJam = label === 'Figma Jam';
 
     return (
       <div
-        className="flex h-8 w-8 items-center justify-center shrink-0"
+        className="theme-tool-icon flex h-8 w-8 items-center justify-center shrink-0"
         style={{
-          color: 'white',
-          filter: 'brightness(0) invert(1)',
-          '--svg-color': 'white'
+          color: 'var(--color-ink)',
+          '--svg-color': 'var(--color-ink)'
         } as React.CSSProperties & { '--svg-color': string }}
       >
         <div
@@ -91,8 +89,7 @@ function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initi
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: 'white',
-            filter: 'brightness(0) invert(1)',
+            color: 'var(--color-ink)',
             transform: isFigmaJam ? 'scale(0.82)' : 'none',
             transformOrigin: 'center',
           }}
@@ -104,8 +101,8 @@ function BrandIcon({ icon, label, initials }: { icon?: any; label: string; initi
 
   const displayText = initials || label.charAt(0);
   return (
-    <div className="flex h-8 w-8 items-center justify-center shrink-0 rounded-sm bg-white bg-opacity-25 border border-white border-opacity-40">
-      <span className="text-xs font-bold text-white leading-none">{displayText}</span>
+    <div className="flex h-8 w-8 items-center justify-center shrink-0 rounded-sm bg-accent-soft border border-line-strong">
+      <span className="text-xs font-bold text-ink leading-none">{displayText}</span>
     </div>
   );
 }
@@ -129,7 +126,7 @@ export default function Tools() {
                 <BrandIcon icon={tool.icon} label={tool.label} initials={tool.initials} />
               </div>
               <div className="flex min-w-0 items-center">
-                <span className="text-xs sm:text-sm font-medium leading-tight text-white break-words">{tool.label}</span>
+                <span className="tools-brand-label text-xs sm:text-sm font-medium leading-tight break-words">{tool.label}</span>
               </div>
             </RevealItem>
           ))}

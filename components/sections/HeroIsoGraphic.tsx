@@ -134,17 +134,17 @@ const RADIUS: Record<'sm' | 'md' | 'lg', number> = {
   lg: 10,
 };
 
-const LINE = 'rgba(255,255,255,0.12)';
+const LINE = 'var(--color-line)';
 const LINE_HOVER = 'var(--accent-mid)';
-const BORDER = 'rgba(255,255,255,0.2)';
+const BORDER = 'var(--color-line-strong)';
 const BORDER_HOVER = 'var(--accent-mid)';
 const SW = 1;
-const FILL_TOP = 'rgba(255,255,255,0.045)';
-const FILL_LEFT = 'rgba(255,255,255,0.02)';
-const FILL_RIGHT = 'rgba(255,255,255,0.03)';
-const FILL_TOP_ACTIVE = 'rgba(127,238,100,0.1)';
-const FILL_LEFT_ACTIVE = 'rgba(127,238,100,0.05)';
-const FILL_RIGHT_ACTIVE = 'rgba(127,238,100,0.07)';
+const FILL_TOP = 'color-mix(in srgb, var(--color-ink) 4.5%, transparent)';
+const FILL_LEFT = 'color-mix(in srgb, var(--color-ink) 2%, transparent)';
+const FILL_RIGHT = 'color-mix(in srgb, var(--color-ink) 3%, transparent)';
+const FILL_TOP_ACTIVE = 'color-mix(in srgb, var(--accent-mid) 10%, transparent)';
+const FILL_LEFT_ACTIVE = 'color-mix(in srgb, var(--accent-mid) 5%, transparent)';
+const FILL_RIGHT_ACTIVE = 'color-mix(in srgb, var(--accent-mid) 7%, transparent)';
 
 type BoxSpec = { w: number; h: number; d: number; viewW: number; viewH: number };
 
@@ -265,11 +265,11 @@ export default function HeroIsoGraphic() {
             aria-hidden
           >
             <div
-              className="absolute left-1/2 top-[28%] h-[110%] w-[130%] -translate-x-1/2 border border-white/10"
+              className="absolute left-1/2 top-[28%] h-[110%] w-[130%] -translate-x-1/2 border border-line"
               style={{
                 transform: 'rotateX(58deg) rotateZ(-45deg) scale(1.45)',
                 backgroundImage:
-                  'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)',
+                  'linear-gradient(color-mix(in srgb, var(--color-ink) 8%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-ink) 8%, transparent) 1px, transparent 1px)',
                 backgroundSize: '48px 48px',
               }}
             />
@@ -287,7 +287,7 @@ export default function HeroIsoGraphic() {
                 markerHeight="6"
                 orient="auto-start-reverse"
               >
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(255,255,255,0.35)" />
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="color-mix(in srgb, var(--color-ink) 35%, transparent)" />
               </marker>
               <marker
                 id="iso-arrow-active"

@@ -220,6 +220,7 @@ export default function FAQ() {
                       className="overflow-hidden"
                     >
                       <div className="border-t border-line px-[var(--section-x)] pb-5 pt-4">
+                        <p className="mb-2 font-mono text-[10px] tracking-[0.16em] text-accent">ANSWER</p>
                         <p className="text-sm leading-relaxed text-muted">{item.a}</p>
 
                         {('points' in item && (item as any).points?.length) ? (

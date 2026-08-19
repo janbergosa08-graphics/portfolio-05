@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { Keyboard } from 'lucide-react';
 import { contactDetails } from '@/lib/contact';
 import ContactForm from '@/components/contact/ContactForm';
 
@@ -11,12 +12,24 @@ type ContactModalProps = {
 
 export default function ContactModal({ open, onClose }: ContactModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose();
+
+      if (
+        (event.key === 'ArrowUp' || event.key === 'ArrowDown') &&
+        event.target === dialogRef.current
+      ) {
+        event.preventDefault();
+        scrollAreaRef.current?.scrollBy({
+          top: event.key === 'ArrowDown' ? 96 : -96,
+          behavior: 'smooth',
+        });
+      }
     };
 
     document.addEventListener('keydown', onKeyDown);
@@ -63,7 +76,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
           </button>
         </div>
 
-        <div className="grid overflow-y-auto lg:grid-cols-2">
+        <div ref={scrollAreaRef} className="grid overflow-y-auto lg:grid-cols-2">
           <aside className="section-pad border-b border-line lg:border-b-0 lg:border-r">
             <p className="text-sm leading-relaxed text-muted">
               Share the product, users, timeline, and what success looks like. I reply within 24 hours with
@@ -97,6 +110,35 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
             <ContactForm formId="contact-modal-form" compact />
           </div>
         </div>
+
+        <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 border-t border-line px-4 py-2.5 text-[11px] text-muted sm:px-6" aria-label="Keyboard shortcuts">
+          <span className="inline-flex items-center gap-1.5 font-medium text-ink">
+            <Keyboard className="h-3.5 w-3.5" aria-hidden />
+            Keyboard
+          </span>
+          <span className="mx-2 text-line" aria-hidden>
+            —
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <kbd className="inline-flex min-h-5 items-center border border-line-strong bg-white/10 px-1.5 py-0.5 font-mono text-[10px] leading-none text-ink whitespace-nowrap">ESC</kbd>
+            Close
+          </span>
+          <span aria-hidden>·</span>
+          <span className="inline-flex items-center gap-1">
+            <kbd className="inline-flex min-h-5 items-center border border-line-strong bg-white/10 px-1.5 py-0.5 font-mono text-[10px] leading-none text-ink whitespace-nowrap">↑ ↓</kbd>
+            Scroll
+          </span>
+          <span aria-hidden>·</span>
+          <span className="inline-flex items-center gap-1">
+            <kbd className="inline-flex min-h-5 items-center border border-line-strong bg-white/10 px-1.5 py-0.5 font-mono text-[10px] leading-none text-ink whitespace-nowrap">ENTER</kbd>
+            Select
+          </span>
+          <span aria-hidden>·</span>
+          <span className="inline-flex items-center gap-1">
+            <kbd className="inline-flex min-h-5 items-center border border-line-strong bg-white/10 px-1.5 py-0.5 font-mono text-[10px] leading-none text-ink whitespace-nowrap">TAB</kbd>
+            Focus
+          </span>
+        </p>
       </div>
     </div>
   );
