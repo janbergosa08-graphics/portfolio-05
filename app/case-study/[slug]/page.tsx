@@ -42,7 +42,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
           </p>
           <Link
             href="/#projects"
-            className="mt-6 inline-flex border border-line px-4 py-2 text-sm text-muted hover:text-accent"
+            className="cta-cut cta-cut--secondary mt-6 inline-flex px-4 py-2"
           >
             View projects
           </Link>

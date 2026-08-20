@@ -377,7 +377,7 @@ export default function ContactForm({
         type="submit"
         disabled={!canSubmit}
         aria-disabled={!canSubmit}
-        className={`ui-btn-lg w-full border transition-colors sm:w-auto ${
+        className={`cta-cut cta-fill-top-left ui-btn-lg w-full transition-colors sm:w-auto ${
           canSubmit
             ? 'border-accent bg-accent-soft text-ink hover:bg-accent hover:text-canvas'
             : 'cursor-not-allowed border-line bg-transparent text-muted opacity-50'

@@ -192,7 +192,7 @@ export default function DocShell({
             <span className="hidden text-muted sm:inline">/</span>
             <span className="truncate text-sm text-muted">{page.breadcrumb}</span>
           </div>
-          <Link href="/" className="border border-line px-3 py-2 text-xs text-muted hover:text-ink">
+          <Link href="/" className="cta-cut cta-cut--secondary px-3 py-2 text-xs">
             {homeLabel}
           </Link>
         </div>
@@ -230,7 +230,7 @@ export default function DocShell({
                   href={page.behanceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border border-line px-3 py-2 text-xs text-muted hover:text-accent"
+                  className="cta-cut cta-cut--secondary px-3 py-2 text-xs"
                 >
                   View on Behance →
                 </a>
@@ -240,7 +240,7 @@ export default function DocShell({
                   href={page.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border border-line px-3 py-2 text-xs text-muted hover:text-accent"
+                  className="cta-cut cta-cut--secondary px-3 py-2 text-xs"
                 >
                   Live site →
                 </a>

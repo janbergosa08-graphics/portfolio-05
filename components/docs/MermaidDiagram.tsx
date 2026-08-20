@@ -32,7 +32,7 @@ export default function MermaidDiagram({ definition, summary }: MermaidDiagramPr
             lineColor: isLight ? '#5b6b5e' : '#a1aaa1',
             secondaryColor: isLight ? '#f7f8f4' : '#0f0f0f',
             tertiaryColor: isLight ? '#e3eadf' : '#111511',
-            fontFamily: 'var(--font-geist-sans), ui-sans-serif, sans-serif',
+            fontFamily: 'var(--font-sans)',
           },
         });
         const result = await mermaid.render(diagramId, definition);

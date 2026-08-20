@@ -30,7 +30,7 @@ export default function Projects() {
               href="https://www.behance.net/janbergosa"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 shrink-0 items-center gap-1.5 text-sm text-muted hover:text-accent"
+              className="cta-tertiary shrink-0"
             >
               View all
               <ArrowRight className="h-3.5 w-3.5" aria-hidden />

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import ThemeSwitcher from '@/components/theme/ThemeSwitcher';
 import './globals.css';
@@ -16,12 +16,6 @@ const themeBootstrapScript = `(() => {
     document.documentElement.style.colorScheme = resolved;
   } catch {}
 })();`;
-
-const geistSans = Geist({
-  subsets: ['latin'],
-  variable: '--font-geist-sans',
-  display: 'swap',
-});
 
 const geistMono = Geist_Mono({
   subsets: ['latin'],
@@ -67,8 +61,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={geistMono.variable} suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=tasa-orbiter@400,500,600,700&display=swap"
+        />
         <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
       </head>
       <body className="text-ink antialiased">

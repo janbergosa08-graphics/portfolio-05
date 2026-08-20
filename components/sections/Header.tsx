@@ -6,7 +6,7 @@ import { useContactModal } from '@/components/contact/ContactProvider';
 import { navLinks, site } from '@/lib/content';
 
 const navControlClass =
-  'inline-flex h-9 items-center justify-center border border-line px-3.5 text-xs leading-none';
+  'cta-cut inline-flex h-9 items-center justify-center px-3.5 text-xs leading-none';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -83,14 +83,14 @@ export default function Header() {
           <button
             type="button"
             onClick={openContactModal}
-            className={`${navControlClass} hidden text-ink hover:border-accent hover:text-ink sm:inline-flex`}
+            className={`${navControlClass} cta-fill-top-left hidden text-ink hover:border-accent hover:text-ink sm:inline-flex`}
           >
             Let&apos;s talk
           </button>
           <a
             href={site.resume.href}
             download={site.resume.downloadName}
-            className={`${navControlClass} gap-2 text-muted hover:text-ink`}
+            className={`${navControlClass} cta-cut--secondary gap-2 text-muted hover:text-ink`}
             aria-label={site.resume.label}
             title="Download Resume"
           >
