@@ -33,10 +33,11 @@ export function RotatingWord({ words, intervalMs = 3000, className = '' }: Rotat
 
   return (
     <span
-      className={`relative inline-grid overflow-hidden align-bottom ${className}`}
+      className={`relative inline-grid align-baseline leading-none ${className}`}
       aria-live="polite"
+      style={{ minHeight: '1.15em' }}
     >
-      <span className="invisible col-start-1 row-start-1 whitespace-nowrap" aria-hidden>
+      <span className="invisible col-start-1 row-start-1 whitespace-nowrap leading-none" aria-hidden>
         {longest}
       </span>
 
@@ -47,6 +48,7 @@ export function RotatingWord({ words, intervalMs = 3000, className = '' }: Rotat
           <motion.span
             key={word}
             className={wordClass}
+            style={{ display: 'block' }}
             initial={{ y: '110%', opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: '-110%', opacity: 0 }}

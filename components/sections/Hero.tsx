@@ -39,45 +39,31 @@ export default function Hero() {
           <p className="mb-5 inline-flex items-center border border-line px-3 py-1.5 font-mono text-[10px] leading-none tracking-[0.16em] text-ink sm:mb-6">
             {hero.role}
           </p>
-          <h1 className="hero-title max-w-[18ch] font-semibold text-ink">
+          <h1 className="hero-title max-w-[12ch] font-semibold text-ink">
             <span className="block">{hero.headlineLead}</span>
             <span className="block">
               <RotatingWord words={hero.rotatingWords} intervalMs={3000} />
             </span>
             <span className="block">{hero.headlineTail}</span>
           </h1>
-          <p className="mt-5 max-w-md text-sm leading-relaxed text-muted sm:mt-6 md:text-base">
+          <p className="mt-5 max-w-md text-base leading-relaxed text-muted sm:mt-6">
             {hero.description}
           </p>
-          <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
+          <div className="mt-7 flex w-full max-w-[32rem] flex-col gap-3 sm:mt-8 sm:flex-row sm:items-stretch">
             <motion.a
               href="#projects"
-              className="cta-cut cta-fill-top-left ui-btn-lg inline-flex w-full justify-center sm:w-auto"
+              className="cta-cut cta-fill-top-left ui-btn-lg inline-flex flex-1 justify-center sm:w-auto"
             >
               {hero.primaryCta}
             </motion.a>
-            <div className="flex items-stretch gap-3">
-              <motion.a
-                href={site.resume.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cta-cut cta-cut--secondary ui-btn-lg inline-flex flex-1 justify-center sm:flex-none"
-                whileHover={reduced ? undefined : { y: -2 }}
-                whileTap={reduced ? undefined : { scale: 0.98 }}
-              >
-                {hero.resumeCta}
-              </motion.a>
-              <motion.a
-                href={site.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cta-cut cta-cut--secondary ui-btn-lg inline-flex flex-1 justify-center sm:flex-none"
-                whileHover={reduced ? undefined : { y: -2 }}
-                whileTap={reduced ? undefined : { scale: 0.98 }}
-              >
-                {hero.linkedinCta}
-              </motion.a>
-            </div>
+            <motion.a
+              href="#contact"
+              className="cta-cut cta-cut--secondary ui-btn-lg inline-flex flex-1 justify-center sm:w-auto"
+              whileHover={reduced ? undefined : { y: -2 }}
+              whileTap={reduced ? undefined : { scale: 0.98 }}
+            >
+              {hero.secondaryCta}
+            </motion.a>
           </div>
         </motion.div>
 

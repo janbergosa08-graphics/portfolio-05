@@ -6,7 +6,7 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/marjan-bergosa-b973a9184/',
   behance: 'https://www.behance.net/janbergosa',
   tagline:
-    'UI/UX designer focused on clear interfaces, scalable systems, and shippable experiences.',
+    'Product designer for complex software where clarity drives trust, speed, and adoption.',
   resume: {
     href: '/resume/marjan-bergosa-ui-ux-design-resume.pdf',
     label: 'Download Resume',
@@ -15,32 +15,30 @@ export const site = {
 };
 
 export const navLinks = [
-  { label: 'Home', href: '#hero' },
   { label: 'Work', href: '#projects' },
-  { label: 'Expertise', href: '#expertise' },
-  { label: 'Method', href: '#method' },
+  { label: 'Capabilities', href: '#expertise' },
+  { label: 'Process', href: '#method' },
   { label: 'About', href: '#philosophy' },
   { label: 'Contact', href: '#contact' },
 ];
 
 export const footerNavLinks = [
   { label: 'Work', href: '#projects' },
-  { label: 'Expertise', href: '#expertise' },
-  { label: 'Method', href: '#method' },
+  { label: 'Capabilities', href: '#expertise' },
+  { label: 'Process', href: '#method' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
 ];
 
 export const hero = {
   role: site.role,
-  headlineLead: 'I design',
-  rotatingWords: ['products', 'systems', 'experiences'],
-  headlineTail: 'teams can ship.',
+  headlineLead: 'Design for',
+  rotatingWords: ['clarity', 'trust', 'speed'],
+  headlineTail: 'in product.',
   description:
-    'From ambiguous requirements to usable interfaces — I turn complex product problems into clear flows, scalable UI systems, and developer-ready designs.',
+    'I design clearer digital experiences for SaaS, dashboards, and web products where users need speed, confidence, and fewer decisions.',
   primaryCta: 'View selected work',
-  resumeCta: 'View resume',
-  linkedinCta: 'LinkedIn',
+  secondaryCta: 'Let’s talk',
 };
 
 export const projects = [
@@ -50,10 +48,10 @@ export const projects = [
     role: 'Product/UI Designer',
     image: '/projects/grafon.jpg',
     imageAlt: 'Grafon supply chain simulator UI',
-    blurb: 'An interactive simulator that visualizes multi-step supply-chain processes so teams can explore scenarios without heavy documentation.',
+    blurb: 'Simplified a complex workflow simulator so teams could understand dependencies, explore scenarios, and make faster decisions without reading dense documentation.',
     meta: [
       { icon: 'audience' as const, text: 'Flow visualization · Simulation' },
-      { icon: 'result' as const, text: 'Clearer process orientation' },
+      { icon: 'result' as const, text: 'Faster decision-making through clearer system logic' },
     ],
     href: '/case-study/grafon-supply-chain',
     internal: true,
@@ -64,10 +62,10 @@ export const projects = [
     role: 'Product/UI Designer',
     image: '/projects/tradedungeon.jpg',
     imageAlt: 'TradeDungeon trading product UI',
-    blurb: 'Redesigned listing and trade flows to surface security cues and make transaction states easy to scan before committing.',
+    blurb: 'Reworked trust signals and transaction states so users could assess risk clearly before committing to a trade or listing.',
     meta: [
       { icon: 'audience' as const, text: 'Trust · Onboarding · Transaction states' },
-      { icon: 'result' as const, text: 'Clearer trade confidence and reusable status components' },
+      { icon: 'result' as const, text: 'Improved confidence and clearer decision cues' },
     ],
     href: '/case-study/tradedungeon-uiux',
     internal: true,
@@ -78,10 +76,10 @@ export const projects = [
     role: 'Product/UI Designer',
     image: '/projects/dataflower.png',
     imageAlt: 'Dataflower backend-as-a-service platform UI',
-    blurb: 'Dashboard and onboarding work that clarifies API setup and surfaces the next actions developers need to get to first success.',
+    blurb: 'Clarified onboarding and dashboard actions so developers could understand setup steps and reach first success faster.',
     meta: [
       { icon: 'audience' as const, text: 'Developer onboarding · API setup' },
-      { icon: 'result' as const, text: 'Improved first-call clarity' },
+      { icon: 'result' as const, text: 'Clearer first-run path and fewer handoff gaps' },
     ],
     href: '/case-study/dataflower-baas',
     internal: true,
@@ -92,10 +90,10 @@ export const projects = [
     role: 'Product/UI Designer',
     image: '/projects/powerion.png',
     imageAlt: 'Powerion energy management platform UI',
-    blurb: 'Energy dashboards that surface usage and impact signals with clear next actions so operators can intervene quickly.',
+    blurb: 'Structured critical data into clearer action pathways so operators could spot issues and respond with less delay.',
     meta: [
       { icon: 'audience' as const, text: 'Energy ops · Data visualization' },
-      { icon: 'result' as const, text: 'Signal → action clarity' },
+      { icon: 'result' as const, text: 'Signal-to-action clarity in operational workflows' },
     ],
     href: '/case-study/powerion-energy',
     internal: true,
@@ -148,9 +146,9 @@ export const socialLinks = [
 ];
 
 export const expertiseIntro = {
-  title: 'What I own on a product team',
+  title: 'Capabilities',
   body:
-    'I work across the product lifecycle — from defining flows and interfaces to validating, documenting, and supporting the build.',
+    'I work across product flows, interface design, and system thinking to make complex tools easier to understand and use.',
 };
 
 export const expertise = [
@@ -216,14 +214,14 @@ export const method = [
 ];
 
 export const methodIntro = {
-  title: 'A delivery loop product teams can trust.',
-  body: 'A practical loop from problem definition to shipped product.',
+  title: 'Process',
+  body: 'From unclear problem to shipped product, with clarity at every step.',
 };
 
 export const philosophyIntro = {
-  title: 'Designing between product, people, and code.',
+  title: 'About',
   body:
-    "I turn complex product requirements into clear, shippable interfaces. I blend product thinking, visual systems, and engineering-aware workflows to move ideas into production.",
+    'I turn complex workflows into product experiences that are easier to learn, faster to use, and easier to trust.',
 };
 
 export const philosophy = [
@@ -294,7 +292,7 @@ export const faqs = [
 
 export const contactIntro = {
   kicker: 'CONTACT',
-  titleLine1: 'Hiring for product UI/UX?',
-  titleLine2: "Let\u2019s talk outcomes.",
-  body: "I'm open to product UI/UX opportunities where I can contribute across UX, interface design, systems, prototyping, and developer collaboration.",
+  titleLine1: 'Need clearer product UX?',
+  titleLine2: 'Let’s talk.',
+  body: "I design interfaces for SaaS, dashboards, and operational tools where users need clarity, speed, and confidence in the decisions they make.",
 };

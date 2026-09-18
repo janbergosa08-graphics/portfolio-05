@@ -530,9 +530,10 @@ select:-webkit-autofill:active {
 }
 
 .hero-title {
-  font-size: clamp(2rem, 7.5vw, 4.75rem);
-  line-height: 0.98;
-  letter-spacing: -0.05em;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 0.82;
+  letter-spacing: -0.065em;
+  overflow: visible;
 }
 
 .split-pad-y {

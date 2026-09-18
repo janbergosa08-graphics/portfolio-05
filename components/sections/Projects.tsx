@@ -19,9 +19,9 @@ export default function Projects() {
         <div className="frame-highlight flex flex-col gap-3 border-b border-line section-pad sm:flex-row sm:items-end sm:justify-between">
           <Reveal>
             <div>
-              <h2 className="section-heading-lg font-semibold">Selected work</h2>
-              <p className="mt-2 max-w-md text-sm text-muted">
-                Product UI case studies — role, who it served, and what improved.
+              <h2 className="section-heading-lg font-semibold">Work</h2>
+              <p className="mt-2 max-w-xl text-sm text-muted">
+                I design interfaces that reduce friction, clarify decisions, and make complex tools easier to trust and use.
               </p>
             </div>
           </Reveal>
